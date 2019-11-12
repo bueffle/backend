@@ -2,3 +2,4 @@ bueffle\db\entity\Card.class
 bueffle\controller\BackendController.class
 bueffle\BackendApplication.class
 bueffle\controller\CardController.class
+bueffle\service\CardService.class
