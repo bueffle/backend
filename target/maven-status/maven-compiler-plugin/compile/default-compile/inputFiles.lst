@@ -1,2 +1,5 @@
 D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\controller\BackendController.java
-D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\entrypoint\BackendApplication.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\db\entity\Card.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\service\CardService.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\BackendApplication.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\controller\CardController.java
