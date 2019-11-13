@@ -1,8 +1,8 @@
 package bueffle.model;
 
 import bueffle.db.entity.Card;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CardRepository extends PagingAndSortingRepository<Card, Long> {
+public interface CardRepository extends JpaRepository<Card, Long> {
 
 }
