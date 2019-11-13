@@ -19,12 +19,22 @@ public class CardController {
     }
 
     @GetMapping("/cards/{id}")
-    public Card getCard(@PathVariable String id) {
+    public Card getCard(@PathVariable Long id) {
         return cardService.getCard(id);
     }
 
     @PostMapping("/cards")
     public void addCard(@RequestBody Card card) {
         cardService.addCard(card);
+    }
+
+    @PutMapping("/cards/{id}")
+    public void updateCard(@RequestBody Card card, @PathVariable Long id) {
+        cardService.updateCard(card, id);
+    }
+
+    @DeleteMapping("/cards/{id}")
+    public void deleteCard(@PathVariable Long id) {
+        cardService.deleteCard(id);
     }
 }

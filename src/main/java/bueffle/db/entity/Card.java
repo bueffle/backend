@@ -1,16 +1,19 @@
 package bueffle.db.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Card {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String question;
     private String answer;
-
-    public Card(String id, String question, String answer) {
-        this.id = id;
-        this.question = question;
-        this.answer = answer;
-    };
 
     public String getQuestion() {
         return question;
@@ -28,7 +31,7 @@ public class Card {
         this.answer = answer;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 }

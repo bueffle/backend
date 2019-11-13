@@ -1,30 +1,38 @@
 package bueffle.service;
 
 import bueffle.db.entity.Card;
+import bueffle.model.CardRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class CardService {
 
-    private List<Card> cards = new ArrayList<>(Arrays.asList(
-            new Card("banane","Warum ist Banana krumm?", "Weil sie nicht gerade ist"),
-            new Card("pinug" ,"Warum sind Pinguine nicht ro", "Weil sie schwarz sind"),
-            new Card("katze", "Warum schnurren Katzen", "Damit sie nicht bellen müssen")
-    ));
+    @Autowired
+    private CardRepository cardRepository;
 
     public List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<>();
+        cardRepository.findAll().forEach(cards::add);
         return cards;
     }
 
-    public Card getCard(String id) {
-        return cards.stream().filter(t -> t.getId().equals(id)).findFirst().get();
+    public Card getCard(Long id) {
+        return cardRepository.findById(id).get();
     }
 
     public void addCard(Card card) {
-        cards.add(card);
+       cardRepository.save(card);
+    }
+
+    public void updateCard(Card card, Long id) {
+        cardRepository.save(card);
+    }
+
+    public void deleteCard(Long id) {
+        cardRepository.deleteById(id);
     }
 }
