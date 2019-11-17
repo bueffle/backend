@@ -1,4 +1,4 @@
-package bueffle.exceptions;
+package bueffle.exception;
 
 public class CollectionNotFoundException extends RuntimeException {
     public CollectionNotFoundException(Long id) {

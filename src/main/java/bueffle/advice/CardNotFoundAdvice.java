@@ -1,6 +1,6 @@
 package bueffle.advice;
 
-import bueffle.exceptions.CardNotFoundException;
+import bueffle.exception.CardNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

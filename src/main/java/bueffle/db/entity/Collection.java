@@ -1,19 +1,32 @@
 package bueffle.db.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 @Entity
 public class Collection {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
     private String description;
+
+    @ManyToMany
+    private List<Card> cards = new ArrayList<>();
+
+    // For deserialization purposes, we must have a zero-arg constructor.
+    public Collection() {}
+
+    public Collection(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public String getName() {
         return name;
@@ -31,11 +44,4 @@ public class Collection {
         this.description = description;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

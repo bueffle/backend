@@ -1,6 +1,6 @@
 package bueffle.advice;
 
-import bueffle.exceptions.CollectionNotFoundException;
+import bueffle.exception.CollectionNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

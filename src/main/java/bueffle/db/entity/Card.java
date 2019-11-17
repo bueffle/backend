@@ -1,17 +1,32 @@
 package bueffle.db.entity;
 
-import javax.persistence.*;
+import lombok.Data;
 
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 @Entity
 public class Card {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String question;
     private String answer;
-    @ManyToOne
-    private Collection collection;
+
+    @ManyToMany
+    private List<Collection> collections = new ArrayList<>();
+
+    // For deserialization purposes, we must have a zero-arg constructor.
+    public Card() {}
+
+    public Card(String question, String answer) {
+        this.question = question;
+        this.answer = answer;
+    }
 
     public String getQuestion() {
         return question;
@@ -29,12 +44,13 @@ public class Card {
         this.answer = answer;
     }
 
-    public long getId() {
-        return id;
+    public boolean hasCollection() {return !collections.isEmpty();}
+
+    public List<Collection> getCollections() {
+        return collections;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void addCollection(Collection collection) {
+        collections.add(collection);
     }
-
 }
