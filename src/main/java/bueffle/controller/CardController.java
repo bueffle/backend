@@ -25,18 +25,23 @@ public class CardController {
         cardService.addCard(card);
     }
 
-    @GetMapping("/cards/{id}")
-    public Card getCard(@PathVariable Long id) {
-        return cardService.getCard(id);
+    @GetMapping("/cards/{cardId}")
+    public Card getCard(@PathVariable Long cardId) {
+        return cardService.getCard(cardId);
     }
 
-    @PutMapping("/cards/{id}")
-    public void updateCard(@RequestBody Card card, @PathVariable Long id) {
-        cardService.updateCard(card, id);
+    @GetMapping("/collections/{collectionId}/cards")
+    public List<Card> getAllCardsForCollection(@PathVariable Long collectionId) {
+        return cardService.getAllCardsForCollection(collectionId);
     }
 
-    @DeleteMapping("/cards/{id}")
-    public void deleteCard(@PathVariable Long id) {
-        cardService.deleteCard(id);
+    @PutMapping("/cards/{cardId}")
+    public void updateCard(@RequestBody Card card, @PathVariable Long cardId) {
+        cardService.updateCard(card, cardId);
+    }
+
+    @DeleteMapping("/cards/{cardId}")
+    public void deleteCard(@PathVariable Long cardId) {
+        cardService.deleteCard(cardId);
     }
 }

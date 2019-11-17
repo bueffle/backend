@@ -21,28 +21,32 @@ public class CardService {
         return new ArrayList<>(cardRepository.findAll());
     }
 
-    public Card getCard(Long id) {
-        return cardRepository.findById(id).orElseThrow(() -> new CardNotFoundException(id));
+    public Card getCard(Long cardId) {
+        return cardRepository.findById(cardId).orElseThrow(() -> new CardNotFoundException(cardId));
     }
 
     public void addCard(Card card) {
        cardRepository.save(card);
     }
 
-    public void updateCard(Card newCard, Long id) {
-        cardRepository.findById(id)
+    public void updateCard(Card newCard, Long cardId) {
+        cardRepository.findById(cardId)
                 .map(card -> {
                     card.setQuestion(newCard.getQuestion());
                     card.setAnswer(newCard.getAnswer());
                     return cardRepository.save(card);
                 })
                 .orElseGet(() -> {
-                    newCard.setId(id);
+                    newCard.setId(cardId);
                     return cardRepository.save(newCard);
                 });
     }
 
-    public void deleteCard(Long id) {
-        cardRepository.deleteById(id);
+    public void deleteCard(Long cardId) {
+        cardRepository.deleteById(cardId);
+    }
+
+    public ArrayList<Card> getAllCardsForCollection(Long collectionId) {
+        return new ArrayList<>(cardRepository.findByCollectionId(collectionId));
     }
 }

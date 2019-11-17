@@ -1,8 +1,13 @@
-bueffle\exceptions\CardNotFoundException.class
+bueffle\service\CollectionService.class
 bueffle\advice\CardNotFoundAdvice.class
 bueffle\BackendApplication.class
+bueffle\advice\CollectionNotFoundAdvice.class
 bueffle\db\entity\Card.class
-bueffle\controller\BackendController.class
+bueffle\db\entity\Collection.class
+bueffle\exceptions\CollectionNotFoundException.class
+bueffle\service\CardService.class
+bueffle\exceptions\CardNotFoundException.class
+bueffle\model\CollectionRepository.class
+bueffle\controller\CollectionController.class
 bueffle\controller\CardController.class
 bueffle\model\CardRepository.class
-bueffle\service\CardService.class

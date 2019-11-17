@@ -1,5 +1,13 @@
-D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\controller\BackendController.java
 D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\db\entity\Card.java
 D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\service\CardService.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\advice\CardNotFoundAdvice.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\exceptions\CollectionNotFoundException.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\advice\CollectionNotFoundAdvice.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\model\CardRepository.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\service\CollectionService.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\model\CollectionRepository.java
 D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\BackendApplication.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\controller\CollectionController.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\db\entity\Collection.java
 D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\controller\CardController.java
+D:\OneDrive\Studium\PA\bueffle\backend\src\main\java\bueffle\exceptions\CardNotFoundException.java
