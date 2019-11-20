@@ -8,3 +8,4 @@ INSERT INTO card (question,answer) VALUES ('question 7', 'answer to 7');
 INSERT INTO card (question,answer) VALUES ('question 8', 'answer to 8');
 INSERT INTO card (question,answer) VALUES ('question 9', 'answer to 9');
 INSERT INTO card (question,answer) VALUES ('question 10', 'answer to 10');
+

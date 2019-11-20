@@ -3,9 +3,7 @@ package bueffle.controller;
 import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
 import bueffle.service.BackendService;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 import java.util.List;
 
@@ -16,13 +14,6 @@ public class BackendController {
 
     BackendController(BackendService backendService) {
         this.backendService = backendService;
-    }
-
-    @RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
-    public String indexPage(Model model) {
-        model.addAttribute("title", "Welcome");
-        model.addAttribute("message", "This is welcome page!");
-        return "index";
     }
 
     /*
