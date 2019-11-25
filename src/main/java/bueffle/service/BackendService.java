@@ -2,10 +2,15 @@ package bueffle.service;
 
 import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
+import bueffle.db.entity.Role;
+import bueffle.db.entity.User;
 import bueffle.exception.CardNotFoundException;
 import bueffle.exception.CollectionNotFoundException;
+import bueffle.exception.UserNotFoundException;
 import bueffle.model.CardRepository;
 import bueffle.model.CollectionRepository;
+import bueffle.model.RoleRepository;
+import bueffle.model.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,10 +21,14 @@ public class BackendService {
 
     private final CardRepository cardRepository;
     private final CollectionRepository collectionRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    BackendService(CardRepository cardRepository, CollectionRepository collectionRepository) {
+    BackendService(CardRepository cardRepository, CollectionRepository collectionRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.cardRepository = cardRepository;
         this.collectionRepository = collectionRepository;
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Card getCard(Long cardId) {
@@ -39,7 +48,7 @@ public class BackendService {
         if(!defaultCollectionExists()) {
             addDefaultCollection();
         }
-        card.addCollection(getCollectionByName("default"));
+        card.addCollection(collectionRepository.findByName("default"));
         cardRepository.save(card);
     }
 
@@ -63,7 +72,7 @@ public class BackendService {
     }
 
     private boolean defaultCollectionExists() {
-        return getCollectionByName("default") != null;
+        return collectionRepository.findByName("default") != null;
     }
 
     private void addDefaultCollection() {
@@ -91,10 +100,6 @@ public class BackendService {
         return collectionRepository.findById(id).orElseThrow(() -> new CollectionNotFoundException(id));
     }
 
-    private Collection getCollectionByName(String name) {
-        return collectionRepository.findByName(name);
-    }
-
     public void addCollection(Collection collection) {
         collectionRepository.save(collection);
     }
@@ -118,4 +123,23 @@ public class BackendService {
         collectionRepository.deleteById(id);
     }
 
+    public void addUser(User user) {
+        if(!userRoleExists()) {
+            addUserRole();
+        }
+        user.addRole(roleRepository.findByName("ROLE_USER"));
+        userRepository.save(user);
+    }
+
+    private boolean userRoleExists() {
+        return roleRepository.findByName("ROLE_USER") != null;
+    }
+
+    private void addUserRole() {
+        roleRepository.save(new Role("ROLE_USER"));
+    }
+
+    public User getUser(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+    }
 }

@@ -2,6 +2,7 @@ package bueffle.controller;
 
 import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
+import bueffle.db.entity.User;
 import bueffle.service.BackendService;
 import org.springframework.web.bind.annotation.*;
 
@@ -80,4 +81,17 @@ public class BackendController {
         backendService.deleteCollection(collectionId);
     }
 
+    /*
+     * Mappings for requests on /user
+     */
+
+    @PostMapping("/user")
+    public void addUser(@RequestBody User user) {
+        backendService.addUser(user);
+    }
+
+    @GetMapping("/user/{userId}")
+    public User getUser(@PathVariable Long userId) {
+        return backendService.getUser(userId);
+    }
 }
