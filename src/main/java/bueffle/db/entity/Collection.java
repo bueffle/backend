@@ -17,7 +17,7 @@ public class Collection {
     private String name;
     private String description;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Card> cards = new ArrayList<>();
 
     // For deserialization purposes, we must have a zero-arg constructor.
