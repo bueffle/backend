@@ -14,3 +14,4 @@ INSERT INTO collection (name,description) VALUES ('Sammlung 3', 'Dies ist die Be
 INSERT INTO collection (name,description) VALUES ('Sammlung 4', 'Dies ist die Beschreibung der Sammlung 4.');
 INSERT INTO collection (name,description) VALUES ('Sammlung 5', 'Dies ist die Beschreibung der Sammlung 5.');
 INSERT INTO collection (name,description) VALUES ('Sammlung 6', 'Dies ist die Beschreibung der Sammlung 6.');
+
