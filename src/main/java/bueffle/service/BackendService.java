@@ -11,6 +11,7 @@ import bueffle.model.CardRepository;
 import bueffle.model.CollectionRepository;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,12 +24,14 @@ public class BackendService {
     private final CollectionRepository collectionRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    BackendService(CardRepository cardRepository, CollectionRepository collectionRepository, UserRepository userRepository, RoleRepository roleRepository) {
+    BackendService(CardRepository cardRepository, CollectionRepository collectionRepository, UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.cardRepository = cardRepository;
         this.collectionRepository = collectionRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Card getCard(Long cardId) {
@@ -123,10 +126,17 @@ public class BackendService {
         collectionRepository.deleteById(id);
     }
 
+    /**
+     * Adding user, adding a role for the user if it has none yet.
+     * Hashing the Password so it doesn't get saved in plain text in the database.
+     * Sending the user to the userRepository.
+     * @param user user
+     */
     public void addUser(User user) {
         if(!userRoleExists()) {
             addUserRole();
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.addRole(roleRepository.findByName("ROLE_USER"));
         userRepository.save(user);
     }

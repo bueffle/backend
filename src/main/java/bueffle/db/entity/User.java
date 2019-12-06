@@ -20,6 +20,12 @@ public class User {
 
     public User() {}
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+        enabled = true;
+    }
+
     public User(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;

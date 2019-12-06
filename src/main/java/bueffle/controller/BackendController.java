@@ -94,4 +94,5 @@ public class BackendController {
     public User getUser(@PathVariable Long userId) {
         return backendService.getUser(userId);
     }
+
 }
