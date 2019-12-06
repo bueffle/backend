@@ -1,6 +1,7 @@
 package bueffle.security;
 
-import bueffle.service.BackendUserDetailsService;
+import bueffle.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,16 +13,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final
-    BackendUserDetailsService userDetailsService;
-
-    public SecurityConfiguration(BackendUserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+    @Autowired
+    private UserService userService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userService);
     }
 
     @Override
