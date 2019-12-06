@@ -1,12 +1,13 @@
 package bueffle.service;
 
-import bueffle.authentication.BackendUserDetails;
+import bueffle.auth.BackendUserDetails;
 import bueffle.db.entity.Role;
 import bueffle.db.entity.User;
 import bueffle.exception.UserNotFoundException;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,7 +26,7 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public org.springframework.security.core.userdetails.UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = userRepository.findByUsername(username);
         user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
         return user.map(BackendUserDetails::new).get();
@@ -56,5 +57,9 @@ public class UserService implements UserDetailsService {
 
     public User getUser(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }

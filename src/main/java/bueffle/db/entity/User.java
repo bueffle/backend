@@ -13,23 +13,19 @@ public class User {
 
     private String username;
     private String password;
-    private boolean enabled;
+    @Transient
+    private String passwordConfirm;
+    private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password, String passwordConfirm) {
         this.username = username;
         this.password = password;
-        enabled = true;
-    }
-
-    public User(String username, String password, boolean enabled) {
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
+        this.passwordConfirm = passwordConfirm;
     }
 
     public String getUsername() {
@@ -64,4 +60,11 @@ public class User {
         roles.add(role);
     }
 
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
 }

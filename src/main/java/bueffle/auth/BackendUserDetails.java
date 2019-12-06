@@ -1,4 +1,4 @@
-package bueffle.authentication;
+package bueffle.auth;
 
 import bueffle.db.entity.User;
 import org.springframework.security.core.GrantedAuthority;
