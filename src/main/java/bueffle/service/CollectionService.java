@@ -62,7 +62,9 @@ public class CollectionService {
      * @return all collections
      */
     public List<Collection> getAllCollections() {
-        return new ArrayList<>(collectionRepository.findAll());
+        List<Collection> collections = (collectionRepository.findAll());
+        collections.forEach(Collection::emptyCards);
+        return collections;
     }
 
     /**

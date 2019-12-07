@@ -19,7 +19,6 @@ public class Card {
     private String answer;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonManagedReference
     private List<Collection> collections = new ArrayList<>();
 
     // For deserialization purposes, we must have a zero-arg constructor.

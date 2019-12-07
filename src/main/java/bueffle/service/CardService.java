@@ -49,7 +49,9 @@ public class CardService {
      * @return List of all cards.
      */
     public List<Card> getAllCards() {
-        return new ArrayList<>(cardRepository.findAll());
+        List<Card> cards = (cardRepository.findAll());
+        cards.forEach(Card::emptyCollections);
+        return cards;
     }
 
     /**
