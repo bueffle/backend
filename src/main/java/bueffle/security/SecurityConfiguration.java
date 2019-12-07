@@ -24,13 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                //filters are just for testing like this
-                .antMatchers("/collections").hasRole("USER")
-                .antMatchers("/cards/*").hasRole("USER")
-                .antMatchers("/cards").permitAll()
-                .antMatchers("/user").permitAll()
-                .antMatchers("/user/*").permitAll()
-                .antMatchers("/").permitAll()
+                .antMatchers("/*").permitAll()
                 .and().formLogin()
                 .and().csrf().disable(); // Only activated for testing with postman
     }

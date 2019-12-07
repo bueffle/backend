@@ -1,5 +1,6 @@
 package bueffle.service;
 
+import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.model.CollectionRepository;
@@ -16,24 +17,76 @@ public class CollectionService {
     @Autowired
     private CollectionRepository collectionRepository;
 
-    boolean defaultCollectionExists() {
-        return collectionRepository.findByName("default") != null;
+    @Autowired
+    private UserService userService;
+
+    /**
+     * Creates new collection.
+     * @param collection the collection to add
+     */
+    public void addCollection(Collection collection) {
+        collectionRepository.save(collection);
     }
 
-    void addDefaultCollection() {
-        addCollection(new Collection("default", "default"));
+    /**
+     * Checks if the default collection for a user already exists.
+     * @param username the name of the user to check
+     * @return boolean if the default collection exists
+     */
+    boolean defaultUserCollectionExists(String username) {
+        return collectionRepository.findByName(username) != null;
     }
 
+    /**
+     * Adds the default user collection. (name = username)
+     * @param username name for the user to add the collection
+     */
+    void addDefaultUserCollection(String username) {
+        addCollection(new Collection(username, "Cards owned by " + username));
+    }
+
+    /**
+     * Adds a ccard to a users default collection.
+     * @param card to add
+     */
+    public void addCardToUserDefaultCollection(Card card) {
+        String username = userService.findLoggedInUsername();
+        if(!defaultUserCollectionExists(username)) {
+            addDefaultUserCollection(username);
+        }
+        card.addCollection(findByName(username));
+    }
+
+    /**
+     * Gets all the collections
+     * @return all collections
+     */
     public List<Collection> getAllCollections() {
         return new ArrayList<>(collectionRepository.findAll());
     }
 
-    public Collection getCollection(Long id) {
-        return collectionRepository.findById(id).orElseThrow(() -> new CollectionNotFoundException(id));
+    /**
+     * Shows one collection by providing an Id.
+     * @param collectionId The Id to show the collection for.
+     * @return a collection Object.
+     */
+    public Collection getCollection(Long collectionId) {
+        Collection collection = collectionRepository.findById(collectionId)
+                .orElseThrow(() -> new CollectionNotFoundException(collectionId));
+        collection.emptyCards();
+        return collection;
     }
 
-    public void addCollection(Collection collection) {
-        collectionRepository.save(collection);
+    /**
+     * Shows the cards of a collection.
+     * @param collectionId the Id of the collection who's cards should be shown.
+     * @return List of cards of the collection
+     */
+    public List<Card> getCardsFromCollection(Long collectionId) {
+        List<Card> cards = collectionRepository.findById(collectionId)
+                .orElseThrow(() -> new CollectionNotFoundException(collectionId)).getCards();
+        cards.forEach(Card::emptyCollections);
+        return cards;
     }
 
     /**
@@ -51,15 +104,30 @@ public class CollectionService {
                 .orElseThrow(() -> new CollectionNotFoundException(collectionId));
     }
 
+    /**
+     * Deletes a collection
+     * @param id for deletion
+     */
     public void deleteCollection(Long id) {
         collectionRepository.deleteById(id);
     }
 
+    /**
+     * Finds a collection by providing a name
+     * @param name to find
+     * @return collection
+     */
     public Collection findByName(String name) {
         return collectionRepository.findByName(name);
     }
 
+    /**
+     * Finds a collection by Id
+     * @param collectionId the Id to find
+     * @return an Optional found collection
+     */
     public Optional<Collection> findById(Long collectionId) {
         return collectionRepository.findById(collectionId);
     }
+
 }

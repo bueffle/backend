@@ -1,5 +1,6 @@
 package bueffle.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Card {
     private String answer;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Collection> collections = new ArrayList<>();
 
     // For deserialization purposes, we must have a zero-arg constructor.
@@ -44,13 +46,16 @@ public class Card {
         this.answer = answer;
     }
 
-    public boolean hasCollection() {return !collections.isEmpty();}
+    public void addCollection(Collection collection) {
+        collections.add(collection);
+    }
+
+    public void emptyCollections() {
+        collections.clear();
+    }
 
     public List<Collection> getCollections() {
         return collections;
     }
 
-    public void addCollection(Collection collection) {
-        collections.add(collection);
-    }
 }

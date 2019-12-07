@@ -7,6 +7,7 @@ import bueffle.exception.UserNotFoundException;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +37,7 @@ public class UserService implements UserDetailsService {
      * Adding user, adding a role for the user if it has none yet.
      * Hashing the Password so it doesn't get saved in plain text in the database.
      * Sending the user to the userRepository.
-     * @param user user
+     * @param user The User to be added.
      */
     public void addUser(User user) {
         if(!userRoleExists()) {
@@ -55,11 +56,22 @@ public class UserService implements UserDetailsService {
         roleRepository.save(new Role("ROLE_USER"));
     }
 
-    public User getUser(Long userId) {
+    public User getUserById(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
     }
 
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public String findLoggedInUsername() {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return  ((UserDetails)principal).getUsername();
+        }
+        else {
+            return "Not logged in";
+        }
+    }
+
 }
