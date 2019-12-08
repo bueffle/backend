@@ -6,7 +6,10 @@
 
 
 
-
+.card-image-placeholder {
+    height: 150px;
+    background-color: grey;
+}
 
 
 
