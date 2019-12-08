@@ -67,4 +67,8 @@ public class User {
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
     }
+
+    public boolean hasUsername() {
+        return username != null;
+    }
 }

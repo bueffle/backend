@@ -1,6 +1,7 @@
 package bueffle.controller;
 
-import bueffle.auth.UserValidator;
+import bueffle.auth.PasswordValidator;
+import bueffle.auth.UserNameValidator;
 import bueffle.db.entity.User;
 import bueffle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,10 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private UserValidator userValidator;
+    private UserNameValidator userNameValidator;
+
+    @Autowired
+    private PasswordValidator passwordValidator;
 
     /**
      * Returns the currently logged in user or an error when not logged in.
@@ -24,24 +28,6 @@ public class UserController {
     @GetMapping("/user")
     public String getUser() {
         return userService.findLoggedInUsername();
-    }
-
-    /**
-     * Method for creating new User. The input gets validated, if the validation ist successful it redirects
-     * the user to the starting page.
-     * @param user The User which should be created
-     * @param bindingResult The result of the validation
-     * @return String redirects to the appropriate site.
-     */
-    @PostMapping("/user")
-    public String addUser(@RequestBody User user, BindingResult bindingResult) {
-        userValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        } else {
-            userService.addUser(user);
-            return "redirect:/";
-        }
     }
 
     /**
@@ -54,4 +40,52 @@ public class UserController {
         return userService.getUserById(userId).getUsername();
     }
 
+    /**
+     * Method for creating new User. The input gets validated, if the validation ist successful it redirects
+     * the user to the starting page.
+     * @param user The User which should be created
+     * @param bindingResult The result of the validation
+     * @return String redirects to the appropriate site.
+     */
+    @PostMapping("/user")
+    public String addUser(@RequestBody User user, BindingResult bindingResult) {
+        userNameValidator.validate(user, bindingResult);
+        passwordValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        } else {
+            userService.addUser(user);
+            return "redirect:/";
+        }
+    }
+
+    /**
+     * Method for updating an user. (username or password). If the PUT Request just contains an updated username,
+     * it will validate the username and update it. If the PUT Request contains a new password and its confirmation,
+     * it will validate and update the password.
+     * @param user The User which should be update (self)
+     * @param bindingResult The result of the validation
+     * @return String redirects to the appropriate site.
+     */
+    @PutMapping("/user")
+    public String updateUser(@RequestBody User user, BindingResult bindingResult) {
+        // Case 1: Password should be validated and updated
+        if (!user.hasUsername()) {
+            user.setUsername(userService.findLoggedInUsername());
+            passwordValidator.validate(user, bindingResult);
+            if (!bindingResult.hasErrors()) {
+                userService.updatePassword(user);
+                return "redirect:/profile";
+            }
+        }
+        // Case 2: username should be validated and updated
+        else {
+            userNameValidator.validate(user, bindingResult);
+            if (!bindingResult.hasErrors()) {
+                userService.updateUsername(user);
+                return "redirect:/profile";
+            }
+        }
+        return "profile/edit";
+    }
 }

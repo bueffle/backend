@@ -24,6 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/profile").hasRole("USER")
                 .antMatchers("/*").permitAll()
                 .and().formLogin()
                 .and().csrf().disable(); // Only activated for testing with postman

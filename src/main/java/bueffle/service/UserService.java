@@ -1,8 +1,11 @@
 package bueffle.service;
 
 import bueffle.auth.BackendUserDetails;
+import bueffle.db.entity.Card;
 import bueffle.db.entity.Role;
 import bueffle.db.entity.User;
+import bueffle.exception.CardNotFoundException;
+import bueffle.exception.CollectionNotFoundException;
 import bueffle.exception.UserNotFoundException;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;
@@ -40,30 +43,54 @@ public class UserService implements UserDetailsService {
      * @param user The User to be added.
      */
     public void addUser(User user) {
-        if(!userRoleExists()) {
-            addUserRole();
+        if(!userRoleExists("ROLE_USER")) {
+            addUserRole("ROLE_USER");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.addRole(roleRepository.findByName("ROLE_USER"));
         userRepository.save(user);
     }
 
-    private boolean userRoleExists() {
-        return roleRepository.findByName("ROLE_USER") != null;
+    /**
+     * Checks if a role with name "rolename" exists
+     * @param rolename the name to check
+     * @return boolean if the name to checks exists
+     */
+    private boolean userRoleExists(String rolename) {
+        return roleRepository.findByName(rolename) != null;
     }
 
-    private void addUserRole() {
-        roleRepository.save(new Role("ROLE_USER"));
+    /**
+     * Adds a user role with name "rolename"
+     * @param rolename the name to add
+     */
+    private void addUserRole(String rolename) {
+        roleRepository.save(new Role(rolename));
     }
 
+    /**
+     * Returns a user by its userId
+     * @param userId the id of the user to return
+     * @return User with id UserId
+     */
     public User getUserById(Long userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
+        return userRepository.findById(userId).orElseThrow(UserNotFoundException::new);
     }
 
+    /**
+     * Returns a Optional User Object for better Nullpointer Handling
+     * @param username the name to find
+     * @return if present, a user object.
+     */
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
+    /**
+     * Finds the logged in username by querying the SecurityContextHolder and returns it as a string. Returns "not
+     * logged in" as String when there is no logged in user. This can be changed if needed.
+     * @return String the name of the logged in user
+     */
     public String findLoggedInUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {
@@ -74,4 +101,23 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    /**
+     * Updates a username.
+     * @param updatedUser the updated User Object containing the new name.
+     */
+    public void updateUsername(User updatedUser) {
+        User oldUser = userRepository.findByUsername(findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
+        oldUser.setUsername(updatedUser.getUsername());
+        userRepository.save(oldUser);
+    }
+
+    /**
+     * Updates a password.
+     * @param updatedUser the updated User Object containing the new password and passwordConfirmation.
+     */
+    public void updatePassword(User updatedUser) {
+        User oldUser = userRepository.findByUsername(findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
+        oldUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        userRepository.save(oldUser);
+    }
 }
