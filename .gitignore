@@ -1,4 +1,12 @@
 # Default ignored files
 /.idea
 bueffle-be.iml
-/target
+target/
+bin
+bueffle/
+mdb/
+.classpath
+.factorypath
+.project
+.settings/
+.vscode/
