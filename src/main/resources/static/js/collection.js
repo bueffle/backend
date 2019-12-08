@@ -16,9 +16,11 @@ $(function() {
  */
 function getCollections() {
     console.log("getCollections()");
+    var url = $(location).attr('origin'); //base url, instead of href
+    console.log("url: " + url);
 
     $.ajax({
-        url: getBaseUrl() + "/collections",
+        url: url + "/collections",
         type: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -72,10 +74,11 @@ function loadCollections(data) {
         collectionDescriptions[num].innerHTML = data[num].description;
 
         //edit button
-        var editBtn = document.getElementsByClassName("btn-group")[num].children[1];
-        editBtn.innerHTML = "editieren";
-        editBtn.href = getBaseUrl() + "/collection.html/?id=" + data[num].id;
-        console.log(getBaseUrl() + "/collection.html/?id=" + data[num].id);
+        var element = document.getElementsByClassName("btn-group")[num].children[1];
+        element.innerHTML = "editieren";
+        var url = $(location).attr('origin'); //base url, instead of href
+        element.href = url + "/collection.html/?id=" + data[num].id;
+        console.log(url + "/collection.html/?id=" + data[num].id);
     }
 }
 
@@ -84,49 +87,22 @@ function loadCollections(data) {
  */
 function loadCollection() {
     console.log("loadCollection()");
+    var url = $(location).attr('origin'); //base url, instead of href
+    console.log("url: " + url);
+
+    //get parameter id from current url
+    var id = new URLSearchParams(window.location.search).get('id');
+    console.log("idFromUrl: " + id);
 
     $.ajax({
-        url: getBaseUrl() + "/collections/" + getParameterFromUrlByName('id'),
+        url: url + "/collections/" + id,
         type: 'GET',
         //dataType: 'json',
-        success: function (data) {
-            console.log("description : " + data.description);
-            $("#collectionName").html(data.name);
-            $("#collectionDescription").html(data.description);
-
-            //Breadcrumb
-            var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[1];
-            breadCrumbCollection.innerHTML = data.name;
-            breadCrumbCollection.href = getBaseUrl() + "/collection.html/?id=" + data.id;
-            //getBaseUrl() necessary?
-            console.log("breadCrumbCollection.href: " + breadCrumbCollection.href);
+        success: function (response) {
+            console.log("Beschreibung ist : " + response.description);
+            $("#collectionName").html(response.name);
+            $("#collectionDescription").html(response.description);
         }
-    });
-
-
-}
-
-/**
- * Update changes of collection by PUT to /collections/id
- */
-function updateCollection() {
-    console.log("updateCollection()");
-    var id = getParameterFromUrlByName('id');
-    var name = $("#collectionName").text();
-    console.log("name: " + name);
-    var description = $("#collectionDescription").text();
-
-    //todo: get cards of this collection
-
-    $.ajax({
-        url: getBaseUrl() + "/collections/" + id,
-        type: 'PUT',
-        contentType: 'application/json',
-        data: JSON.stringify({"id": id, "name": name, "description": description, "cards": []}),
-        success: function (data) {
-            console.log(data);
-            console.log('process success');
-        },
     });
 }
 
@@ -136,32 +112,20 @@ function updateCollection() {
 function editCollection() {
     console.log("editCollection()");
     $(this).hide();
-    var name = $("#collectionName").text();
     $("#collectionName").attr("contenteditable", "true");
     $("#collectionName").css("background-color", "white");
-    var description = $("#collectionDescription").text();
     $("#collectionDescription").attr("contenteditable", "true");
     $("#collectionDescription").css("background-color", "white");
     $("#collectionBtn1").html("Save");
     $("#collectionBtn2").html("Cancel");
     //cancel
-    $("#collectionBtn2").on("click", function() {
-        setCollectionUneditable();
-        $("#collectionName").text(name);
-        $("#collectionDescription").text(description);
-    });
+    $("#collectionBtn2").on("click", setCollectionUneditable);
     //save
     $("#collectionBtn1").on("click", function() {
         setCollectionUneditable();
-        updateCollection();
-
-        //Breadcrumb
-        var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[1];
-        breadCrumbCollection.innerHTML =  $("#collectionName").text();
+        //todo: save changes via POST/PUT
     });
 }
-
-//todo: save new collection by POST
 
 /**
  * Set elements of collection.html from edit mode back to normal mode
@@ -174,27 +138,5 @@ function setCollectionUneditable() {
     //todo: buttons
     $("#collectionBtn1").html("New Card");
     $("#collectionBtn2").html("Start Training");
-}
-
-/**
- * Get parameter by given name from current URL
- * @param paramName name of parameter (e.g.: ?id=)
- * @returns {string}
- */
-function getParameterFromUrlByName(paramName) {
-    var  urlParams= new URLSearchParams(window.location.search);
-    var param = urlParams.get(paramName);
-    console.log("getParameterFromUrlByName(" + paramName + "): " + param);
-    return param;
-}
-
-/**
- * Return base part of URL (e.g.: )
- * @returns {string | jQuery}
- */
-function getBaseUrl() {
-    var url = $(location).attr('origin');
-    console.log("getBaseUrl(): " + url);
-    return url;
 }
 
