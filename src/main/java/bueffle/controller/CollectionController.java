@@ -23,15 +23,6 @@ public class CollectionController {
     }
 
     /**
-     * Creates a new collection.
-     * @param collection The body of the new collection.
-     */
-    @PostMapping("/collections")
-    public void addCollection(@RequestBody Collection collection) {
-        collectionService.addCollection(collection);
-    }
-
-    /**
      * Gets the name of a collection while providing an id.
      * @param collectionId The Id of the collection to get.
      * @return The body of the collection with the provided Id.
@@ -49,6 +40,17 @@ public class CollectionController {
     @GetMapping("/collections/{collectionId}/cards")
     public List<Card> getCardsFromCollection(@PathVariable Long collectionId) {
         return collectionService.getCardsFromCollection(collectionId);
+    }
+
+    @GetMapping("collections/search/findByName")
+
+    /**
+     * Creates a new collection.
+     * @param collection The body of the new collection.
+     */
+    @PostMapping("/collections")
+    public void addCollection(@RequestBody Collection collection) {
+        collectionService.addCollection(collection);
     }
 
     /**

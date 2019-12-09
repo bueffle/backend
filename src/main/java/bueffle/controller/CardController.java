@@ -4,9 +4,12 @@ import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
 import bueffle.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 public class CardController {
@@ -19,9 +22,16 @@ public class CardController {
      * @return All Cards as List.
      */
     @GetMapping("/cards")
-    public List<Card> indexCards() {
-        return cardService.getAllCards();
+    public Page<Card> findCardsByQuestion(@RequestParam(value = "question", required = false) String question, Pageable pageable) {
+        if (question == null) {
+            return cardService.getAllCards();
+        } else {
+            return cardService.findByQuestion(question, pageable);
+        }
     }
+    /*public List<Card> indexCards() {
+        return cardService.getAllCards();
+    }*/
 
     /**
      * Gets the Card for a provided Id.

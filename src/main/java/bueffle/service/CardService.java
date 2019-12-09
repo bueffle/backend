@@ -6,9 +6,11 @@ import bueffle.exception.CardNotFoundException;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.model.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,10 +50,22 @@ public class CardService {
      * Returns all cards as List of Cards.
      * @return List of all cards.
      */
-    public List<Card> getAllCards() {
+    /*public List<Card> getAllCards() {
         List<Card> cards = (cardRepository.findAll());
         cards.forEach(Card::emptyCollections);
         return cards;
+    }*/
+
+    public Page<Card> getAllCards() {
+        List<Card> cards = (cardRepository.findAll());
+        cards.forEach(Card::emptyCollections);
+        return new PageImpl<>(cards);
+    }
+
+    public Page<Card> findByQuestion(String question, Pageable pageable) {
+        List<Card> cards = (cardRepository.findByQuestion(question, pageable));
+        cards.forEach(Card::emptyCollections);
+        return new PageImpl<>(cards);
     }
 
     /**
