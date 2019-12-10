@@ -85,11 +85,13 @@
                                   <form action="/collections" method="post" id="create_collection_form">
                                       <div class="form-group">
                                         <label for="formGroupExampleInput">Titel</label>
-                                        <input type="text" class="form-control" id="formCreateColletionName" placeholder="Example input">
+                                        <input type="text" class="form-control" id="formCreateCollectionName"
+                                               placeholder="Example input">
                                       </div>
                                       <div class="form-group">
                                         <label for="formGroupExampleInput2">Beschreibung</label>
-                                        <input type="text" class="form-control" id="formCreateColletionDescription" placeholder="Another input">
+                                        <input type="text" class="form-control" id="formCreateCollectionDescription"
+                                               placeholder="Another input">
                                       </div>
                                       
                                     </form>
@@ -164,8 +166,8 @@
               <p class="card-text">{{description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                  <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                  <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Lernen</a>
+                  <a type="button" class="btn btn-sm btn-outline-secondary" href="collection.html/?id={{id}}">Editieren</a>
                 </div>
                 <small class="text-muted">{{cards.length}} Karten enthalten</small>
               </div>
