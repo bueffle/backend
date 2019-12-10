@@ -83,7 +83,8 @@
       <section class="jumbotron text-center">
         <div class="container">
           <h1 id="collectionName" class="jumbotron-heading">Collection</h1>
-          <button id="editCollectionBtn" name="edit" type="button">Edit</button>
+          <button id="editCollectionBtn" name="edit" type="button">Editieren</button>
+          <button id="deleteCollectionBtn" name="edit" type="button">Löschen</button>
           <p id="collectionDescription" class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
           <p>
             <a href="#" id="collectionBtn1" class="btn btn-primary my-2" data-toggle="modal" data-target="#createCardModal">Neue Karte</a>
@@ -158,5 +159,60 @@
 
       <p>&copy; Büffle 2019</p>
     </footer>
+
+    <script id="cards-template" type="text/x-handlebars-template">
+      {{#nth 3 cards}}
+      <div class="col-md-4">
+        {{#each this}}
+        <div class="card mb-4 shadow-sm">
+          <!-- Add image here -->
+          <div class="card-body">
+            <p class="card-text">{{name}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Editieren</a>
+                <a type="button" class="btn btn-sm btn-outline-secondary">Löschen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/nth}}
+    </script>
+
+    <script id="card-template" type="text/x-handlebars-template">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-image-placeholder"></div>
+        <div class="card-body">
+          <p class="card-text">{{question}}</p>
+          <p class="card-text">{{answer}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html/?cardId={{id}}">Editieren</a>
+              <a type="button" class="btn btn-sm btn-outline-secondary">Löschen</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script id="new-card-template" type="text/x-handlebars-template">
+      {{#nth 3 cards}}
+      <div class="col-md-4">
+        {{#each this}}
+        <div class="card mb-4 shadow-sm">
+          <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
+          <div class="card-body">
+            <p class="card-text">{{question}}</p>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+      {{/nth}}
+    </script>
+
+
+
   </body>
 </html>

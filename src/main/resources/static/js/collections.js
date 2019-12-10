@@ -10,6 +10,10 @@ $( document ).ready(function() {
         console.log("collection.html");
         loadCollection();
         $("#editCollectionBtn").on("click", editCollection);
+
+        $("#deleteCollectionBtn").on("click", function() {
+            deleteCollection(getParameterFromUrlByName('collectionId'))
+        });
         getAllCards();
     }
 });
@@ -60,7 +64,16 @@ function renderCollections(collections) {
 
 
 function deleteCollection(collection_id) {
+    //todo: ask user before
 
+    $.ajax({
+        url: "/collections/" + collection_id,
+        type: 'DELETE',
+        dataType: 'json',
+        success: function(data) {
+            window.location.href = getBaseUrl() + "/collections.html";
+        }
+    });
 }
 
 function appendToBody(index, collection) {
@@ -92,11 +105,11 @@ $('#create_new_collection_submit').click(function(event) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 //the same for cards
-
+//todo: gleiche Fkt. nutzen wie oben?
 
 function getAllCards() {
     $.ajax({
-        url: "/collections/" + getParameterFromUrlByName('id') + "/cards",
+        url: "/collections/" + getParameterFromUrlByName('collectionId') + "/cards",
         type: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -112,13 +125,13 @@ function createCard() {
         contentType: 'application/json',
         dataType: 'json',
         complete: function(data) {
-            $('#createCollectionModal').modal('hide');
-            clearCollections();
-            getAllCollections();
+            $('#createCardModal').modal('hide');
+            clearCards();
+            getAllCards();
         },
         data: JSON.stringify({
-            "name": $('#formCreateCollectionName').val(),
-            "description": $('#formCreateCollectionDescription').val()
+            "name": $('#formCreateCardQuestion').val(),
+            "description": $('#formCreateCardAnswer').val()
         }),
     });
 }
@@ -135,9 +148,15 @@ function renderCards(cards) {
     }
 }
 
-
 function deleteCard(card_id) {
-
+    $.ajax({
+        url: "/cards/" + card_id,
+        type: 'DELETE',
+        dataType: 'json',
+        success: function(data) {
+            renderCards(data);
+        }
+    });
 }
 
 function appendToBodyCards(index, card) {
@@ -167,10 +186,6 @@ $('#create_new_card_submit').click(function(event) {
 });
 
 
-
-
-
-
 /////////collection.js//////////////
 
 /**
@@ -181,7 +196,7 @@ function loadCollection() {
     console.log("loadCollection()");
 
     $.ajax({
-        url: getBaseUrl() + "/collections/" + getParameterFromUrlByName('id'),
+        url: getBaseUrl() + "/collections/" + getParameterFromUrlByName('collectionId'),
         type: 'GET',
         //dataType: 'json',
         success: function (data) {
@@ -192,7 +207,7 @@ function loadCollection() {
             //Breadcrumb
             var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
             breadCrumbCollection.innerHTML = data.name;
-            breadCrumbCollection.href = getBaseUrl() + "/collection.html/?id=" + data.id;
+            breadCrumbCollection.href = getBaseUrl() + "/collection.html/?collectionId=" + data.id;
             //getBaseUrl() necessary?
             console.log("breadCrumbCollection.href: " + breadCrumbCollection.href);
         }
@@ -204,7 +219,7 @@ function loadCollection() {
  */
 function updateCollection() {
     console.log("updateCollection()");
-    var id = getParameterFromUrlByName('id');
+    var collectionId = getParameterFromUrlByName('collectionId');
     var name = $("#collectionName").text();
     console.log("name: " + name);
     var description = $("#collectionDescription").text();
@@ -212,10 +227,10 @@ function updateCollection() {
     //todo: get cards of this collection
 
     $.ajax({
-        url: getBaseUrl() + "/collections/" + id,
+        url: getBaseUrl() + "/collections/" + collectionId,
         type: 'PUT',
         contentType: 'application/json',
-        data: JSON.stringify({"id": id, "name": name, "description": description, "cards": []}),
+        data: JSON.stringify({"id": collectionId, "name": name, "description": description, "cards": []}),
         success: function (data) {
             console.log(data);
             console.log('process success');
