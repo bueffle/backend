@@ -10,6 +10,7 @@ $( document ).ready(function() {
         console.log("collection.html");
         loadCollection();
         $("#editCollectionBtn").on("click", editCollection);
+        getAllCards();
     }
 });
 
@@ -90,6 +91,86 @@ $('#create_new_collection_submit').click(function(event) {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+//the same for cards
+
+
+function getAllCards() {
+    $.ajax({
+        url: "/collections/" + getParameterFromUrlByName('id') + "/cards",
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            renderCards(data);
+        }
+    });
+}
+
+function createCard() {
+    $.ajax({
+        url: "/cards",
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        complete: function(data) {
+            $('#createCollectionModal').modal('hide');
+            clearCollections();
+            getAllCollections();
+        },
+        data: JSON.stringify({
+            "name": $('#formCreateCollectionName').val(),
+            "description": $('#formCreateCollectionDescription').val()
+        }),
+    });
+}
+
+function renderCards(cards) {
+    var row = 1;
+    for (var i in cards) {
+        appendToBodyCards(row,cards[i])
+        if(row >= 3) {
+            row=1;
+        } else {
+            row++;
+        }
+    }
+}
+
+
+function deleteCard(card_id) {
+
+}
+
+function appendToBodyCards(index, card) {
+
+    var template = Handlebars.compile($('#card-template').html());
+
+    var html = template(card);
+    var addCardSnipp = $("#create_card").detach();
+    $('#nth-column-'+index).append(html);
+    (index == 3)?index=1:index++;
+    $('#nth-column-'+index).append(addCardSnipp);
+}
+
+function clearCards() {
+    var addCardSnipp = $("#create_card").detach();
+    $('#nth-column-1').empty();
+    $('#nth-column-2').empty();
+    $('#nth-column-3').empty();
+
+    $('#nth-column-1').append(addCardSnipp);
+    $('#formCreateCardQuestion').val("");
+    $('#formCreateCardAnswer').val("");
+}
+
+$('#create_new_card_submit').click(function(event) {
+    createCard()
+});
+
+
+
+
+
+
 /////////collection.js//////////////
 
 /**
@@ -109,7 +190,7 @@ function loadCollection() {
             $("#collectionDescription").html(data.description);
 
             //Breadcrumb
-            var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[1];
+            var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
             breadCrumbCollection.innerHTML = data.name;
             breadCrumbCollection.href = getBaseUrl() + "/collection.html/?id=" + data.id;
             //getBaseUrl() necessary?
@@ -207,3 +288,4 @@ function getBaseUrl() {
     console.log("getBaseUrl(): " + url);
     return url;
 }
+//////////////////////////////////////////////////////////////

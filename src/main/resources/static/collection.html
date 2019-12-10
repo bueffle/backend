@@ -73,6 +73,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/collections.html">Sammlungen</a></li>
         <li class="breadcrumb-item"><a href="/collection.html">Collection</a></li>
       </ol>
     </nav>
@@ -85,109 +86,62 @@
           <button id="editCollectionBtn" name="edit" type="button">Edit</button>
           <p id="collectionDescription" class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
           <p>
-            <a href="#" id="collectionBtn1" class="btn btn-primary my-2">New Card</a>
-            <a href="#" id="collectionBtn2" class="btn btn-secondary my-2">Start Training</a>
+            <a href="#" id="collectionBtn1" class="btn btn-primary my-2" data-toggle="modal" data-target="#createCardModal">Neue Karte</a>
+            <a href="#" id="collectionBtn2" class="btn btn-secondary my-2">Lernlauf starten</a>
           </p>
         </div>
       </section>
-    
-      <div class="album py-5 bg-light">
-        <div class="container">
-    
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
-                <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                      <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    </div>
-                    <small class="text-muted">9 cards</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                  <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1573595287099-eabfdb20ec6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                  <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                      <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    </div>
-                    <small class="text-muted">9 cards</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                  <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1573595287099-eabfdb20ec6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                  <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                      <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    </div>
-                    <small class="text-muted">9 cards</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                  <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1573614035635-336aff831d7f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                  <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                      <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    </div>
-                    <small class="text-muted">9 cards</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                  <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1558980664-769d59546b3d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                  <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                      <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    </div>
-                    <small class="text-muted">9 cards</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                  <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1573595287099-eabfdb20ec6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" />
-                  <div class="card-body">
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                      <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                    </div>
-                    <small class="text-muted">9 cards</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-    
 
+      <div class="album py-5 bg-light">
+        <div class="container" >
+          <div class="row" id="collection-content">
+
+            <div class="col-md-4" id="nth-column-1">
+              <div class="card mb-4 shadow-sm" id="create_card">
+
+                <div class="card-body">
+                  <p class="card-text">Neue Karte erstellen</p>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCardModal">Erstellen</button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="createCardModal" tabindex="-1" role="dialog" aria-labelledby="createCardModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="createCardModalLabel">Neue Karte erstellen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form action="/cards" method="post" id="create_card_form">
+                            <div class="form-group">
+                              <label for="formGroupExampleInput">Frage</label>
+                              <input type="text" class="form-control" id="formCreateCardQuestion"
+                                     placeholder="Example input">
+                            </div>
+                            <div class="form-group">
+                              <label for="formGroupExampleInput2">Antwort</label>
+                              <input type="text" class="form-control" id="formCreateCardAnswer"
+                                     placeholder="Another input">
+                            </div>
+
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                          <button type="button" form="create_card_form" class="btn btn-primary" id="create_new_card_submit">Speichern</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End Modal -->
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4" id="nth-column-2"></div>
+            <div class="col-md-4" id="nth-column-3"></div>
 
           </div>
         </div>
