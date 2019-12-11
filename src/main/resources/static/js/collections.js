@@ -52,8 +52,8 @@ function createCollection() {
 
 function renderCollections(collections) {
     var row = 1;
-    for (var i in collections) {
-        appendToBody(row,collections[i])
+    for (var i in collections.content) {
+        appendToBody(row,collections.content[i])
         if(row >= 3) {
             row=1;
         } else {
@@ -138,8 +138,8 @@ function createCard() {
 
 function renderCards(cards) {
     var row = 1;
-    for (var i in cards) {
-        appendToBodyCards(row,cards[i])
+    for (var i in cards.content) {
+        appendToBodyCards(row,cards.content[i])
         if(row >= 3) {
             row=1;
         } else {
