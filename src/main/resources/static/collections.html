@@ -36,24 +36,43 @@
           <div class="" >
             
             <div class="btn-group dropleft">
-              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                  Konto erstellen
-              </button>
-              <form class="dropdown-menu p-4" style="width:300px">
-                  <div class="form-group">
-                    <label for="exampleDropdownFormEmail2">Email address</label>
-                    <input type="email" class="form-control" id="exampleDropdownFormEmail2" placeholder="email@example.com">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signupModal">
+                    Konto erstellen
+                  </button>
+              <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="signupModalLabel">Konto erstellen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <form class="p-4">
+                              <div class="form-group">
+                                <label for="signupEmail">Email address</label>
+                                <input type="email" class="form-control" id="signupEmail" placeholder="email@example.com">
+                              </div>
+                              <div class="form-group">
+                                <label for="signupPassword1">Password</label>
+                                <input type="password" class="form-control" id="signupPassword1" placeholder="Passwort">
+                              </div>
+                              <div class="form-group">
+                                <label for="signupPassword2">Password wiederholen</label>
+                                <input type="password" class="form-control" id="signupPassword2" placeholder="Passwort">
+                              </div>
+                              
+                            </form>
+                            <p>Durch das erstellen eines Kontos, stimmen Sie unseren <a href="#">Nutzerbedingungen</a> zu.</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                        <button type="button" class="btn btn-primary" id="signup_accept">Zustimmen und Konto erstellen</button>
+                      </div>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="exampleDropdownFormPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleDropdownFormPassword2">Password</label>
-                    <input type="password" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Sign in</button>
-                </form>
+                </div>
             </div>
             <div class="btn-group" >
             <a href="/login" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="In Konto einloggen">
