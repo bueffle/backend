@@ -28,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/*").permitAll()
                 .and().formLogin()
                 .and().csrf().disable().httpBasic(); // Only activated for testing with postman
+        http.headers().frameOptions().sameOrigin(); //for access to http://localhost:8080/h2-console
     }
 
     @Bean
