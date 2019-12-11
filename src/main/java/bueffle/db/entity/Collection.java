@@ -16,7 +16,7 @@ public class Collection {
     private boolean isPublic = false;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "collections")
-    private Set<Card> cards = new HashSet<>();;
+    private Set<Card> cards = new HashSet<>();
 
     @ManyToOne
     private User owner;

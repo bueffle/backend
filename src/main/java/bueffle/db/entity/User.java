@@ -1,8 +1,7 @@
 package bueffle.db.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,7 +18,7 @@ public class User {
     private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "owner")
     private Set<Collection> collections;
@@ -62,7 +61,7 @@ public class User {
         this.enabled = enabled;
     }
 
-    public List<Role> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 

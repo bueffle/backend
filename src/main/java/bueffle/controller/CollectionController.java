@@ -4,8 +4,10 @@ import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
 import bueffle.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
 import java.util.Set;
 
 @RestController
@@ -15,12 +17,25 @@ public class CollectionController {
     private CollectionService collectionService;
 
     /**
-     * Gets a List of all collections.
-     * @return All Collections as List.
+     * Returns a List of all collections if used with no parameters.
+     * if used with ?user=userId for example /collections?user=1 it will only return the collections owned by user 1
+     * if used with ?name=name for example /collections?name=hi it will only return the collections with the name "hi"
+     * @return All collections as List.
      */
     @GetMapping("/collections")
-    public List<Collection> indexCollections() {
-        return collectionService.getAllCollections();
+    public Page<Collection> getCollections(
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "user", required = false) Long userId,
+            Pageable pageable) {
+        if (name == null && userId == null) {
+            return collectionService.getAllCollections();
+        }
+        else if (name != null){
+            return collectionService.findByName(name, pageable);
+        }
+        else {
+            return collectionService.findByUserId(userId, pageable);
+        }
     }
 
     /**

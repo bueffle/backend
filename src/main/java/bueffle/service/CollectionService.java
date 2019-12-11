@@ -5,6 +5,9 @@ import bueffle.db.entity.Collection;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.model.CollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -33,42 +36,13 @@ public class CollectionService {
     }
 
     /**
-     * Checks if the default collection for a user already exists.
-     * @param username the name of the user to check
-     * @return boolean if the default collection exists
-     */
-    boolean defaultUserCollectionExists(String username) {
-        return collectionRepository.findByName(username) != null;
-    }
-
-    /**
-     * Adds the default user collection. (name = username)
-     * @param username name for the user to add the collection
-     */
-    void addDefaultUserCollection(String username) {
-        addCollection(new Collection(username, username + "'s Cards"));
-    }
-
-    /**
-     * Adds a ccard to a users default collection.
-     * @param card to add
-     */
-    public void addCardToUserDefaultCollection(Card card) {
-        String username = userService.findLoggedInUsername();
-        if(!defaultUserCollectionExists(username)) {
-            addDefaultUserCollection(username);
-        }
-        card.addCollection(findByName(username));
-    }
-
-    /**
      * Gets all the collections
      * @return all collections
      */
-    public List<Collection> getAllCollections() {
+    public Page<Collection> getAllCollections() {
         List<Collection> collections = (collectionRepository.findAll());
         collections.forEach(Collection::emptyCards);
-        return collections;
+        return new PageImpl<>(collections);
     }
 
     /**
@@ -123,8 +97,22 @@ public class CollectionService {
      * @param name to find
      * @return collection
      */
-    public Collection findByName(String name) {
-        return collectionRepository.findByName(name);
+    public Page<Collection> findByName(String name, Pageable pageable) {
+        List<Collection> collections = (collectionRepository.findByName(name, pageable));
+        collections.forEach(Collection::emptyCards);
+        return new PageImpl<>(collections);
+    }
+
+    /**
+     * Finds a collection by providing a userId.
+     * @param userId id of the User
+     * @param pageable a pageable Object
+     * @return Page which contains the card/-s
+     */
+    public Page<Collection> findByUserId(Long userId, Pageable pageable) {
+        List<Collection> collections = (collectionRepository.findCardsByOwnerId(userId, pageable));
+        collections.forEach(Collection::emptyCards);
+        return new PageImpl<>(collections);
     }
 
     /**

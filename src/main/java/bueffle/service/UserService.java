@@ -1,11 +1,8 @@
 package bueffle.service;
 
 import bueffle.auth.BackendUserDetails;
-import bueffle.db.entity.Card;
 import bueffle.db.entity.Role;
 import bueffle.db.entity.User;
-import bueffle.exception.CardNotFoundException;
-import bueffle.exception.CollectionNotFoundException;
 import bueffle.exception.UserNotFoundException;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;

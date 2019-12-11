@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 
@@ -19,15 +18,24 @@ public class CardController {
     private CardService cardService;
 
     /**
-     * Returns a List of all cards.
+     * Returns a List of all cards if used with no parameters.
+     * if used with ?user=userId for example /cards?user=1 it will only return the cards owned by user 1
+     * if used with ?question=question for example /cards?question=why it will only return the cards that contain "why"
      * @return All Cards as List.
      */
     @GetMapping("/cards")
-    public Page<Card> findCardsByQuestion(@RequestParam(value = "question", required = false) String question, Pageable pageable) {
-        if (question == null) {
+    public Page<Card> getCards(
+            @RequestParam(value = "question", required = false) String question,
+            @RequestParam(value = "user", required = false) Long userId,
+            Pageable pageable) {
+        if (question == null && userId == null) {
             return cardService.getAllCards();
-        } else {
+        }
+        else if (question != null){
             return cardService.findByQuestion(question, pageable);
+        }
+        else {
+            return cardService.findByUserId(userId, pageable);
         }
     }
 

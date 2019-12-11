@@ -74,11 +74,22 @@ public class CardService {
     }
 
     /**
+     * Finds a card by providing a userId.
+     * @param userId id of the User
+     * @param pageable a pageable Object
+     * @return Page which contains the card/-s
+     */
+    public Page<Card> findByUserId(Long userId, Pageable pageable) {
+        List<Card> cards = (cardRepository.findCardsByOwnerId(userId, pageable));
+        cards.forEach(Card::emptyCollections);
+        return new PageImpl<>(cards);
+    }
+
+    /**
      * Creates new card. The new card is added to the default collection of the user then.
      * @param card the card to add
      */
     public void addCard(Card card) {
-        collectionService.addCardToUserDefaultCollection(card);
         card.setOwner(userService.findByUsername(userService.findLoggedInUsername()).orElseThrow(
                 () -> new UsernameNotFoundException("Not found: " + userService.findLoggedInUsername())
         ));
