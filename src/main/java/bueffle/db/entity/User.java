@@ -1,13 +1,10 @@
 package bueffle.db.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Data
 @Entity
 public class User {
 
@@ -83,5 +80,9 @@ public class User {
 
     public boolean hasUsername() {
         return username != null;
+    }
+
+    public long getId() {
+        return id;
     }
 }

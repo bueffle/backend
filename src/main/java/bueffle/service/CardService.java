@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CardService {
@@ -21,6 +23,9 @@ public class CardService {
 
     @Autowired
     private CollectionService collectionService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Shows one card by providing an Id.
@@ -39,8 +44,8 @@ public class CardService {
      * @param cardId the Id of the card who's collections should be shown.
      * @return List of collections of the card
      */
-    public List<Collection> getCollectionsFromCard(Long cardId) {
-        List<Collection> collections = cardRepository.findById(cardId)
+    public Set<Collection> getCollectionsFromCard(Long cardId) {
+        Set<Collection> collections = cardRepository.findById(cardId)
                 .orElseThrow(() -> new CardNotFoundException(cardId)).getCollections();
         collections.forEach(Collection::emptyCards);
         return collections;
@@ -56,6 +61,12 @@ public class CardService {
         return new PageImpl<>(cards);
     }
 
+    /**
+     * Finds a card by providing a Question as String.
+     * @param question provided String
+     * @param pageable a pageable Object
+     * @return Page which contains the card/-s
+     */
     public Page<Card> findByQuestion(String question, Pageable pageable) {
         List<Card> cards = (cardRepository.findByQuestion(question, pageable));
         cards.forEach(Card::emptyCollections);
@@ -68,6 +79,9 @@ public class CardService {
      */
     public void addCard(Card card) {
         collectionService.addCardToUserDefaultCollection(card);
+        card.setOwner(userService.findByUsername(userService.findLoggedInUsername()).orElseThrow(
+                () -> new UsernameNotFoundException("Not found: " + userService.findLoggedInUsername())
+        ));
         cardRepository.save(card);
     }
 

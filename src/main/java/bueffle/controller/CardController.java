@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -46,7 +47,7 @@ public class CardController {
      * @return The collections of the card with the provided Id.
      */
     @GetMapping("/cards/{cardId}/collections")
-    public List<Collection> getCollectionsFromCards(@PathVariable Long cardId) {
+    public Set<Collection> getCollectionsFromCards(@PathVariable Long cardId) {
         return cardService.getCollectionsFromCard(cardId);
     }
 

@@ -27,7 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/profile").hasRole("USER")
                 .antMatchers("/*").permitAll()
                 .and().formLogin()
-                .and().csrf().disable(); // Only activated for testing with postman
+                .and().csrf().disable().httpBasic(); // Only activated for testing with postman
     }
 
     @Bean

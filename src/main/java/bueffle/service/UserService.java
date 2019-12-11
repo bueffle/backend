@@ -97,7 +97,7 @@ public class UserService implements UserDetailsService {
             return  ((UserDetails)principal).getUsername();
         }
         else {
-            return "Not logged in";
+            return principal.toString();
         }
     }
 

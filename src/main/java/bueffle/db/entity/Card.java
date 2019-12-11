@@ -1,13 +1,9 @@
 package bueffle.db.entity;
 
-import lombok.Data;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
-@Data
 @Entity
 public class Card {
 
@@ -20,7 +16,7 @@ public class Card {
     private boolean isPublic = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Collection> collections = new ArrayList<>();
+    private Set<Collection> collections = new HashSet<>();
 
     @ManyToOne
     private User owner;
@@ -60,7 +56,7 @@ public class Card {
         collections.clear();
     }
 
-    public List<Collection> getCollections() {
+    public Set<Collection> getCollections() {
         return collections;
     }
 
@@ -70,5 +66,17 @@ public class Card {
 
     public void setPublic(boolean aPublic) {
         isPublic = aPublic;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public long getId() {
+        return id;
     }
 }

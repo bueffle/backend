@@ -5,10 +5,12 @@ import bueffle.db.entity.Collection;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.model.CollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class CollectionService {
@@ -24,6 +26,9 @@ public class CollectionService {
      * @param collection the collection to add
      */
     public void addCollection(Collection collection) {
+        collection.setOwner(userService.findByUsername(userService.findLoggedInUsername()).orElseThrow(
+                () -> new UsernameNotFoundException("Not found: " + userService.findLoggedInUsername())
+        ));
         collectionRepository.save(collection);
     }
 
@@ -83,8 +88,8 @@ public class CollectionService {
      * @param collectionId the Id of the collection who's cards should be shown.
      * @return List of cards of the collection
      */
-    public List<Card> getCardsFromCollection(Long collectionId) {
-        List<Card> cards = collectionRepository.findById(collectionId)
+    public Set<Card> getCardsFromCollection(Long collectionId) {
+        Set<Card> cards = collectionRepository.findById(collectionId)
                 .orElseThrow(() -> new CollectionNotFoundException(collectionId)).getCards();
         cards.forEach(Card::emptyCollections);
         return cards;

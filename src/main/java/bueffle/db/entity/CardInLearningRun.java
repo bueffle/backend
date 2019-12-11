@@ -3,7 +3,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-@Data
 @Entity
 public class CardInLearningRun {
 
@@ -11,12 +10,25 @@ public class CardInLearningRun {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private boolean answeredCorrectly = false;
+
     @ManyToOne
     private LearningRun learningRun;
 
     @ManyToOne
     private Card card;
 
+    public boolean isAnsweredCorrectly() {
+        return answeredCorrectly;
+    }
+
+    public void setAnsweredCorrectly(boolean answeredCorrectly) {
+        this.answeredCorrectly = answeredCorrectly;
+    }
+
+    public long getId() {
+        return id;
+    }
 }
 
 

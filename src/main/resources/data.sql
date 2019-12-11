@@ -1,2 +1,10 @@
 INSERT INTO card (question,answer,is_Public) VALUES ('question 1', 'answer to 1', true);
+INSERT INTO card (question,answer,is_Public) VALUES ('question 2', 'answer to 2', true);
+INSERT INTO card (question,answer,is_Public) VALUES ('question 3', 'answer to 3', true);
+INSERT INTO card (question,answer,is_Public) VALUES ('question 4', 'answer to 4', true);
+INSERT INTO card (question,answer,is_Public) VALUES ('question 4', 'answer to 4', true);
 INSERT INTO collection (name,description,is_Public) VALUES ('Sammlung 1', 'Dies ist die Beschreibung der Sammlung 1.', true);
+INSERT INTO collection (name,description,is_Public) VALUES ('Sammlung 2', 'Dies ist die Beschreibung der Sammlung 2.', true);
+INSERT INTO collection (name,description,is_Public) VALUES ('Sammlung 3', 'Dies ist die Beschreibung der Sammlung 3.', true);
+INSERT INTO collection (name,description,is_Public) VALUES ('Sammlung 4', 'Dies ist die Beschreibung der Sammlung 4.', true);
+INSERT INTO collection (name,description,is_Public) VALUES ('Sammlung 5', 'Dies ist die Beschreibung der Sammlung 5.', true);

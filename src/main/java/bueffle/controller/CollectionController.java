@@ -6,6 +6,7 @@ import bueffle.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class CollectionController {
@@ -38,16 +39,10 @@ public class CollectionController {
      * @return The cards of the collection with the provided Id.
      */
     @GetMapping("/collections/{collectionId}/cards")
-    public List<Card> getCardsFromCollection(@PathVariable Long collectionId) {
+    public Set<Card> getCardsFromCollection(@PathVariable Long collectionId) {
         return collectionService.getCardsFromCollection(collectionId);
     }
 
-    @GetMapping("collections/search/findByName")
-
-    /**
-     * Creates a new collection.
-     * @param collection The body of the new collection.
-     */
     @PostMapping("/collections")
     public void addCollection(@RequestBody Collection collection) {
         collectionService.addCollection(collection);
