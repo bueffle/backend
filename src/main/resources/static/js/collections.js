@@ -3,7 +3,10 @@ $( document ).ready(function() {
     // var titles = {"collections":[{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"}]};
 
     //var titles =[{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"}];
-    getAllCollections();
+
+    if ($("body.collections").length > 0) {
+        getAllCollections();
+    }
 
 
     if ($("body.collection").length > 0) {
@@ -27,7 +30,7 @@ function getAllCollections() {
         type: 'GET',
         dataType: 'json',
         success: function(data) {
-            renderCollections(data);
+            renderCollections(data.content);
         }
     });
 }
@@ -77,9 +80,9 @@ function deleteCollection(collection_id) {
 }
 
 function appendToBody(index, collection) {
-     
+    console.log("before handlebars collection-template");
     var template = Handlebars.compile($('#collection-template').html());
-
+    console.log("after handlebars collection-template");
     var html = template(collection);
     var addColletionSnipp = $("#create_collection_card").detach();
     $('#nth-column-'+index).append(html);
@@ -145,11 +148,15 @@ function signup(data) {
 //todo: gleiche Fkt. nutzen wie oben?
 
 function getAllCards() {
+    console.log("getAllCards()");
+    url = "/collections/" + getParameterFromUrlByName('collectionId') + "/cards";
+    console.log(url);
     $.ajax({
-        url: "/collections/" + getParameterFromUrlByName('collectionId') + "/cards",
+        url: url,
         type: 'GET',
         dataType: 'json',
         success: function(data) {
+            console.log("data of getAllCards(): " + data);
             renderCards(data);
         }
     });
@@ -197,9 +204,9 @@ function deleteCard(card_id) {
 }
 
 function appendToBodyCards(index, card) {
-
+    console.log("before handlebars card-template");
     var template = Handlebars.compile($('#card-template').html());
-
+    console.log("after handlebars card-template");
     var html = template(card);
     var addCardSnipp = $("#create_card").detach();
     $('#nth-column-'+index).append(html);
