@@ -7,7 +7,6 @@ import bueffle.model.CollectionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +41,7 @@ public class CollectionService {
      * @param username name for the user to add the collection
      */
     void addDefaultUserCollection(String username) {
-        addCollection(new Collection(username, "Cards owned by " + username));
+        addCollection(new Collection(username, username + "'s Cards"));
     }
 
     /**

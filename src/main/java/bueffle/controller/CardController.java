@@ -29,9 +29,6 @@ public class CardController {
             return cardService.findByQuestion(question, pageable);
         }
     }
-    /*public List<Card> indexCards() {
-        return cardService.getAllCards();
-    }*/
 
     /**
      * Gets the Card for a provided Id.

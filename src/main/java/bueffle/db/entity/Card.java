@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -16,9 +17,16 @@ public class Card {
 
     private String question;
     private String answer;
+    private boolean isPublic = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Collection> collections = new ArrayList<>();
+
+    @ManyToOne
+    private User owner;
+
+    @OneToMany(mappedBy = "card")
+    private Set<CardInLearningRun> cardInLearningRuns;
 
     // For deserialization purposes, we must have a zero-arg constructor.
     public Card() {}
@@ -56,4 +64,11 @@ public class Card {
         return collections;
     }
 
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
 }

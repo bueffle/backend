@@ -1,8 +1,11 @@
 package bueffle.db.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -19,6 +22,15 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Collection> collections;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<Card> cards;
+
+    @OneToMany(mappedBy = "owner")
+    private Set<LearningRun> learningRuns;
 
     public User() {}
 
