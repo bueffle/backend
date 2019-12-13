@@ -137,7 +137,9 @@ function signup(data) {
             "Content-Type": "application/json"
           },
         success: function(data) {
-            window.location.href = window.location.origin+"/login";
+            $('#signupModal').modal('hide');
+            console.log(data);
+            window.open(window.location.origin+"/login","_self");
         },
         data: JSON.stringify(data)
     });
