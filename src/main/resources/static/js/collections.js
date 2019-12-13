@@ -193,11 +193,13 @@ function renderCards(cards) {
 }
 
 function deleteCard(card_id) {
+    console.log("deleteCard(" + card_id + ")");
     $.ajax({
         url: "/cards/" + card_id,
         type: 'DELETE',
         dataType: 'json',
         success: function(data) {
+            console.log("data of deleteCard(): " + data);
             renderCards(data);
         }
     });
@@ -240,7 +242,7 @@ function loadCollection() {
     console.log("loadCollection()");
 
     $.ajax({
-        url: getBaseUrl() + "/collections/" + getParameterFromUrlByName('collectionId'),
+        url: "/collections/" + getParameterFromUrlByName('collectionId'),
         type: 'GET',
         //dataType: 'json',
         success: function (data) {
@@ -260,6 +262,7 @@ function loadCollection() {
 
 /**
  * Update changes of collection by PUT to /collections/id
+ * Cards are saved to collection when created or edited individually
  */
 function updateCollection() {
     console.log("updateCollection()");
@@ -268,10 +271,8 @@ function updateCollection() {
     console.log("name: " + name);
     var description = $("#collectionDescription").text();
 
-    //todo: get cards of this collection
-
     $.ajax({
-        url: getBaseUrl() + "/collections/" + collectionId,
+        url: "/collections/" + collectionId,
         type: 'PUT',
         contentType: 'application/json',
         data: JSON.stringify({"id": collectionId, "name": name, "description": description, "cards": []}),
@@ -287,28 +288,31 @@ function updateCollection() {
  */
 function editCollection() {
     console.log("editCollection()");
-    $(this).hide();
+    //$("#saveCollectionBtn").attr("disabled", "enabled");
+    document.getElementById("saveCollectionBtn").disabled = false;
+    $("#editCollectionBtn").html("Abbrechen");
+
+    //$(this).hide();
     var name = $("#collectionName").text();
     $("#collectionName").attr("contenteditable", "true");
     $("#collectionName").css("background-color", "white");
     var description = $("#collectionDescription").text();
     $("#collectionDescription").attr("contenteditable", "true");
     $("#collectionDescription").css("background-color", "white");
-    $("#collectionBtn1").html("Save");
-    $("#collectionBtn2").html("Cancel");
+
     //cancel
-    $("#collectionBtn2").on("click", function() {
+    $("#editCollectionBtn").on("click", function() {
         setCollectionUneditable();
         $("#collectionName").text(name);
         $("#collectionDescription").text(description);
     });
     //save
-    $("#collectionBtn1").on("click", function() {
+    $("#saveCollectionBtn").on("click", function() {
         setCollectionUneditable();
         updateCollection();
 
         //Breadcrumb
-        var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[1];
+        var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
         breadCrumbCollection.innerHTML =  $("#collectionName").text();
     });
 }
@@ -318,12 +322,11 @@ function editCollection() {
  */
 function setCollectionUneditable() {
     console.log("setCollectionUneditable()");
-    $("#editCollectionBtn").show();
+    $("#editCollectionBtn").html("Editieren");
     $("#collectionName").removeAttr('contenteditable style');
     $("#collectionDescription").removeAttr('contenteditable style');
-    //todo: buttons
-    $("#collectionBtn1").html("New Card");
-    $("#collectionBtn2").html("Start Training");
+    //$("#saveCollectionBtn").removeAttr("disabled");
+    document.getElementById("saveCollectionBtn").disabled = true;
 }
 
 /**
