@@ -7,22 +7,11 @@ $( document ).ready(function() {
     if ($("body.collections").length > 0) {
         getAllCollections();
     }
-
-
     if ($("body.collection").length > 0) {
         console.log("collection.html");
         loadCollection();
-        $("#editCollectionBtn").on("click", editCollection);
-
-        $("#deleteCollectionBtn").on("click", function() {
-            deleteCollection(getParameterFromUrlByName('collectionId'))
-        });
-        getAllCards();
     }
 });
-
-
-
 
 function getAllCollections() {
     $.ajax({
@@ -65,18 +54,22 @@ function renderCollections(collections) {
     }
 }
 
-
+/**
+ * Deletes collection
+ * todo: ask user before, also delete references on cards?
+ * @param collection_id
+ */
 function deleteCollection(collection_id) {
-    //todo: ask user before
-
     $.ajax({
         url: "/collections/" + collection_id,
         type: 'DELETE',
         dataType: 'json',
-        success: function(data) {
-            window.location.href = getBaseUrl() + "/collections.html";
+        complete: function(data) {
+            console.log("DELETE /collections/" + collection_id);
+            //redirect back to collections is not possible here
         }
     });
+    window.location.href = getBaseUrl() + "/collections.html";
 }
 
 function appendToBody(index, collection) {
@@ -155,8 +148,8 @@ function signup(data) {
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-//the same for cards
-//todo: gleiche Fkt. nutzen wie oben?
+//functions for cards
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 function getAllCards() {
     console.log("getAllCards()");
@@ -242,20 +235,35 @@ $('#create_new_card_submit').click(function(event) {
     createCard()
 });
 
-
 /////////collection.js//////////////
 
 /**
+ * Saves the current collection
+ * incl. changes of buttons and breadcrumbs
+ */
+function saveCollection() {
+    setCollectionUneditable();
+    updateCollection();
+    var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
+    breadCrumbCollection.innerHTML =  $("#collectionName").text();
+}
+
+/**
  * Load data of current collection into view (from parameter id from current url)
- * via ajax call on GET /collections/id
+ * via ajax call on GET /collections/id and also loads cards
  */
 function loadCollection() {
     console.log("loadCollection()");
+    $("#editCollectionBtn").on("click", editCollection);
+    $("#saveCollectionBtn").on("click", saveCollection);
+    $("#deleteCollectionBtn").on("click", function() {
+        deleteCollection(getParameterFromUrlByName('collectionId'))
+    });
 
     $.ajax({
         url: "/collections/" + getParameterFromUrlByName('collectionId'),
         type: 'GET',
-        //dataType: 'json',
+        dataType: 'json',
         success: function (data) {
             console.log("description : " + data.description);
             $("#collectionName").html(data.name);
@@ -265,10 +273,10 @@ function loadCollection() {
             var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
             breadCrumbCollection.innerHTML = data.name;
             breadCrumbCollection.href = getBaseUrl() + "/collection.html/?collectionId=" + data.id;
-            //getBaseUrl() necessary?
             console.log("breadCrumbCollection.href: " + breadCrumbCollection.href);
         }
     });
+    getAllCards();
 }
 
 /**
@@ -299,33 +307,14 @@ function updateCollection() {
  */
 function editCollection() {
     console.log("editCollection()");
-    //$("#saveCollectionBtn").attr("disabled", "enabled");
     document.getElementById("saveCollectionBtn").disabled = false;
-    $("#editCollectionBtn").html("Abbrechen");
-
-    //$(this).hide();
+    document.getElementById("editCollectionBtn").disabled = true;
     var name = $("#collectionName").text();
     $("#collectionName").attr("contenteditable", "true");
     $("#collectionName").css("background-color", "white");
     var description = $("#collectionDescription").text();
     $("#collectionDescription").attr("contenteditable", "true");
     $("#collectionDescription").css("background-color", "white");
-
-    //cancel
-    $("#editCollectionBtn").on("click", function() {
-        setCollectionUneditable();
-        $("#collectionName").text(name);
-        $("#collectionDescription").text(description);
-    });
-    //save
-    $("#saveCollectionBtn").on("click", function() {
-        setCollectionUneditable();
-        updateCollection();
-
-        //Breadcrumb
-        var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
-        breadCrumbCollection.innerHTML =  $("#collectionName").text();
-    });
 }
 
 /**
@@ -333,11 +322,10 @@ function editCollection() {
  */
 function setCollectionUneditable() {
     console.log("setCollectionUneditable()");
-    $("#editCollectionBtn").html("Editieren");
     $("#collectionName").removeAttr('contenteditable style');
     $("#collectionDescription").removeAttr('contenteditable style');
-    //$("#saveCollectionBtn").removeAttr("disabled");
     document.getElementById("saveCollectionBtn").disabled = true;
+    document.getElementById("editCollectionBtn").disabled = false;
 }
 
 /**
@@ -361,4 +349,3 @@ function getBaseUrl() {
     console.log("getBaseUrl(): " + url);
     return url;
 }
-//////////////////////////////////////////////////////////////

@@ -106,6 +106,7 @@ public class CardService {
                 .map(card -> {
                     card.setQuestion(newCard.getQuestion());
                     card.setAnswer(newCard.getAnswer());
+                    card.setPublic(newCard.isPublic());
                     return cardRepository.save(card);
                 })
                 .orElseThrow(() -> new CollectionNotFoundException(cardId));

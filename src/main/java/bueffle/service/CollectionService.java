@@ -79,6 +79,7 @@ public class CollectionService {
                 .map(collection -> {
                     collection.setName(newColl.getName());
                     collection.setDescription(newColl.getDescription());
+                    collection.setPublic(newColl.isPublic());
                     return collectionRepository.save(collection);
                 })
                 .orElseThrow(() -> new CollectionNotFoundException(collectionId));

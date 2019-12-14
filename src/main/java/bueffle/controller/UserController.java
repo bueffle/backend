@@ -60,7 +60,7 @@ public class UserController {
     }
 
     /**
-     * Method for updating an user. (username or password). If the PUT Request just contains an updated username,
+     * Method for updating a user. (username or password). If the PUT Request just contains an updated username,
      * it will validate the username and update it. If the PUT Request contains a new password and its confirmation,
      * it will validate and update the password.
      * @param user The User which should be update (self)
