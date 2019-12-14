@@ -163,9 +163,10 @@ function deleteCard(card_id) {
         dataType: 'json',
         success: function(data) {
             console.log("data of deleteCard(): " + data);
-            renderCards(data);
+            //renderCards(data);
         }
     });
+    location.reload();
 }
 
 function appendToBodyCards(index, card) {
@@ -191,7 +192,7 @@ function clearCards() {
 }
 
 $('#create_new_card_submit').click(function(event) {
-    createCard()
+    createCard();
 });
 
 /////////collection.js//////////////

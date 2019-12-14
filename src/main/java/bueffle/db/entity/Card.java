@@ -15,6 +15,7 @@ public class Card {
     private String answer;
     private boolean isPublic = false;
 
+    @JoinColumn
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Collection> collections = new HashSet<>();
 
@@ -52,7 +53,10 @@ public class Card {
         collections.add(collection);
     }
 
-    public void emptyCollections() {
+    public void emptyRestrictedFields() {
+        if (owner != null) {
+            owner.emptyRestrictedFields();
+        }
         collections.clear();
     }
 

@@ -48,7 +48,10 @@ public class Collection {
         this.description = description;
     }
 
-    public void emptyCards() {
+    public void emptyRestrictedFields() {
+        if (owner != null) {
+            owner.emptyRestrictedFields();
+        }
         cards.clear();
     }
 

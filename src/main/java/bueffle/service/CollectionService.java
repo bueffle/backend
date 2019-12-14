@@ -41,7 +41,7 @@ public class CollectionService {
      */
     public Page<Collection> getAllCollections() {
         List<Collection> collections = (collectionRepository.findAll());
-        collections.forEach(Collection::emptyCards);
+        collections.forEach(Collection::emptyRestrictedFields);
         return new PageImpl<>(collections);
     }
 
@@ -53,7 +53,7 @@ public class CollectionService {
     public Collection getCollection(Long collectionId) {
         Collection collection = collectionRepository.findById(collectionId)
                 .orElseThrow(() -> new CollectionNotFoundException(collectionId));
-        collection.emptyCards();
+        collection.emptyRestrictedFields();
         return collection;
     }
 
@@ -65,7 +65,7 @@ public class CollectionService {
     public Set<Card> getCardsFromCollection(Long collectionId) {
         Set<Card> cards = collectionRepository.findById(collectionId)
                 .orElseThrow(() -> new CollectionNotFoundException(collectionId)).getCards();
-        cards.forEach(Card::emptyCollections);
+        cards.forEach(Card::emptyRestrictedFields);
         return cards;
     }
 
@@ -90,6 +90,7 @@ public class CollectionService {
      * @param id for deletion
      */
     public void deleteCollection(Long id) {
+        getCardsFromCollection(id).forEach(Card::emptyRestrictedFields);
         collectionRepository.deleteById(id);
     }
 
@@ -100,7 +101,7 @@ public class CollectionService {
      */
     public Page<Collection> findByName(String name, Pageable pageable) {
         List<Collection> collections = (collectionRepository.findByName(name, pageable));
-        collections.forEach(Collection::emptyCards);
+        collections.forEach(Collection::emptyRestrictedFields);
         return new PageImpl<>(collections);
     }
 
@@ -111,8 +112,8 @@ public class CollectionService {
      * @return Page which contains the card/-s
      */
     public Page<Collection> findByUserId(Long userId, Pageable pageable) {
-        List<Collection> collections = (collectionRepository.findCardsByOwnerId(userId, pageable));
-        collections.forEach(Collection::emptyCards);
+        List<Collection> collections = (collectionRepository.findCollectionsByOwnerId(userId, pageable));
+        collections.forEach(Collection::emptyRestrictedFields);
         return new PageImpl<>(collections);
     }
 

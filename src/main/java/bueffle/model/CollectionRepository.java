@@ -12,6 +12,6 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
     @Query("select q from Collection q where ?1 is null or upper(q.name) like concat('%', upper(?1), '%')")
     List<Collection> findByName(String name, final Pageable pageable);
 
-    List<Collection> findCardsByOwnerId(Long userId, final Pageable pageable);
+    List<Collection> findCollectionsByOwnerId(Long userId, final Pageable pageable);
 
 }
