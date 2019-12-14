@@ -61,9 +61,7 @@ public class UserService implements UserDetailsService {
      * Adds a user role with name "rolename"
      * @param rolename the name to add
      */
-    private void addUserRole(String rolename) {
-        roleRepository.save(new Role(rolename));
-    }
+    private void addUserRole(String rolename) { roleRepository.save(new Role(rolename)); }
 
     /**
      * Returns a user by its userId
