@@ -135,13 +135,22 @@ function signup(data) {
         dataType: 'json',
         headers: {
             "Content-Type": "application/json"
-          },
+        },
+        data: JSON.stringify(data),
         success: function(data) {
             $('#signupModal').modal('hide');
             console.log(data);
             window.open(window.location.origin+"/login","_self");
         },
-        data: JSON.stringify(data)
+        error:function(data){
+            console.log("error");
+            console.log(data);
+        },
+        complete: function(data){
+            $('#signupModal').modal('hide');
+            console.log(data);
+            window.open(window.location.origin+"/login","_self");
+        }
     });
 }
 
