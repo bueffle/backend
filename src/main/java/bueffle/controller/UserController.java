@@ -3,6 +3,7 @@ package bueffle.controller;
 import bueffle.auth.PasswordValidator;
 import bueffle.auth.UserNameValidator;
 import bueffle.db.entity.User;
+import bueffle.exception.UserNotFoundException;
 import bueffle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -26,8 +27,10 @@ public class UserController {
      * @return String the current user or an error.
      */
     @GetMapping("/user")
-    public String getUser() {
-        return userService.findLoggedInUsername();
+    public User getUser() {
+        User result = userService.findByUsername(userService.findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
+        result.emptyRestrictedFields();
+        return result;
     }
 
     /**
@@ -48,14 +51,16 @@ public class UserController {
      * @return String redirects to the appropriate site.
      */
     @PostMapping("/user")
-    public String addUser(@RequestBody User user, BindingResult bindingResult) {
+    public User addUser(@RequestBody User user, BindingResult bindingResult) {
         userNameValidator.validate(user, bindingResult);
         passwordValidator.validate(user, bindingResult);
-        if (bindingResult.hasErrors()) {
-            return "registration";
-        } else {
+        if (!bindingResult.hasErrors()) {
             userService.addUser(user);
-            return "redirect:/";
+            user.emptyRestrictedFields();
+            return user;
+        }
+        else {
+            return new User();
         }
     }
 

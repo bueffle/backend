@@ -84,4 +84,9 @@ public class User {
     public long getId() {
         return id;
     }
+
+    public void emptyRestrictedFields() {
+        password = null;
+        passwordConfirm = null;
+    }
 }
