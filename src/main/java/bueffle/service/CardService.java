@@ -35,7 +35,7 @@ public class CardService {
     public Card getCard(Long cardId) {
         Card card = cardRepository.findById(cardId)
                 .orElseThrow(() -> new CardNotFoundException(cardId));
-        card.emptyCollections();
+        card.emptyRestrictedFields();
         return card;
     }
 
@@ -47,7 +47,7 @@ public class CardService {
     public Set<Collection> getCollectionsFromCard(Long cardId) {
         Set<Collection> collections = cardRepository.findById(cardId)
                 .orElseThrow(() -> new CardNotFoundException(cardId)).getCollections();
-        collections.forEach(Collection::emptyCards);
+        collections.forEach(Collection::emptyRestrictedFields);
         return collections;
     }
 
@@ -57,7 +57,7 @@ public class CardService {
      */
     public Page<Card> getAllCards() {
         List<Card> cards = (cardRepository.findAll());
-        cards.forEach(Card::emptyCollections);
+        cards.forEach(Card::emptyRestrictedFields);
         return new PageImpl<>(cards);
     }
 
@@ -69,7 +69,7 @@ public class CardService {
      */
     public Page<Card> findByQuestion(String question, Pageable pageable) {
         List<Card> cards = (cardRepository.findByQuestion(question, pageable));
-        cards.forEach(Card::emptyCollections);
+        cards.forEach(Card::emptyRestrictedFields);
         return new PageImpl<>(cards);
     }
 
@@ -81,7 +81,7 @@ public class CardService {
      */
     public Page<Card> findByUserId(Long userId, Pageable pageable) {
         List<Card> cards = (cardRepository.findCardsByOwnerId(userId, pageable));
-        cards.forEach(Card::emptyCollections);
+        cards.forEach(Card::emptyRestrictedFields);
         return new PageImpl<>(cards);
     }
 
