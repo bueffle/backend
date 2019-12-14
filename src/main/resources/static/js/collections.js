@@ -30,6 +30,12 @@ function createCollection() {
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
+        success:function(data){
+            console.log(data);
+        },
+        error:function(data){
+            console.log(data);
+        },
         complete: function(data) {
             $('#createCollectionModal').modal('hide');
             clearCollections();

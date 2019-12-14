@@ -24,65 +24,9 @@
     <title>Collections</title>
   </head>
   <body  class="collections">
-    <header>
-      <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 20px; width: 20px;"><path d="M0 0h512v512H0z" fill="#343a40" fill-opacity="1"></path><g class="" transform="translate(0,0)" style="touch-action: none;"><g><path d="M256 18.365L50.14 136L256 253.635L461.86 136L256 18.365Z" class="selected" fill="#fff" fill-opacity="1"></path><path d="M102 186.365L50.14 216L256 333.635L461.86 216L410 186.365L256 274.365L102 186.365Z" class="" fill="#fff" fill-opacity="1"></path><path d="M102 266.365L50.14 296L256 413.635L461.86 296L410 266.365L256 354.365L102 266.365Z" class="" fill="#fff" fill-opacity="1"></path><path d="M102 346.365L50.14 376L256 493.635L461.86 376L410 346.365L256 434.365L102 346.365Z" class="" fill="#fff" fill-opacity="1"></path></g></g></svg>            <strong>Büffle</strong>
-          </a>
-          <div class="col-6 activemt-0">
-              <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-            </div>
-          <div id="login_button_group" >
-            
-            <div class="btn-group" id="">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signupModal">
-                    Konto erstellen
-                  </button>
-              <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="signupModalLabel">Konto erstellen</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                          <form class="p-4">
-                              <div class="form-group">
-                                <label for="signupEmail">Email address</label>
-                                <input type="email" class="form-control" id="signupEmail" placeholder="email@example.com">
-                              </div>
-                              <div class="form-group">
-                                <label for="signupPassword1">Password</label>
-                                <input type="password" class="form-control" id="signupPassword1" placeholder="Passwort">
-                              </div>
-                              <div class="form-group">
-                                <label for="signupPassword2">Password wiederholen</label>
-                                <input type="password" class="form-control" id="signupPassword2" placeholder="Passwort">
-                              </div>
-                              
-                            </form>
-                            <p>Durch das erstellen eines Kontos, stimmen Sie unseren <a href="#">Nutzerbedingungen</a> zu.</p>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                        <button type="button" class="btn btn-primary" id="signup_accept">Zustimmen und Konto erstellen</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="btn-group" >
-            <a href="/login" class="btn btn-secondary" data-toggle="tooltip" data-placement="left" title="In Konto einloggen">
-              Einloggen
-            </a>
-          </div>
-          </div>
-        </div>
-      </div>
-     
+    <header id="header_nav">
+      <!-- Loaded via helpers.js -->
+      <!-- Just add an element with the id header_nav and the header is added automatically -->
     </header>
 
     <main role="main">
@@ -92,6 +36,7 @@
             <div class="row" id="collections-content">
 
                 <div class="col-md-4" id="nth-column-1">
+                  <!-- Default add element -->
                     <div class="card mb-4 shadow-sm" id="create_collection_card">
             
                         <div class="card-body">
@@ -134,6 +79,7 @@
 
                         </div>
                       </div>
+                       <!-- End Default add element -->
                 </div>
                 <div class="col-md-4" id="nth-column-2"></div>
                 <div class="col-md-4" id="nth-column-3"></div>
@@ -162,29 +108,8 @@
     <script src="/js/vendor/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js" integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
     <script src="js/helpers.js"></script>
-    <script src="js/user.js" ></script>
     
-    <script id="collections-template" type="text/x-handlebars-template">
-      {{#nth 3 collections}}
-        <div class="col-md-4">
-          {{#each this}}
-          <div class="card mb-4 shadow-sm">
-            <!-- Add image here -->
-            <div class="card-body">
-              <p class="card-text">{{name}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Learn</a>
-                  <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
-                </div>
-                <small class="text-muted">{{cards.length}} Karten enthalten</small>
-              </div>
-            </div>
-          </div>
-          {{/each}}
-        </div>
-      {{/nth}}
-    </script>
+
     
     <script id="collection-template" type="text/x-handlebars-template">
           <div class="card mb-4 shadow-sm">
@@ -203,23 +128,7 @@
           </div>
     </script>
 
-    <script id="new-collection-template" type="text/x-handlebars-template">
-      {{#nth 3 collections}}
-        <div class="col-md-4">
-          {{#each this}}
-          <div class="card mb-4 shadow-sm">
-            <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
-            <div class="card-body">
-              <p class="card-text">{{title}}</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">{{cards.length}} Karten enthalten</small>
-              </div>
-            </div>
-          </div>
-          {{/each}}
-        </div>
-      {{/nth}}
-    </script>
+
 
     <!-- Custom JavaScript -->
     <script src="js/collections.js"></script>
