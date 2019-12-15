@@ -35,7 +35,7 @@ function login(username, password){
         headers: {
             "Content-Type": "application/json"
         },
-        data: JSON.stringify(data),
+        data: JSON.stringify({username:username,password:password}),
         success: function(resp){},
         error: function(resp){},
         complete: function(resp){}
@@ -76,8 +76,8 @@ function showUsername(user_name) {
     $('#login_button_group').empty();
     var userProfile = document.createElement('a');
     var userLogout = document.createElement('a');
-    userProfile.setAttribute('class', '');
-    userLogout.setAttribute('class', '');
+    userProfile.setAttribute('class', 'badge badge-secondary float-right');
+    userLogout.setAttribute('class', 'badge badge-dark float-right');
     userProfile.setAttribute('id', 'user_logout_button');
     userLogout.setAttribute('id', 'user_profile_button');
     userProfile.setAttribute('href', '#'); 
@@ -85,6 +85,7 @@ function showUsername(user_name) {
     userLogout.innerText = "Abmelden";  
     userProfile.innerText = user_name;  
     $('#login_button_group').append(userProfile);
+    $('#login_button_group').append(document.createElement('br'));
     $('#login_button_group').append(userLogout);
     $('#user_logout_button').click(function(){
         logout();
@@ -96,8 +97,9 @@ function showUsername(user_name) {
 
 function logout() {
     eraseCookie('bueffle-user');
-    window.location("/logout");
+    window.location="/logout";
 }
+
 $( document ).ready(function() {
     checkLoggedin();
 });

@@ -44,3 +44,22 @@ function readCookie(name) {
 function eraseCookie(name) {
     createCookie(name, "", -1);
 }
+
+function getTemplateAjax(path, target) {
+    var source;
+    var template;
+
+    $.ajax({
+        url: path, //ex. js/templates/mytemplate.handlebars
+        cache: true,
+        success: function(data) {
+            source    = data;
+            template  = Handlebars.compile(source);
+            $('#'+target).html(template);
+        }               
+    });         
+}
+
+$( document ).ready(function() {
+    getTemplateAjax('templates/header.handlebars','header_nav');
+});
