@@ -1,8 +1,10 @@
 package bueffle.service;
 
 import bueffle.auth.BackendUserDetails;
+import bueffle.db.entity.Collection;
 import bueffle.db.entity.Role;
 import bueffle.db.entity.User;
+import bueffle.exception.NoAccessException;
 import bueffle.exception.UserNotFoundException;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;
@@ -99,20 +101,27 @@ public class UserService implements UserDetailsService {
     /**
      * Updates a username.
      * @param updatedUser the updated User Object containing the new name.
+     * @return User the updated user
      */
-    public void updateUsername(User updatedUser) {
+    public User updateUsername(User updatedUser) {
         User oldUser = userRepository.findByUsername(findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
         oldUser.setUsername(updatedUser.getUsername());
         userRepository.save(oldUser);
+        oldUser.emptyRestrictedFields();
+        return oldUser;
     }
 
     /**
      * Updates a password.
      * @param updatedUser the updated User Object containing the new password and passwordConfirmation.
+     * @return User the updated user
      */
-    public void updatePassword(User updatedUser) {
+    public User updatePassword(User updatedUser) {
         User oldUser = userRepository.findByUsername(findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
         oldUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         userRepository.save(oldUser);
+        oldUser.emptyRestrictedFields();
+        return oldUser;
     }
+
 }

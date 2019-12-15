@@ -1,6 +1,7 @@
 package bueffle.model;
 
 import bueffle.db.entity.Collection;
+import bueffle.db.entity.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,5 +14,9 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
     List<Collection> findByName(String name, final Pageable pageable);
 
     List<Collection> findCollectionsByOwnerId(Long userId, final Pageable pageable);
+
+    List<Collection> findByisPublicTrue();
+
+    List<Collection> findByOwner(User owner);
 
 }
