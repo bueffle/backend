@@ -119,10 +119,10 @@
               <p class="card-text">{{description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Lernen</a>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="console.log({{id}})">Lernen</button>
                   <a type="button" class="btn btn-sm btn-outline-secondary" href="collection.html/?collectionId={{id}}">Editieren</a>
                 </div>
-                <small class="text-muted">{{cards.length}} Karten enthalten</small>
+                <small class="text-muted">{{numberOfElements}} Karten enthalten</small>
               </div>
             </div>
           </div>

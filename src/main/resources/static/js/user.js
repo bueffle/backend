@@ -30,14 +30,23 @@ function signup(data) {
 function login(username, password){
     $.ajax({
         url: "/user",
-        type: 'POST',
+        type: 'GET',
         dataType: 'json',
         headers: {
             "Content-Type": "application/json"
         },
-        data: JSON.stringify({username:username,password:password}),
-        success: function(resp){},
-        error: function(resp){},
+        xhrFields: {
+            withCredentials: true
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa(username+':'+password));
+        },
+        success: function(resp){
+            console.log("success");
+        },
+        error: function(resp){
+            console.log("error");
+        },
         complete: function(resp){}
     });
 
@@ -66,10 +75,27 @@ $('#signup_accept').click(function(event){
 });
 
 
+
+
 function checkLoggedin() {
-    if (readCookie("bueffle-user")) {
-        showUsername(readCookie("bueffle-user"))
-    }
+    $.ajax({
+        url: "/user",
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        success: function(resp){
+            console.log(resp);
+            if (resp.username && resp.username != "") {
+                showUsername(resp.username);
+            }
+        },
+        error: function(resp){
+            console.log(resp);
+        },
+        complete: function(resp){}
+    });
 }
 
 function showUsername(user_name) {
@@ -96,7 +122,6 @@ function showUsername(user_name) {
 }
 
 function logout() {
-    eraseCookie('bueffle-user');
     window.location="/logout";
 }
 
