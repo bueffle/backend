@@ -117,6 +117,7 @@ public class CardService {
      * @param cardId the Id of the card which should be deleted.
      */
     public void deleteCard(Long cardId) {
+        getCollectionsFromCard(cardId).forEach(Collection::emptyRestrictedFields);
         cardRepository.deleteById(cardId);
     }
 
