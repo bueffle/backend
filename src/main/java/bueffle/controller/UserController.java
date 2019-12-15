@@ -3,12 +3,10 @@ package bueffle.controller;
 import bueffle.auth.PasswordValidator;
 import bueffle.auth.UserNameValidator;
 import bueffle.db.entity.User;
-import bueffle.exception.UserNotFoundException;
 import bueffle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 
 @RestController
 public class UserController {
@@ -70,27 +68,24 @@ public class UserController {
      * it will validate and update the password.
      * @param user The User which should be update (self)
      * @param bindingResult The result of the validation
-     * @return String redirects to the appropriate site.
      */
     @PutMapping("/user")
-    public String updateUser(@RequestBody User user, BindingResult bindingResult) {
+    public User updateUser(@RequestBody User user, BindingResult bindingResult) {
         // Case 1: Password should be validated and updated
         if (!user.hasUsername()) {
             user.setUsername(userService.findLoggedInUsername());
             passwordValidator.validate(user, bindingResult);
             if (!bindingResult.hasErrors()) {
-                userService.updatePassword(user);
-                return "redirect:/profile";
+                return userService.updatePassword(user);
             }
         }
         // Case 2: username should be validated and updated
         else {
             userNameValidator.validate(user, bindingResult);
             if (!bindingResult.hasErrors()) {
-                userService.updateUsername(user);
-                return "redirect:/profile";
+                return userService.updateUsername(user);
             }
         }
-        return "profile/edit";
+        return new User();
     }
 }

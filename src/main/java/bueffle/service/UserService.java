@@ -99,20 +99,26 @@ public class UserService implements UserDetailsService {
     /**
      * Updates a username.
      * @param updatedUser the updated User Object containing the new name.
+     * @return User the updated user
      */
-    public void updateUsername(User updatedUser) {
+    public User updateUsername(User updatedUser) {
         User oldUser = userRepository.findByUsername(findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
         oldUser.setUsername(updatedUser.getUsername());
         userRepository.save(oldUser);
+        oldUser.emptyRestrictedFields();
+        return oldUser;
     }
 
     /**
      * Updates a password.
      * @param updatedUser the updated User Object containing the new password and passwordConfirmation.
+     * @return User the updated user
      */
-    public void updatePassword(User updatedUser) {
+    public User updatePassword(User updatedUser) {
         User oldUser = userRepository.findByUsername(findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
         oldUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         userRepository.save(oldUser);
+        oldUser.emptyRestrictedFields();
+        return oldUser;
     }
 }
