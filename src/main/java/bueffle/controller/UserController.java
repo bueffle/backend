@@ -23,12 +23,12 @@ public class UserController {
     private PasswordValidator passwordValidator;
 
     /**
-     * Returns the currently logged in user or an error when not logged in.
+     * Returns the currently logged in user or an empty user.
      * @return String the current user or an error.
      */
     @GetMapping("/user")
     public User getUser() {
-        User result = userService.findByUsername(userService.findLoggedInUsername()).orElseThrow(UserNotFoundException::new);
+        User result = userService.findByUsername(userService.findLoggedInUsername()).orElse(new User());
         result.emptyRestrictedFields();
         return result;
     }
