@@ -1,8 +1,10 @@
 package bueffle.service;
 
 import bueffle.auth.BackendUserDetails;
+import bueffle.db.entity.Collection;
 import bueffle.db.entity.Role;
 import bueffle.db.entity.User;
+import bueffle.exception.NoAccessException;
 import bueffle.exception.UserNotFoundException;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;
@@ -121,4 +123,5 @@ public class UserService implements UserDetailsService {
         oldUser.emptyRestrictedFields();
         return oldUser;
     }
+
 }

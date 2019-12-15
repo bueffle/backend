@@ -18,7 +18,7 @@ public class CollectionController {
     private CollectionService collectionService;
 
     /**
-     * Returns a List of all collections if used with no parameters.
+     * Returns a List of all public collections if used with no parameters.
      * if used with ?user=userId for example /collections?user=1 it will only return the collections owned by user 1
      * if used with ?name=name for example /collections?name=hi it will only return the collections with the name "hi"
      * @return All collections as List.
@@ -37,6 +37,17 @@ public class CollectionController {
         else {
             return collectionService.findByUserId(userId, pageable);
         }
+    }
+
+    /**
+     * Returns a List of all collections if used with no parameters.
+     * if used with ?user=userId for example /collections?user=1 it will only return the collections owned by user 1
+     * if used with ?name=name for example /collections?name=hi it will only return the collections with the name "hi"
+     * @return All collections as List.
+     */
+    @GetMapping("/collections/own")
+    public Page<Collection> getOwnCollections(Pageable pageable) {
+        return collectionService.getAllOwnCollections();
     }
 
     /**
