@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 Handlebars.registerHelper("nth", function(every, context, options){
     console.log("TEST");
     var out = "", subcontext = [], i;
@@ -14,7 +17,12 @@ Handlebars.registerHelper("nth", function(every, context, options){
     return out;
 });
 
-
+/**
+ * 
+ * @param {*} name 
+ * @param {*} value 
+ * @param {*} days 
+ */
 function createCookie(name, value, days) {
     var expires;
 
@@ -28,6 +36,10 @@ function createCookie(name, value, days) {
     document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
 }
 
+/**
+ * 
+ * @param {*} name 
+ */
 function readCookie(name) {
     var nameEQ = encodeURIComponent(name) + "=";
     var ca = document.cookie.split(';');
@@ -41,25 +53,58 @@ function readCookie(name) {
     return null;
 }
 
+/**
+ * 
+ * @param {*} name 
+ */
 function eraseCookie(name) {
     createCookie(name, "", -1);
 }
 
-function getTemplateAjax(path, target) {
+/**
+ * 
+ */
+function parseSearch() {
+    if(location.search.substring(1) !== "") {
+        var search = location.search.substring(1);
+        return JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) })
+    } else {
+        return null;
+    }
+}
+
+
+/**
+ * 
+ * @param {*} path 
+ * @param {*} target 
+ * @param {*} values 
+ */
+function getTemplateAjax(path, target, values=null) {
     var source;
     var template;
 
     $.ajax({
-        url: path, //ex. js/templates/mytemplate.handlebars
+        url: path, 
         cache: true,
         success: function(data) {
             source    = data;
             template  = Handlebars.compile(source);
-            $('#'+target).html(template);
+            if(values) {
+                var html=template(values);
+                $('#'+target).html(html);
+            } else {
+                $('#'+target).html(template);
+            }
         }               
     });         
 }
 
+
+/**
+ * On document ready function
+ * For loading of global template elementes
+ */
 $( document ).ready(function() {
     getTemplateAjax('templates/header.handlebars','header_nav');
 });
