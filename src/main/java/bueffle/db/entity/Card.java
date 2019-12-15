@@ -15,7 +15,6 @@ public class Card {
     private String answer;
     private boolean isPublic = false;
 
-    @JoinColumn
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Collection> collections = new HashSet<>();
 

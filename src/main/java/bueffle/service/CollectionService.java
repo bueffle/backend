@@ -1,9 +1,13 @@
 package bueffle.service;
 
 import bueffle.db.entity.Card;
+import bueffle.db.entity.CardInLearningRun;
 import bueffle.db.entity.Collection;
+import bueffle.db.entity.LearningRun;
 import bueffle.exception.CollectionNotFoundException;
+import bueffle.model.CardInLearningRunRepository;
 import bueffle.model.CollectionRepository;
+import bueffle.model.LearningRunRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

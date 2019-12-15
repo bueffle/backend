@@ -89,4 +89,5 @@ public class User {
         password = null;
         passwordConfirm = null;
     }
+
 }

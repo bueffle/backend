@@ -89,11 +89,11 @@ public class CardService {
      * Creates new card. The new card is added to the default collection of the user then.
      * @param card the card to add
      */
-    public void addCard(Card card) {
+    public Card save(Card card) {
         card.setOwner(userService.findByUsername(userService.findLoggedInUsername()).orElseThrow(
                 () -> new UsernameNotFoundException("Not found: " + userService.findLoggedInUsername())
         ));
-        cardRepository.save(card);
+        return cardRepository.save(card);
     }
 
     /**

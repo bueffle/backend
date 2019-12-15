@@ -2,6 +2,7 @@ package bueffle.controller;
 
 import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
+import bueffle.db.entity.LearningRun;
 import bueffle.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

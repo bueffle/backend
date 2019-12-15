@@ -65,7 +65,7 @@ public class CardController {
      */
     @PostMapping("/cards")
     public void addCard(@RequestBody Card card) {
-        cardService.addCard(card);
+        cardService.save(card);
     }
 
      /**

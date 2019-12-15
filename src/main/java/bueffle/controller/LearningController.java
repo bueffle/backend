@@ -1,0 +1,31 @@
+package bueffle.controller;
+
+import bueffle.db.entity.Card;
+import bueffle.db.entity.CardInLearningRun;
+import bueffle.db.entity.LearningRun;
+import bueffle.service.LearningService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
+
+@RestController
+public class LearningController {
+
+    @Autowired
+    private LearningService learningService;
+
+
+    @GetMapping("/collections/{collectionId}/learn")
+    public LearningRun getCardsFromCollection(@PathVariable Long collectionId) {
+        return learningService.start(collectionId);
+    }
+
+    @GetMapping("/learn/{learnId}/next")
+    public Card next(@PathVariable Long learnId) {
+        return learningService.next(learnId);
+    }
+
+}
+

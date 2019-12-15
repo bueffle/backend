@@ -13,6 +13,7 @@ public class LearningRun {
 
     private LocalDateTime created = LocalDateTime.now();
     private LocalDateTime lastModified = LocalDateTime.now();
+    private boolean isLearningRunPlus = false;
 
     @ManyToOne
     private User owner;
@@ -22,6 +23,8 @@ public class LearningRun {
 
     @OneToMany(mappedBy = "learningRun")
     private Set<CardInLearningRun> cardInLearningRuns;
+
+    public LearningRun() {}
 
     public LocalDateTime getCreated() {
         return created;
@@ -37,5 +40,33 @@ public class LearningRun {
 
     public long getId() {
         return id;
+    }
+
+    public boolean isLearningRunPlus() {
+        return isLearningRunPlus;
+    }
+
+    public void setLearningRunPlus(boolean learningRunPlus) {
+        isLearningRunPlus = learningRunPlus;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public Set<CardInLearningRun> getCardInLearningRuns() {
+        return cardInLearningRuns;
     }
 }
