@@ -4,6 +4,7 @@ package bueffle.service;
 import bueffle.db.entity.Card;
 import bueffle.db.entity.CardInLearningRun;
 import bueffle.db.entity.LearningRun;
+import bueffle.exception.CardInLearningRunNotFoundException;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.exception.LearningRunNotFoundException;
 import bueffle.model.CardInLearningRunRepository;
@@ -12,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -30,12 +30,11 @@ public class LearningService {
     @Autowired
     private CardInLearningRunRepository cardInLearningRunRepository;
 
-    public LearningRun start(Long collectionId) {
-        LearningRun learningRun = new LearningRun();
+    public LearningRun start(LearningRun learningRun, Long collectionId) {
         learningRun.setCollection(collectionService.findById(collectionId).orElseThrow(
                 () -> new CollectionNotFoundException(collectionId)));
         learningRun.setOwner(userService.findByUsername(userService.findLoggedInUsername()).orElse(null));
-        LearningRun result = learningRunRepository.save(learningRun);
+        LearningRun resultingLearningRun = learningRunRepository.save(learningRun);
 
         Set<Card> cards = collectionService.findById(collectionId)
                 .orElseThrow(() -> new CollectionNotFoundException(collectionId)).getCards();
@@ -45,7 +44,7 @@ public class LearningService {
             );
         });
         cards.forEach(Card::emptyRestrictedFields);
-        if(result.getOwner()!= null) {result.getOwner().emptyRestrictedFields();}
+        if(resultingLearningRun.getOwner()!= null) {resultingLearningRun.getOwner().emptyRestrictedFields();}
         return learningRun;
     }
 
@@ -56,19 +55,32 @@ public class LearningService {
     public Card next(Long learnId) {
         LearningRun learningRun = learningRunRepository.findById(learnId)
                 .orElseThrow(() -> new LearningRunNotFoundException(learnId));
-        if (!learningRun.isLearningRunPlus()) {
-            Set<CardInLearningRun> cardInLearningRuns = learningRun.getCardInLearningRuns();
-            CardInLearningRun cardInLearningRun = cardInLearningRuns.stream().filter(c -> c.getShownCounter() < 1).findFirst().orElse(
+        Set<CardInLearningRun> cardInLearningRuns = learningRun.getCardInLearningRuns();
+        CardInLearningRun cardInLearningRun;
+        if (learningRun.isLearningRunPlus()) {
+            cardInLearningRun = cardInLearningRuns.stream().filter(c -> !c.isAnsweredCorrectly()).findFirst().orElse(
                     new CardInLearningRun());
-            cardInLearningRun.increaseShownCounter();
-            cardInLearningRunRepository.save(cardInLearningRun);
-            Card card = cardInLearningRun.getCard();
-            if (card != null) {card.emptyRestrictedFields();}
-            return card;
         }
         else {
-            return null;
+            cardInLearningRun = cardInLearningRuns.stream().filter(c -> c.getShownCounter() < 1).findFirst().orElse(
+                    new CardInLearningRun());
         }
+        learningRun.setLastAnsweredCardInLearningRunId(cardInLearningRun.getId());
+        cardInLearningRun.increaseShownCounter();
+        cardInLearningRunRepository.save(cardInLearningRun);
+        Card card = cardInLearningRun.getCard();
+        if (card != null) {card.emptyRestrictedFields();}
+        return card;
     }
 
+    public void setAnswer(CardInLearningRun answerStatus, Long learnId) {
+        LearningRun learningRun = learningRunRepository.findById(learnId)
+                .orElseThrow(() -> new LearningRunNotFoundException(learnId));
+        CardInLearningRun cardInLearningRun =
+                cardInLearningRunRepository.findById(learningRun.getLastAnsweredCardInLearningRunId())
+                        .orElseThrow(
+                                () -> new CardInLearningRunNotFoundException(learningRun.getLastAnsweredCardInLearningRunId()));
+        cardInLearningRun.setAnsweredCorrectly(answerStatus.isAnsweredCorrectly());
+        cardInLearningRunRepository.save(cardInLearningRun);
+    }
 }

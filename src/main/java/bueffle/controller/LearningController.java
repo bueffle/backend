@@ -2,13 +2,12 @@ package bueffle.controller;
 
 import bueffle.db.entity.Card;
 import bueffle.db.entity.CardInLearningRun;
+import bueffle.db.entity.Collection;
 import bueffle.db.entity.LearningRun;
 import bueffle.service.LearningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Set;
 
 @RestController
 public class LearningController {
@@ -16,10 +15,9 @@ public class LearningController {
     @Autowired
     private LearningService learningService;
 
-
-    @GetMapping("/collections/{collectionId}/learn")
-    public LearningRun getCardsFromCollection(@PathVariable Long collectionId) {
-        return learningService.start(collectionId);
+    @PostMapping("/collections/{collectionId}/learn")
+    public LearningRun getCardsFromCollection(@RequestBody LearningRun isLearningRunPlus, @PathVariable Long collectionId) {
+        return learningService.start(isLearningRunPlus, collectionId);
     }
 
     @GetMapping("/learn/{learnId}/next")
@@ -27,5 +25,9 @@ public class LearningController {
         return learningService.next(learnId);
     }
 
+    @PutMapping("/learn/{learnId}")
+    public void setAnswer(@RequestBody CardInLearningRun answerStatus, @PathVariable Long learnId) {
+        learningService.setAnswer(answerStatus, learnId);
+    }
 }
 

@@ -24,6 +24,8 @@ public class LearningRun {
     @OneToMany(mappedBy = "learningRun")
     private Set<CardInLearningRun> cardInLearningRuns;
 
+    private Long lastAnsweredCardInLearningRunId;
+
     public LearningRun() {}
 
     public LocalDateTime getCreated() {
@@ -68,5 +70,13 @@ public class LearningRun {
 
     public Set<CardInLearningRun> getCardInLearningRuns() {
         return cardInLearningRuns;
+    }
+
+    public Long getLastAnsweredCardInLearningRunId() {
+        return lastAnsweredCardInLearningRunId;
+    }
+
+    public void setLastAnsweredCardInLearningRunId(Long lastAnsweredCardInLearningRun) {
+        this.lastAnsweredCardInLearningRunId = lastAnsweredCardInLearningRun;
     }
 }
