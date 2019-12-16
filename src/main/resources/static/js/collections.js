@@ -60,6 +60,21 @@ function renderCollections(collections) {
     }
 }
 
+function learnCollection(collection_id) {
+    var settings = {
+        url: "/collections/"+collection_id+"/learn",
+        method: "POST",
+        data: JSON.stringify({learningRunPlus: true}),
+        success: function(resp){
+            console.log(resp);
+        }
+      }
+      
+      $.ajax(settings).done(function (response) {
+        console.log(response);
+      });
+}
+
 /**
  * Deletes collection
  * todo: ask user before, also delete references on cards?
