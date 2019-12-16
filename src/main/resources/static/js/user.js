@@ -104,8 +104,8 @@ function showUsername(user_name) {
     var userLogout = document.createElement('a');
     userProfile.setAttribute('class', 'badge badge-secondary float-right');
     userLogout.setAttribute('class', 'badge badge-dark float-right');
-    userProfile.setAttribute('id', 'user_logout_button');
-    userLogout.setAttribute('id', 'user_profile_button');
+    userProfile.setAttribute('id', 'user_profile_button');
+    userLogout.setAttribute('id', 'user_logout_button');
     userProfile.setAttribute('href', '#'); 
     userLogout.setAttribute('href', '#'); 
     userLogout.innerText = "Abmelden";  

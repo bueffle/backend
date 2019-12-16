@@ -64,9 +64,11 @@ function learnCollection(collection_id) {
     var settings = {
         url: "/collections/"+collection_id+"/learn",
         method: "POST",
+        contentType: 'application/json',
         data: JSON.stringify({learningRunPlus: true}),
         success: function(resp){
-            console.log(resp);
+            createCookie("learnrun", resp.id, 1)
+            window.location.href = window.location.origin+"/learn.html";
         }
       }
       
