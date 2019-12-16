@@ -67,7 +67,7 @@ function learnCollection(collection_id) {
         contentType: 'application/json',
         data: JSON.stringify({learningRunPlus: true}),
         success: function(resp){
-            createCookie("learnrun", resp.id, 1)
+            createCookie("learnrun", JSON.stringify({collection_id:collection_id,learnrun:resp.id}), 1)
             window.location.href = window.location.origin+"/learn.html";
         }
       }

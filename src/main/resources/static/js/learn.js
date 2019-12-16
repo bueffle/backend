@@ -2,9 +2,9 @@
  * On document ready function
  */
 $( document ).ready(function() {
-    var current_learn = readCookie("learnrun");
+    var current_learn = JSON.parse(readCookie("learnrun"));
     if(current_learn) {
-        getNextCard(current_learn);
+        getNextCard(current_learn["learnrun"]);
     } else {
         // go back to collections
         alert("current_learn not defined")
@@ -13,14 +13,11 @@ $( document ).ready(function() {
 
 });
 
-$( window ).unload(function() {
-    eraseCookie("learnrun");
-  });
 
 
-function getNextCard(collection_id) {
+function getNextCard(leanrun_id) {
     $.ajax({
-        url: "/learn/"+collection_id+"/next",
+        url: "/learn/"+leanrun_id+"/next",
         type: 'GET',
         dataType: 'json',
         complete: function(data) {
@@ -37,8 +34,9 @@ function getNextCard(collection_id) {
 };
 
 function answer(state) {
+    var current_learn = JSON.parse(readCookie("learnrun"));
     var settings = {
-        url: "/learn/"+readCookie("learnrun"),
+        url: "/learn/"+current_learn["learnrun"],
         method: "PUT",
         contentType: 'application/json',
         "data": "{\r\n    \"answeredCorrectly\": \"false\"\r\n}",
@@ -50,8 +48,9 @@ function answer(state) {
       
     console.log("aswered with" +state);
       $.ajax(settings).done(function (response) {
+        var current_learn = JSON.parse(readCookie("learnrun"));
         console.log(response);
-        getNextCard(readCookie("learnrun"));
+        getNextCard(current_learn["learnrun"]);
       });
 }
 
