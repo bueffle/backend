@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 
 @RestController
@@ -18,7 +18,7 @@ public class CardController {
     private CardService cardService;
 
     /**
-     * Returns a List of all cards if used with no parameters.
+     * Returns a List of all public cards if used with no parameters.
      * if used with ?user=userId for example /cards?user=1 it will only return the cards owned by user 1
      * if used with ?question=question for example /cards?question=why it will only return the cards that contain "why"
      * @return All Cards as List.
@@ -40,6 +40,15 @@ public class CardController {
     }
 
     /**
+     * Returns a List of all owned cards.
+     * @return All owned cards as List.
+     */
+    @GetMapping("/cards/own")
+    public Page<Card> getOwnCards(Pageable pageable) {
+        return cardService.getAllOwnCards();
+    }
+
+    /**
      * Gets the Card for a provided Id.
      * @param cardId the Id which should be returned.
      * @return A Card Object for an Id.
@@ -55,7 +64,7 @@ public class CardController {
      * @return The collections of the card with the provided Id.
      */
     @GetMapping("/cards/{cardId}/collections")
-    public Set<Collection> getCollectionsFromCards(@PathVariable Long cardId) {
+    public List<Collection> getCollectionsFromCards(@PathVariable Long cardId) {
         return cardService.getCollectionsFromCard(cardId);
     }
 
@@ -65,7 +74,7 @@ public class CardController {
      */
     @PostMapping("/cards")
     public void addCard(@RequestBody Card card) {
-        cardService.save(card);
+        cardService.add(card);
     }
 
      /**
