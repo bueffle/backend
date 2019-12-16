@@ -2,14 +2,13 @@ package bueffle.controller;
 
 import bueffle.db.entity.Card;
 import bueffle.db.entity.Collection;
-import bueffle.db.entity.LearningRun;
 import bueffle.service.CollectionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
 public class CollectionController {
@@ -40,10 +39,8 @@ public class CollectionController {
     }
 
     /**
-     * Returns a List of all collections if used with no parameters.
-     * if used with ?user=userId for example /collections?user=1 it will only return the collections owned by user 1
-     * if used with ?name=name for example /collections?name=hi it will only return the collections with the name "hi"
-     * @return All collections as List.
+     * Returns a List of all owned collections.
+     * @return All owned collections as List.
      */
     @GetMapping("/collections/own")
     public Page<Collection> getOwnCollections(Pageable pageable) {
@@ -66,7 +63,7 @@ public class CollectionController {
      * @return The cards of the collection with the provided Id.
      */
     @GetMapping("/collections/{collectionId}/cards")
-    public Set<Card> getCardsFromCollection(@PathVariable Long collectionId) {
+    public List<Card> getCardsFromCollection(@PathVariable Long collectionId) {
         return collectionService.getCardsFromCollection(collectionId);
     }
 

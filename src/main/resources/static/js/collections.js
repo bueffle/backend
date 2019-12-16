@@ -233,8 +233,21 @@ function loadCollection() {
     console.log("loadCollection()");
     $("#editCollectionBtn").on("click", editCollection);
     $("#saveCollectionBtn").on("click", saveCollection);
-    $("#deleteCollectionBtn").on("click", function() {
-        deleteCollection(getParameterFromUrlByName('collectionId'))
+
+    //modal for confirming the delete of the collection
+    $('#confirmDeleteCollectionModal').on('show.bs.modal', function (e) {
+        $('#confirmDeleteCollection').on("click", function() {
+            deleteCollection(getParameterFromUrlByName('collectionId'));
+        })
+    });
+
+    //modal for confirming the delete of the cards
+    $('#confirmDeleteCardModal').on('show.bs.modal', function (e) {
+        var cardId = e.relatedTarget.dataset['id'];
+        console.log("deleteCard: " + cardId);
+        $('#confirmDeleteCard').on("click", function() {
+            deleteCard(cardId);
+        })
     });
 
     $.ajax({

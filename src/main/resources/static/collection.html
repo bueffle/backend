@@ -89,7 +89,7 @@
           <div class="btn-group-lg">
             <button id="saveCollectionBtn" type="button" disabled><i class="fas fa-save"></i></button>
             <button id="editCollectionBtn" type="button"><i class="fas fa-edit"></i></button>
-            <button id="deleteCollectionBtn" type="button"><i class="fas fa-trash"></i></button>
+            <button id="deleteCollectionBtn" type="button" data-toggle="modal" data-target="#confirmDeleteCollectionModal"><i class="fas fa-trash"></i></button>
           </div>
           <p>
             <a href="card.html" id="trainCollectionBtn" class="btn btn-primary my-2" data-toggle="modal">Lernlauf starten</a>
@@ -141,6 +141,41 @@
                     </div>
                   </div>
                   <!-- End Modal -->
+
+
+                  <div class="modal fade" id="confirmDeleteCardModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteCardModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" >Löschen?</h5>
+                        </div>
+                        <div class="modal-body">
+                          <p>Soll die Karte wirklich gelöscht werden?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                          <a id="confirmDeleteCard" class="btn btn-danger btn-ok">Löschen</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="confirmDeleteCollectionModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteCollectionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" >Löschen?</h5>
+                        </div>
+                        <div class="modal-body">
+                          <p>Soll die Sammlung wirklich gelöscht werden?</p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                          <a id="confirmDeleteCollection" class="btn btn-danger btn-ok">Löschen</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                 </div>
               </div>
@@ -194,7 +229,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
               <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html/?cardId={{id}}">Editieren</a>
-              <a type="button" class="btn btn-sm btn-outline-secondary" onClick="deleteCard('{{id}}')">Löschen</a>
+              <a type="button" class="btn btn-sm btn-outline-secondary" data-id="{{id}}" data-toggle="modal" data-target="#confirmDeleteCardModal">Löschen</a>
             </div>
           </div>
         </div>
