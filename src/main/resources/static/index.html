@@ -23,14 +23,19 @@
     <title>Büffle Startseite</title>
 </head>
 <body class="index">
-<a href="/collections.html" >Collections</a>
-<a href="/cards.html" >Cards</a>
-<header id="header_nav">
-    <!-- Loaded via helpers.js -->
-    <!-- Just add an element with the id header_nav and the header is added automatically -->
-</header>
 
-<main role="main" class="bg-light">
+    <header id="header_nav">
+        <!-- Loaded via helpers.js -->
+        <!-- Just add an element with the id header_nav and the header is added automatically -->
+    </header>
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/index.html">Home</a></li>
+        </ol>
+    </nav>
+
+    <main role="main" class="bg-light">
 
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -42,25 +47,24 @@
                   <div class="carousel-item active" style="background-image: url('/images/1.jpg')">
                     <div class="container">
                       <div class="carousel-caption text-left">
-                        <h1>Example headline.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                        
+                        <h1>Büffle - DAS Lernkarteisystem</h1>
+                        <p>Vergiss mühsames Büffeln, lerne mit Büffle - dem innovativen Lernkarteisystem.</p>
                       </div>
                     </div>
                   </div>
                   <div class="carousel-item"  style="background-image: url('/images/2.jpg')">
                     <div class="container">
                       <div class="carousel-caption">
-                        <h1>Another example headline.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <h1>Immer dabei</h1>
+                        <p>Du kannst büffeln, wo immer du willst.</p>
                       </div>
                     </div>
                   </div>
                   <div class="carousel-item"  style="background-image: url('/images/3.jpg')">
                     <div class="container">
                       <div class="carousel-caption text-right">
-                        <h1>One more for good measure.</h1>
-                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <h1>Öffentliche und private Sammlungen</h1>
+                        <p>Profitiere von anderen oder erfasse deine persönlichen Lernkarten.</p>
                       </div>
                     </div>
                   </div>
@@ -85,19 +89,23 @@
                 <!-- Three columns of text below the carousel -->
                 <div class="row">
                   <div class="col-lg-4">
-                    <div class="bd-placeholder-img rounded-circle mx-auto" style="background-image: url('images/Picture3.png');"></div>
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+                    <div class="bd-placeholder-img rounded-circle mx-auto" style="background-image: url('images/system.png');"></div>
+                    <h2>Büffle - DAS Lernkarteisystem</h2>
+                    <p>Büffle ermöglicht es dir, strukturiert und mit minimalem Lernaufwand grosse Fortschritte zu
+                        erzielen. Gelernt wird dabei nach dem pädagogisch empfohlenen Lernkarteisystem.</p>
                   </div><!-- /.col-lg-4 -->
                   <div class="col-lg-4">
-                        <div class="bd-placeholder-img rounded-circle mx-auto" style="background-image: url('images/Picture2.png');"></div>
-                        <h2>Heading</h2>
-                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+                        <div class="bd-placeholder-img rounded-circle mx-auto" style="background-image: url('images/mobile.jpg');"></div>
+                        <h2>Immer dabei</h2>
+                    <p>Durch die moderne Benutzeroberfläche kannst du zu Hause am PC, aber auch unterwegs am Smartphone
+                        spontan büffeln. Vergangen sind die Zeiten, wo du dir im Vornherein Gedanken darüber machen
+                        musstest, was du für unterwegs zum Lernen mitnehmen willst.</p>
                   </div><!-- /.col-lg-4 -->
                   <div class="col-lg-4">
-                        <div class="bd-placeholder-img rounded-circle mx-auto" style="background-image: url('images/Picture1.png');"></div>
-                        <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        <div class="bd-placeholder-img rounded-circle mx-auto" style="background-image: url('images/privatePublic.jpg');"></div>
+                        <h2>Öffentliche und private Sammlungen</h2>
+                    <p>Du hast die Möglichkeit, auf bereits bestehende Lernkarten zuzugreifen oder dich zusätzlich
+                        kostenlos zu registrieren und deine individuellen Lernkarten zu erfassen.</p>
                   </div><!-- /.col-lg-4 -->
                 </div><!-- /.row -->
             
@@ -108,9 +116,10 @@
             
                 <div class="row featurette">
                   <div class="col-md-7">
-                    <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Jetzt Konto erstellen</a></p>  
+                    <h2 class="featurette-heading">Erfasse deine eigenen Karten.<span class="text-muted">Ganz einfach.</span></h2>
+                    <p class="lead">Du kannst dich hier kostenlos registrieren und kannst dann deine eigenen Kartensammlungen
+                    anlegen. Der Vorteil davon ist auch, dass du deinen Fortschritt siehst, was dich noch mehr motiviert.</p>
+                    <p><a class="btn btn-lg btn-primary" data-target = "#signupModal" data-toggle="modal" role="button">Jetzt Konto erstellen</a></p>
                 </div>
                   <div class="col-md-5">
                     <div class="feature-image img-fluid mx-auto" style="background-image: url('/images/jesshoot.jpg');"></div>
@@ -121,40 +130,42 @@
             
                 <div class="row featurette">
                   <div class="col-md-7 order-md-2">
-                    <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Öffentliche Sammlung jetzt durchsuchen</a></p>
+                    <h2 class="featurette-heading">Schreibaufwand sparen?<span class="text-muted">Durchstöbere die Sammlungen.</span></h2>
+                    <p class="lead">Wenn du Glück hast, kannst du dir das Erfassen von Karten sogar sparen. Es steht dir
+                        eine grosse Auswahl an Karten bereit, welche andere Benutzer mit der Öffentlichkeit teilen.
+                        Oder schau doch einfach mal rein. Auch ohne Login kannst du mit den öffentlichen Daten trainieren.</p>
+                    <p><a class="btn btn-lg btn-primary" href="collections.html" role="button">Öffentliche Sammlung jetzt durchsuchen</a></p>
                   </div>
                   <div class="col-md-5 order-md-1">
                         <div class="feature-image img-fluid mx-auto" style="background-image: url('/images/oldman.jpg');"></div>
                     </div>
                 </div>
-            
-                <hr class="featurette-divider">
-            
-                <div class="row featurette">
-                  <div class="col-md-7">
-                    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                  </div>
-                  <div class="col-md-5">
-                        <div class="feature-image img-fluid mx-auto" style="background-image: url('/images/freedom.jpg');"></div>
+
+                  <!--<hr class="featurette-divider">
+
+                  <div class="row featurette">
+                    <div class="col-md-7">
+                      <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+                      <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                      <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
                     </div>
-                </div>
-            
-                <hr class="featurette-divider">
+                    <div class="col-md-5">
+                          <div class="feature-image img-fluid mx-auto" style="background-image: url('/images/freedom.jpg');"></div>
+                      </div>
+                  </div>
+
+                  <hr class="featurette-divider">-->
             
                 <!-- /END THE FEATURETTES -->
             
               </div><!-- /.container -->
               <p>Image credit:</p>
-              <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@craftedbygc?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Green Chameleon"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Green Chameleon</span></a>
+              <!--<a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@craftedbygc?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Green Chameleon"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Green Chameleon</span></a>
               <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@element5digital?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Element5 Digital"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Element5 Digital</span></a>
               <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@impatrickt?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Patrick Tomasso"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Patrick Tomasso</span></a>
               <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@jeshoots?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from JESHOOTS.COM"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">JESHOOTS.COM</span></a>
               <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@jilburr?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Jilbert Ebrahimi"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Jilbert Ebrahimi</span></a>
-              <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@tocornal92?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Alejandro Tocornal"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Alejandro Tocornal</span></a>
+              <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px" href="https://unsplash.com/@tocornal92?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge" target="_blank" rel="noopener noreferrer" title="Download free do whatever you want high-resolution photos from Alejandro Tocornal"><span style="display:inline-block;padding:2px 3px"><svg xmlns="http://www.w3.org/2000/svg" style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white" viewBox="0 0 32 32"><title>unsplash-logo</title><path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span style="display:inline-block;padding:2px 3px">Alejandro Tocornal</span></a>-->
 </main>
 
 <footer class="sticky-bottom">
