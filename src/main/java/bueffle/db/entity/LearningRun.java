@@ -79,4 +79,14 @@ public class LearningRun {
     public void setLastAnsweredCardInLearningRunId(Long lastAnsweredCardInLearningRun) {
         this.lastAnsweredCardInLearningRunId = lastAnsweredCardInLearningRun;
     }
+
+    public boolean hasOwner() {
+        return owner != null;
+    }
+
+    public void emptyRestrictedFields() {
+        if (hasOwner()) {
+            owner.emptyRestrictedFields();
+        }
+    }
 }

@@ -61,6 +61,9 @@ public class CardInLearningRun {
         shownCounter++;
     }
 
+    public void emptyRestrictedFields() {
+        learningRun = null;
+    }
 }
 
 

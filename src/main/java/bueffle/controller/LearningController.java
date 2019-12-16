@@ -37,6 +37,16 @@ public class LearningController {
     }
 
     /**
+     * Gets the statistics for a given learning run id.
+     * @param learnId the id for the learning run
+     * @return statistics about the learning run
+     */
+    @GetMapping("/learn/{learnId}")
+    public LearningRun getLearningRun(@PathVariable Long learnId) {
+        return learningService.getLearningRun(learnId);
+    }
+
+    /**
      * Set's the answer status in the request body "answeredCorrectly": "boolean" for the last shown card in a given
      * learning run id. The last shown card should be the one which is open right now in the frontend, so you can set
      * the answer status straight with a Put resuqest on /learn/{learnid}
