@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -167,7 +166,8 @@ public class CollectionService {
             hasPermissionsToAccess = true;
         }
         else {
-            User user = userService.findByUsername(userService.findLoggedInUsername()).orElse(new User());
+            User user = userService.findByUsername(userService.findLoggedInUsername())
+                    .orElse(new User("Anonymous"));
             if (collection.getOwner().equals(user)) {
                 hasPermissionsToAccess = true;
             }
@@ -176,7 +176,8 @@ public class CollectionService {
     }
 
     private List<Collection> onlyShowCollectionsWithPermissions(List<Collection> collections) {
-        User user = userService.findByUsername(userService.findLoggedInUsername()).orElse(new User());
+        User user = userService.findByUsername(userService.findLoggedInUsername())
+                .orElse(new User("Anonymous"));
         return collections.stream()
                 .filter(collection -> collection.isPublic() || collection.getOwner().equals(user))
                 .collect(Collectors.toList());
