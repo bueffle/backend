@@ -32,6 +32,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/collections.html">Öffentliche Sammlungen</a></li>
         <li class="breadcrumb-item"><a href="/mycollections.html">Meine Sammlungen</a></li>
       </ol>
     </nav>
@@ -130,7 +131,9 @@
                   <button class="btn btn-sm btn-outline-secondary" onclick="learnCollection('{{id}}')">Lernen</button>
                   <a type="button" class="btn btn-sm btn-outline-secondary" href="collection.html?collectionId={{id}}">Editieren</a>
                 </div>
-                <small class="text-muted">{{numberOfElements}} Karten enthalten</small>
+                {{#if public}}
+                <small class="text-muted"><i class="fas fa-bullhorn"></i>&nbsp;Öffentlich</small>
+                {{/if}}
               </div>
             </div>
           </div>

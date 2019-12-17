@@ -107,6 +107,10 @@ function showUsername(user_name) {
     $('#login_button_group').empty();
     var userProfile = document.createElement('a');
     var userLogout = document.createElement('a');
+    var myCollections = document.createElement('a');
+    myCollections.setAttribute('class', 'btn btn-secondary');
+    myCollections.setAttribute('role', 'button');
+    myCollections.setAttribute('href', '/mycollections.html');
     userProfile.setAttribute('class', 'badge badge-secondary float-right');
     userLogout.setAttribute('class', 'badge badge-dark float-right');
     userProfile.setAttribute('id', 'user_profile_button');
@@ -115,6 +119,8 @@ function showUsername(user_name) {
     userLogout.setAttribute('href', '#'); 
     userLogout.innerText = "Abmelden";  
     userProfile.innerText = user_name;  
+    myCollections.innerText = "Meine Sammlungen"
+    $(myCollections).insertBefore("#login_button_group");
     $('#login_button_group').append(userProfile);
     $('#login_button_group').append(document.createElement('br'));
     $('#login_button_group').append(userLogout);

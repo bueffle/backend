@@ -292,7 +292,7 @@ $('#create_new_card_submit').click(function(event) {
 function saveCollection() {
     setCollectionUneditable();
     updateCollection();
-    var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
+    var breadCrumbCollection = $(".breadcrumb-item").last().find("a")[0];
     breadCrumbCollection.innerHTML =  $("#collectionName").text();
 }
 
@@ -329,9 +329,10 @@ function loadCollection() {
             console.log("description : " + data.description);
             $("#collectionName").html(data.name);
             $("#collectionDescription").html(data.description);
+            $('#collection_public_state option[value="'+data.public+'"]').prop("selected",true)
 
             //Breadcrumb
-            var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
+            var breadCrumbCollection = $(".breadcrumb-item").last().find("a")[0];
             breadCrumbCollection.innerHTML = data.name;
             breadCrumbCollection.href = "collection.html/?collectionId=" + data.id;
             console.log("breadCrumbCollection.href: " + breadCrumbCollection.href);
@@ -350,12 +351,13 @@ function updateCollection() {
     var name = $("#collectionName").text();
     console.log("name: " + name);
     var description = $("#collectionDescription").text();
+    var public_state= $("#collection_public_state").children("option:selected").val()
 
     $.ajax({
         url: "/collections/" + collectionId,
         type: 'PUT',
         contentType: 'application/json',
-        data: JSON.stringify({"id": collectionId, "name": name, "description": description, "cards": []}),
+        data: JSON.stringify({"id": collectionId, "name": name, "description": description, "public": public_state}),
         success: function (data) {
             console.log(data);
             console.log('process success');
@@ -370,6 +372,7 @@ function editCollection() {
     console.log("editCollection()");
     document.getElementById("saveCollectionBtn").disabled = false;
     document.getElementById("editCollectionBtn").disabled = true;
+    $("#collection_public_state").prop('disabled', false);
     var name = $("#collectionName").text();
     $("#collectionName").attr("contenteditable", "true");
     $("#collectionName").css("background-color", "white");
@@ -387,6 +390,7 @@ function setCollectionUneditable() {
     console.log("setCollectionUneditable()");
     $("#collectionName").removeAttr('contenteditable style');
     $("#collectionDescription").removeAttr('contenteditable style');
+    $("#collection_public_state").prop('disabled',true);
     document.getElementById("saveCollectionBtn").disabled = true;
     document.getElementById("editCollectionBtn").disabled = false;
 }
