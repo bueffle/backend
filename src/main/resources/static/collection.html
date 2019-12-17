@@ -50,7 +50,7 @@
             <button id="deleteCollectionBtn" type="button" data-toggle="modal" data-target="#confirmDeleteCollectionModal"><i class="fas fa-trash"></i></button>
           </div>
           <p>
-            <a href="/mycollections.html" class="btn btn-warning my-2">Zurück zu meine Sammlungen</a>
+            <a href="/mycollections.html" class="btn btn-warning my-2">Zurück zu meinen Sammlungen</a>
           </p>
         </div>
       </section>
@@ -79,12 +79,12 @@
                         <div class="modal-body">
                           <form action="/cards" method="post" id="create_card_form">
                             <div class="form-group">
-                              <label for="formGroupExampleInput">Frage</label>
+                              <label for="formCreateCardQuestion">Frage</label>
                               <input type="text" class="form-control" id="formCreateCardQuestion"
                                      placeholder="Example input">
                             </div>
                             <div class="form-group">
-                              <label for="formGroupExampleInput2">Antwort</label>
+                              <label for="formCreateCardAnswer">Antwort</label>
                               <input type="text" class="form-control" id="formCreateCardAnswer"
                                      placeholder="Another input">
                             </div>
@@ -174,7 +174,7 @@
           <p class="card-text font-italic">{{answer}}</p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <a type="button" class="btn btn-sm btn-outline-secondary" onclick="editCard({{id}})">Editieren</a>
+              <a type="button" class="btn btn-sm btn-outline-secondary" onclick="editCard('{{id}}')">Editieren</a>
               <a type="button" class="btn btn-sm btn-outline-secondary" data-id="{{id}}" data-toggle="modal" data-target="#confirmDeleteCardModal">Löschen</a>
             </div>
           </div>
