@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -120,7 +119,8 @@ public class CollectionService {
     }
 
     /**
-     * Updates name and description of an existing collection
+     * Updates name and description of an existing collection and isPublic. If it gets published, also all cards
+     * contained in the collection getting published.
      * @param newColl the fields which should be updated are contained in this collection instance
      * @param collectionId the id of the collection which should be updated
      */
@@ -133,6 +133,9 @@ public class CollectionService {
         collection.setName(newColl.getName());
         collection.setDescription(newColl.getDescription());
         collection.setPublic(newColl.isPublic());
+        if (newColl.isPublic()) {
+            collection.getCards().forEach(Card::publish);
+        }
         collectionRepository.save(collection);
     }
 

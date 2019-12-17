@@ -71,6 +71,10 @@ public class Card {
         isPublic = aPublic;
     }
 
+    public void publish() {
+        isPublic = true;
+    }
+
     public User getOwner() {
         return owner;
     }
