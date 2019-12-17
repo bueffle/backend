@@ -119,7 +119,9 @@ public class CardService {
         card.setOwner(userService.findByUsername(userService.findLoggedInUsername()).orElseThrow(
                 () -> new UsernameNotFoundException("Not found: " + userService.findLoggedInUsername())
         ));
-        return cardRepository.save(card);
+        Card result = cardRepository.save(card);
+        result.emptyRestrictedFields();
+        return result;
     }
 
     /**
