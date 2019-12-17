@@ -146,9 +146,19 @@ function createCard() {
         contentType: 'application/json',
         dataType: 'json',
         complete: function(data) {
-            $('#createCardModal').modal('hide');
-            clearCards();
-            getAllCards();
+
+            $.ajax({
+                url: "/cards/" + data.responseJSON.id + "/collections/" + getParameterFromUrlByName('collectionId'),
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                complete: function(data) {
+                    
+                    $('#createCardModal').modal('hide');
+                    clearCards();
+                    getAllCards();
+                }
+            });
         },
         data: JSON.stringify({
             "question": $('#formCreateCardQuestion').val(),
