@@ -1,11 +1,10 @@
 package bueffle.service;
 
-import bueffle.db.entity.Card;
-import bueffle.db.entity.CardInLearningRun;
-import bueffle.db.entity.LearningRun;
+import bueffle.db.entity.*;
 import bueffle.exception.CardInLearningRunNotFoundException;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.exception.LearningRunNotFoundException;
+import bueffle.exception.NoAccessException;
 import bueffle.model.CardInLearningRunRepository;
 import bueffle.model.LearningRunRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +26,21 @@ public class LearningService {
 
     @Autowired
     private CardInLearningRunRepository cardInLearningRunRepository;
+
+    /**
+     * Gets the statistics for a learning run.
+     * @param learnId the id of the learning run to get
+     * @return learningRun containing the result of the run.
+     */
+    public LearningRun getLearningRun(Long learnId) {
+        LearningRun learningRun = learningRunRepository.findById(learnId)
+                .orElseThrow(() -> new LearningRunNotFoundException(learnId));
+        if (!hasPermissionsToAccessLearningRun(learningRun)) {
+            throw new NoAccessException("Learning Run");
+        }
+        learningRunEmptyFields(learningRun);
+        return learningRun;
+    }
 
     /**
      * Starts a learning run and sets the given collection and the starting user as owner on it and saves it.
@@ -81,6 +95,9 @@ public class LearningService {
      * @return the resulting CardInLearningRun
      */
     private CardInLearningRun getCardInLearningRun(LearningRun learningRun) {
+        if (!hasPermissionsToAccessLearningRun(learningRun)) {
+            throw new NoAccessException("Learning Run");
+        }
         Set<CardInLearningRun> cardInLearningRuns = learningRun.getCardInLearningRuns();
         CardInLearningRun cardInLearningRun;
         if (learningRun.isLearningRunPlus()) {
@@ -103,11 +120,41 @@ public class LearningService {
     public void setAnswer(CardInLearningRun answerStatus, Long learnId) {
         LearningRun learningRun = learningRunRepository.findById(learnId)
                 .orElseThrow(() -> new LearningRunNotFoundException(learnId));
+        if (!hasPermissionsToAccessLearningRun(learningRun)) {
+            throw new NoAccessException("Learning Run");
+        }
         CardInLearningRun cardInLearningRun =
                 cardInLearningRunRepository.findById(learningRun.getLastAnsweredCardInLearningRunId())
                         .orElseThrow(
                                 () -> new CardInLearningRunNotFoundException(learningRun.getLastAnsweredCardInLearningRunId()));
         cardInLearningRun.setAnsweredCorrectly(answerStatus.isAnsweredCorrectly());
         cardInLearningRunRepository.save(cardInLearningRun);
+    }
+
+    /**
+     * Checks the permissions to a given learningRun.
+     * @param learningRun the learningRun to check the permissions on.
+     */
+    boolean hasPermissionsToAccessLearningRun(LearningRun learningRun) {
+        boolean hasPermissionsToAccessLearningRun = false;
+        User user = userService.findByUsername(userService.findLoggedInUsername())
+                .orElse(new User("Anonymous"));
+        if (learningRun.hasOwner()) {
+            hasPermissionsToAccessLearningRun = learningRun.getOwner().equals(user);
+        }
+        else {
+            hasPermissionsToAccessLearningRun = true;
+        }
+        return hasPermissionsToAccessLearningRun;
+    }
+
+    /**
+     * helper method to empty the fields we don't want to show.
+     * @param learningRun the learning run to empty the fields
+     */
+    private void learningRunEmptyFields(LearningRun learningRun) {
+        learningRun.emptyRestrictedFields();
+        learningRun.getCollection().emptyRestrictedFields();
+        learningRun.getCardInLearningRuns().forEach(CardInLearningRun::emptyRestrictedFields);
     }
 }

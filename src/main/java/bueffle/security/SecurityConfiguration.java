@@ -26,7 +26,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/profile").hasRole("USER")
                 .antMatchers("/*").permitAll()
-                .and().formLogin()
+                .and().formLogin().defaultSuccessUrl("/mycollections.html", true)
                 .and().csrf().disable().httpBasic(); // Only activated for testing with postman
         http.headers().frameOptions().sameOrigin(); //for access to http://localhost:8080/h2-console
     }
