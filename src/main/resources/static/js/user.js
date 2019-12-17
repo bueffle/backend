@@ -89,6 +89,11 @@ function checkLoggedin() {
             console.log(resp);
             if (resp.username && resp.username != "") {
                 showUsername(resp.username);
+            } else {
+                var login_required = ["/mycollections.html","/profile.html"];
+                if (login_required.includes(window.location.pathname)) {
+                    window.location="/login";
+                }
             }
         },
         error: function(resp){

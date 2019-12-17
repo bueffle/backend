@@ -80,7 +80,7 @@ function parseSearch() {
  * @param {*} target 
  * @param {*} values 
  */
-function getTemplateAjax(path, target, values=null) {
+function getTemplateAjax(path, target, values=null,callback=null) {
     var source;
     var template;
 
@@ -96,6 +96,10 @@ function getTemplateAjax(path, target, values=null) {
             } else {
                 $('#'+target).html(template);
             }
+
+            if(callback) {
+                callback();
+            }
         }               
     });         
 }
@@ -106,5 +110,5 @@ function getTemplateAjax(path, target, values=null) {
  * For loading of global template elementes
  */
 $( document ).ready(function() {
-    getTemplateAjax('templates/header.handlebars','header_nav');
+    getTemplateAjax('/templates/header.handlebars','header_nav');
 });

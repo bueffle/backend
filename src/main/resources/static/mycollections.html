@@ -21,7 +21,7 @@
       }
     </style>
 
-    <title>Öffentliche Sammlungen</title>
+    <title>Meine Sammlungen</title>
   </head>
   <body  class="collections">
     <header id="header_nav">
@@ -40,7 +40,43 @@
                     <div class="card mb-4 shadow-sm" id="create_collection_card">
             
                         <div class="card-body">
-                          <p class="card-text">Erstelle eine eigene Sammlung <a href="/mycollections.html">hier</a></p>
+                          <p class="card-text">Neue Sammlung erstellen</p>
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCollectionModal">Erstellen</button>
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="createCollectionModal" tabindex="-1" role="dialog" aria-labelledby="createCollectionModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="createCollectionModalLabel">Neue Sammlung erstellen</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form action="/collections" method="post" id="create_collection_form">
+                                      <div class="form-group">
+                                        <label for="formGroupExampleInput">Titel</label>
+                                        <input type="text" class="form-control" id="formCreateCollectionName"
+                                               placeholder="Example input">
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="formGroupExampleInput2">Beschreibung</label>
+                                        <input type="text" class="form-control" id="formCreateCollectionDescription"
+                                               placeholder="Another input">
+                                      </div>
+                                      
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                                  <button type="button" form="create_collection_form" class="btn btn-primary" id="create_new_collection_submit">Speichern</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- End Modal -->
+
                         </div>
                       </div>
                        <!-- End Default add element -->
@@ -84,7 +120,7 @@
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button class="btn btn-sm btn-outline-secondary" onclick="learnCollection({{id}})">Lernen</button>
-                 
+                  <a type="button" class="btn btn-sm btn-outline-secondary" href="collection.html/?collectionId={{id}}">Editieren</a>
                 </div>
                 <small class="text-muted">{{numberOfElements}} Karten enthalten</small>
               </div>

@@ -7,27 +7,13 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
 
     <!-- Icon set -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js" integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
-    <script src="/js/helpers.js"></script>
-
-    <!-- Custom JavaScript -->
-    <script src="/js/collections.js"></script>
 
     <style>
       body {
@@ -38,39 +24,10 @@
     <title>Collection</title>
   </head>
   <body class="collection">
-    <header>
-      <div class="collapse bg-dark" id="navbarHeader">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-8 col-md-7 py-4">
-              <h4 class="text-white">Log- or Sign-in</h4>
-              <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-            </div>
-            <div class="col-sm-4 offset-md-1 py-4">
-                <form class="navbar-form navbar-right" role="form">
-                  <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
-                  </div>
-                  <button type="submit" class="btn btn-success">Sign in</button>
-                </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="navbar navbar-dark bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-          <a href="#" class="navbar-brand d-flex align-items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 20px; width: 20px;"><path d="M0 0h512v512H0z" fill="#343a40" fill-opacity="1"></path><g class="" transform="translate(0,0)" style="touch-action: none;"><g><path d="M256 18.365L50.14 136L256 253.635L461.86 136L256 18.365Z" class="selected" fill="#fff" fill-opacity="1"></path><path d="M102 186.365L50.14 216L256 333.635L461.86 216L410 186.365L256 274.365L102 186.365Z" class="" fill="#fff" fill-opacity="1"></path><path d="M102 266.365L50.14 296L256 413.635L461.86 296L410 266.365L256 354.365L102 266.365Z" class="" fill="#fff" fill-opacity="1"></path><path d="M102 346.365L50.14 376L256 493.635L461.86 376L410 346.365L256 434.365L102 346.365Z" class="" fill="#fff" fill-opacity="1"></path></g></g></svg>            <strong>Büffle</strong>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-        </div>
-      </div>
-    </header>
+      <header id="header_nav">
+        <!-- Loaded via helpers.js -->
+        <!-- Just add an element with the id header_nav and the header is added automatically -->
+      </header>
 
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -92,7 +49,7 @@
             <button id="deleteCollectionBtn" type="button" data-toggle="modal" data-target="#confirmDeleteCollectionModal"><i class="fas fa-trash"></i></button>
           </div>
           <p>
-            <a href="card.html" id="trainCollectionBtn" class="btn btn-primary my-2" data-toggle="modal">Lernlauf starten</a>
+            <a href="/collections.html" class="btn btn-warning my-2">Zurück zu den Sammlungen</a>
           </p>
         </div>
       </section>
@@ -142,7 +99,7 @@
                   </div>
                   <!-- End Modal -->
 
-
+                  <!-- Delete card modal -->
                   <div class="modal fade" id="confirmDeleteCardModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteCardModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -154,12 +111,14 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                          <a id="confirmDeleteCard" class="btn btn-danger btn-ok">Löschen</a>
+                          <button type="button" id="confirmDeleteCard" class="btn btn-danger btn-ok">Löschen</button>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <!-- End delete card modal -->
 
+                  <!-- Delete collection modal -->
                   <div class="modal fade" id="confirmDeleteCollectionModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteCollectionModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -171,12 +130,16 @@
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                          <a id="confirmDeleteCollection" class="btn btn-danger btn-ok">Löschen</a>
+                          <button type="button" id="confirmDeleteCollection" class="btn btn-danger btn-ok">Löschen</button>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <!-- End delete collection modal -->
 
+                  <!-- Edit card modal -->
+
+                  <!-- End edit card modal -->
                 </div>
               </div>
             </div>
@@ -186,7 +149,7 @@
           </div>
         </div>
       </div>
-    
+      <div id="js_modal_holder"></div>
     </main>
 
     <footer class="sticky-bottom">
@@ -199,36 +162,18 @@
       <p>&copy; Büffle 2019</p>
     </footer>
 
-    <script id="cards-template" type="text/x-handlebars-template">
-      {{#nth 3 cards}}
-      <div class="col-md-4">
-        {{#each this}}
-        <div class="card mb-4 shadow-sm">
-          <!-- Add image here -->
-          <div class="card-body">
-            <p class="card-text">{{name}}</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html">Editieren</a>
-                <a type="button" class="btn btn-sm btn-outline-secondary">Löschen</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {{/each}}
-      </div>
-      {{/nth}}
-    </script>
 
     <script id="card-template" type="text/x-handlebars-template">
       <div class="card mb-4 shadow-sm">
-        <div class="card-image-placeholder"></div>
         <div class="card-body">
-          <p class="card-text">{{question}}</p>
-          <p class="card-text">{{answer}}</p>
+          <h5>Frage</h5>
+          <p class="card-text font-italic">{{question}}</p>
+          <hr/>
+          <h5>Antwort</h5>
+          <p class="card-text font-italic">{{answer}}</p>
           <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-              <a type="button" class="btn btn-sm btn-outline-secondary" href="card.html/?cardId={{id}}">Editieren</a>
+              <a type="button" class="btn btn-sm btn-outline-secondary" onclick="editCard({{id}})">Editieren</a>
               <a type="button" class="btn btn-sm btn-outline-secondary" data-id="{{id}}" data-toggle="modal" data-target="#confirmDeleteCardModal">Löschen</a>
             </div>
           </div>
@@ -236,20 +181,15 @@
       </div>
     </script>
 
-    <script id="new-card-template" type="text/x-handlebars-template">
-      {{#nth 3 cards}}
-      <div class="col-md-4">
-        {{#each this}}
-        <div class="card mb-4 shadow-sm">
-          <img class="bd-placeholder-img card-img-top" onerror="this.onerror=null;this.src='https://media3.giphy.com/media/g01ZnwAUvutuK8GIQn/giphy.gif?cid=790b761197d9e0ada9b989ed8c5ff9e37f7dcf278fb3ebc2&rid=giphy.gif';" src="https://images.unsplash.com/photo-1544642058-c5d172ab955c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" />
-          <div class="card-body">
-            <p class="card-text">{{question}}</p>
-          </div>
-        </div>
-        {{/each}}
-      </div>
-      {{/nth}}
-    </script>
 
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/vendor/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="/js/vendor/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js" integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
+    <script src="/js/helpers.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="/js/collections.js"></script>
   </body>
 </html>

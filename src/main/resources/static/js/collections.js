@@ -14,8 +14,13 @@ $( document ).ready(function() {
 });
 
 function getAllCollections() {
+    if(window.location.pathname == "/mycollections.html") {
+        request_url = "/collections/own";
+    } else {
+        request_url = "/collections";
+    }
     $.ajax({
-        url: "/collections",
+        url: request_url,
         type: 'GET',
         dataType: 'json',
         success: function(data) {
@@ -96,9 +101,7 @@ function deleteCollection(collection_id) {
 }
 
 function appendToBody(index, collection) {
-    console.log("before handlebars collection-template");
     var template = Handlebars.compile($('#collection-template').html());
-    console.log("after handlebars collection-template");
     var html = template(collection);
     var addColletionSnipp = $("#create_collection_card").detach();
     $('#nth-column-'+index).append(html);
@@ -186,10 +189,74 @@ function deleteCard(card_id) {
     location.reload();
 }
 
+/**
+ * Loads the modal required for editing a card
+ * @param {*} card_id 
+ */
+function editCard(card_id) {
+    $("#js_modal_holder").empty();
+    var url = "/collections/" + getParameterFromUrlByName('collectionId') + "/cards";
+
+    var settings = {
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            var card_data=null;
+            for (var i=0;i<data.length;i++) {
+                if(data[i]["id"] == card_id) {
+                    card_data = data[i];
+                    break;
+                }
+            }
+            if (card_data) {
+                getTemplateAjax("/templates/edit-card.handlebars", "js_modal_holder", card_data, function(){
+                    $('#editCardModal').modal();
+                });
+            } else {
+                console.error("card data not found");
+            }
+        }
+    }
+    $.ajax(settings);
+
+
+ 
+    
+}
+
+
+/**
+ * Create or update a card
+ * If the card does not have card_public input, it is set to true
+ * @param {String} card_id 
+ */
+function saveCard(card_id) {
+
+    var card_data = {
+        question: $("#card_question").val(),
+        answer: $("#card_answer").val(),
+        public: $("#card_public").is(":checked") || true
+    }
+
+    $.ajax({
+        url: "/cards/"+card_id,
+        type: 'PUT',
+        contentType: 'application/json',
+        dataType: 'json',
+        complete: function(data) {
+            $('#editCardModal').modal('hide');
+            location.reload();
+        },
+        data: JSON.stringify(card_data),
+    });
+
+    console.info(card_data);
+    
+}
+
 function appendToBodyCards(index, card) {
-    console.log("before handlebars card-template");
     var template = Handlebars.compile($('#card-template').html());
-    console.log("after handlebars card-template");
     var html = template(card);
     var addCardSnipp = $("#create_card").detach();
     $('#nth-column-'+index).append(html);
