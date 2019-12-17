@@ -1,14 +1,8 @@
-$( document ).ready(function() {
-
-    // var titles = {"collections":[{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"}]};
-
-    //var titles =[{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"},{"title":"tuk,asdfas jnw"}];
-
+$(function() {
     if ($("body.collections").length > 0) {
         getAllCollections();
     }
     if ($("body.collection").length > 0) {
-        console.log("collection.html");
         loadCollection();
     }
 });
@@ -97,7 +91,7 @@ function deleteCollection(collection_id) {
             //redirect back to collections is not possible here
         }
     });
-    window.location.href = getBaseUrl() + "/collections.html";
+    window.location.href = "mycollections.html";
 }
 
 function appendToBody(index, collection) {
@@ -329,7 +323,7 @@ function loadCollection() {
             //Breadcrumb
             var breadCrumbCollection = document.getElementsByClassName("breadcrumb-item")[2];
             breadCrumbCollection.innerHTML = data.name;
-            breadCrumbCollection.href = getBaseUrl() + "/collection.html/?collectionId=" + data.id;
+            breadCrumbCollection.href = "collection.html/?collectionId=" + data.id;
             console.log("breadCrumbCollection.href: " + breadCrumbCollection.href);
         }
     });
@@ -397,14 +391,4 @@ function getParameterFromUrlByName(paramName) {
     var param = urlParams.get(paramName);
     console.log("getParameterFromUrlByName(" + paramName + "): " + param);
     return param;
-}
-
-/**
- * Return base part of URL (e.g.: )
- * @returns {string | jQuery}
- */
-function getBaseUrl() {
-    var url = $(location).attr('origin');
-    console.log("getBaseUrl(): " + url);
-    return url;
 }

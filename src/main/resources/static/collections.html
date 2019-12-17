@@ -29,6 +29,13 @@
       <!-- Just add an element with the id header_nav and the header is added automatically -->
     </header>
 
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/collections.html">Sammlungen</a></li>
+      </ol>
+    </nav>
+
     <main role="main">
 
       <div class="album py-5 bg-light">
@@ -83,7 +90,7 @@
               <p class="card-text">{{description}}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button class="btn btn-sm btn-outline-secondary" onclick="learnCollection({{id}})">Lernen</button>
+                  <button class="btn btn-sm btn-outline-secondary" onclick="learnCollection('{{id}}')">Lernen</button>
                  
                 </div>
                 <small class="text-muted">{{numberOfElements}} Karten enthalten</small>

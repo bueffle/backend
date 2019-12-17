@@ -73,8 +73,8 @@ public class CardController {
      * @param card the body of the Card Object which should be created.
      */
     @PostMapping("/cards")
-    public void addCard(@RequestBody Card card) {
-        cardService.add(card);
+    public Card addCard(@RequestBody Card card) {
+        return cardService.add(card);
     }
 
      /**
