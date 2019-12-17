@@ -111,7 +111,7 @@ function showUsername(user_name) {
     userLogout.setAttribute('class', 'badge badge-dark float-right');
     userProfile.setAttribute('id', 'user_profile_button');
     userLogout.setAttribute('id', 'user_logout_button');
-    userProfile.setAttribute('href', '#'); 
+    userProfile.setAttribute('href', '/myprofile.html'); 
     userLogout.setAttribute('href', '#'); 
     userLogout.innerText = "Abmelden";  
     userProfile.innerText = user_name;  

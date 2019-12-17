@@ -157,8 +157,8 @@ function createCard() {
             getAllCards();
         },
         data: JSON.stringify({
-            "name": $('#formCreateCardQuestion').val(),
-            "description": $('#formCreateCardAnswer').val()
+            "question": $('#formCreateCardQuestion').val(),
+            "answer": $('#formCreateCardAnswer').val()
         }),
     });
 }
@@ -372,6 +372,8 @@ function editCollection() {
     var description = $("#collectionDescription").text();
     $("#collectionDescription").attr("contenteditable", "true");
     $("#collectionDescription").css("background-color", "white");
+
+
 }
 
 /**
