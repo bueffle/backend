@@ -11,7 +11,14 @@ function getAllCollections() {
     if(window.location.pathname == "/mycollections.html") {
         request_url = "/collections/own";
     } else {
-        request_url = "/collections";
+        var search = parseSearch("search");
+        if(search && "search" in search) {
+            request_url = "/collections?name="+search["search"];
+            $('#collection_search').val(search["search"]);
+        } else {
+
+            request_url = "/collections";
+        }
     }
     $.ajax({
         url: request_url,

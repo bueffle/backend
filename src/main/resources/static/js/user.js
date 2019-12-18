@@ -139,3 +139,9 @@ function logout() {
 $( document ).ready(function() {
     checkLoggedin();
 });
+
+$('#collection_search').on('keypress',function(e) {
+    if(e.which == 13) {
+        window.location.href = window.location.origin+"/collections.html?search="+$('#collection_search').val();
+    }
+});
