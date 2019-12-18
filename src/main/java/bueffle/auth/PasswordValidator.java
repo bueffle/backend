@@ -1,6 +1,6 @@
 package bueffle.auth;
 
-import bueffle.db.entity.User;
+import bueffle.entity.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

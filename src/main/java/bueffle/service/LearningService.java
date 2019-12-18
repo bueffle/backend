@@ -1,6 +1,9 @@
 package bueffle.service;
 
-import bueffle.db.entity.*;
+import bueffle.entity.Card;
+import bueffle.entity.CardInLearningRun;
+import bueffle.entity.LearningRun;
+import bueffle.entity.User;
 import bueffle.exception.CardInLearningRunNotFoundException;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.exception.LearningRunNotFoundException;

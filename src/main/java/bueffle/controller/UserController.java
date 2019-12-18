@@ -2,7 +2,7 @@ package bueffle.controller;
 
 import bueffle.auth.PasswordValidator;
 import bueffle.auth.UserNameValidator;
-import bueffle.db.entity.User;
+import bueffle.entity.User;
 import bueffle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;

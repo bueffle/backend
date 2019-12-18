@@ -1,4 +1,4 @@
-package bueffle.db.entity;
+package bueffle.entity;
 
 import javax.persistence.*;
 
@@ -61,8 +61,16 @@ public class CardInLearningRun {
         shownCounter++;
     }
 
+    public boolean hasNotBeenShown() {
+        return shownCounter == 0;
+    }
+
     public void emptyRestrictedFields() {
         learningRun = null;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
 

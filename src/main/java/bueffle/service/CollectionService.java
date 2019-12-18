@@ -1,8 +1,8 @@
 package bueffle.service;
 
-import bueffle.db.entity.Card;
-import bueffle.db.entity.Collection;
-import bueffle.db.entity.User;
+import bueffle.entity.Card;
+import bueffle.entity.Collection;
+import bueffle.entity.User;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.exception.NoAccessException;
 import bueffle.exception.UserNotFoundException;

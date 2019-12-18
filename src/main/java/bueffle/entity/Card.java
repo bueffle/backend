@@ -1,4 +1,4 @@
-package bueffle.db.entity;
+package bueffle.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;

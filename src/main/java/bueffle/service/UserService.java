@@ -1,10 +1,8 @@
 package bueffle.service;
 
 import bueffle.auth.BackendUserDetails;
-import bueffle.db.entity.Collection;
-import bueffle.db.entity.Role;
-import bueffle.db.entity.User;
-import bueffle.exception.NoAccessException;
+import bueffle.entity.Role;
+import bueffle.entity.User;
 import bueffle.exception.UserNotFoundException;
 import bueffle.model.RoleRepository;
 import bueffle.model.UserRepository;
@@ -41,13 +39,13 @@ public class UserService implements UserDetailsService {
      * Sending the user to the userRepository.
      * @param user The User to be added.
      */
-    public void addUser(User user) {
+    public User addUser(User user) {
         if(!userRoleExists("ROLE_USER")) {
             addUserRole("ROLE_USER");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.addRole(roleRepository.findByName("ROLE_USER"));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     /**
