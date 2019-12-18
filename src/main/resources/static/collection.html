@@ -1,175 +1,185 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <!-- Icon set -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/main.css">
+  <!-- Icon set -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/main.css">
 
-    <title>Collection</title>
-  </head>
-  <body class="collection">
-      <header id="header_nav">
-        <!-- Loaded via helpers.js -->
-        <!-- Just add an element with the id header_nav and the header is added automatically -->
-      </header>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
 
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="/collections.html">Öffentliche Sammlungen</a></li>
-        <li class="breadcrumb-item"><a href="/mycollections.html">Meine Sammlungen</a></li>
-        <li class="breadcrumb-item"><a href="/collection.html">Sammlung</a></li>
-      </ol>
-    </nav>
+  <title>Collection</title>
+</head>
 
-    <main role="main">
+<body class="collection">
+  <header id="header_nav">
+    <!-- Loaded via helpers.js -->
+    <!-- Just add an element with the id header_nav and the header is added automatically -->
+  </header>
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 id="collectionName" class="jumbotron-heading">Collection</h1>
-          <p id="collectionDescription" class="lead text-muted">description of the collection</p>
-          <select id="collection_public_state" class="form-control mx-auto col col-lg-2" disabled>
-              <option value="false" >Privat</option>
-              <option value="true" >Öffentlich</option>
-            </select>
-          <div class="btn-group-lg">
-            <button id="saveCollectionBtn" type="button" disabled><i class="fas fa-save"></i></button>
-            <button id="editCollectionBtn" type="button"><i class="fas fa-edit"></i></button>
-            <button id="deleteCollectionBtn" type="button" data-toggle="modal" data-target="#confirmDeleteCollectionModal"><i class="fas fa-trash"></i></button>
-          </div>
-          <p>
-            <a href="/mycollections.html" class="btn btn-warning my-2">Zurück zu meinen Sammlungen</a>
-          </p>
-        </div>
-      </section>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/collections.html">Öffentliche Sammlungen</a></li>
+      <li class="breadcrumb-item"><a href="/mycollections.html">Meine Sammlungen</a></li>
+      <li class="breadcrumb-item"><a href="/collection.html">Sammlung</a></li>
+    </ol>
+  </nav>
 
-      <div class="album py-5 bg-light">
-        <div class="container" >
-          <div class="row" id="collection-content">
+  <main role="main">
 
-            <div class="col-md-4" id="nth-column-1">
-              <div class="card mb-4 shadow-sm" id="create_card">
-
-                <div class="card-body">
-                  <p class="card-text">Neue Karte erstellen</p>
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCardModal">Erstellen</button>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="createCardModal" tabindex="-1" role="dialog" aria-labelledby="createCardModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="createCardModalLabel">Neue Karte erstellen</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <form action="/cards" method="post" id="create_card_form">
-                            <div class="form-group">
-                              <label for="formCreateCardQuestion">Frage</label>
-                              <input type="text" class="form-control" id="formCreateCardQuestion"
-                                     placeholder="Example input">
-                            </div>
-                            <div class="form-group">
-                              <label for="formCreateCardAnswer">Antwort</label>
-                              <input type="text" class="form-control" id="formCreateCardAnswer"
-                                     placeholder="Another input">
-                            </div>
-
-                          </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                          <button type="button" form="create_card_form" class="btn btn-primary" id="create_new_card_submit">Speichern</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End Modal -->
-
-                  <!-- Delete card modal -->
-                  <div class="modal fade" id="confirmDeleteCardModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteCardModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" >Löschen?</h5>
-                        </div>
-                        <div class="modal-body">
-                          <p>Soll die Karte wirklich gelöscht werden?</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                          <button type="button" id="confirmDeleteCard" class="btn btn-danger btn-ok">Löschen</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End delete card modal -->
-
-                  <!-- Delete collection modal -->
-                  <div class="modal fade" id="confirmDeleteCollectionModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteCollectionModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" >Löschen?</h5>
-                        </div>
-                        <div class="modal-body">
-                          <p>Soll die Sammlung wirklich gelöscht werden?</p>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
-                          <button type="button" id="confirmDeleteCollection" class="btn btn-danger btn-ok">Löschen</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- End delete collection modal -->
-
-                  <!-- Edit card modal -->
-
-                  <!-- End edit card modal -->
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4" id="nth-column-2"></div>
-            <div class="col-md-4" id="nth-column-3"></div>
-
-          </div>
-        </div>
-      </div>
-      <div id="js_modal_holder"></div>
-    </main>
-
-    <footer class="sticky-bottom">
+    <section class="jumbotron text-center">
       <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
+        <h1 id="collectionName" class="jumbotron-heading">Collection</h1>
+        <p id="collectionDescription" class="lead text-muted">description of the collection</p>
+        <select id="collection_public_state" class="form-control mx-auto col col-lg-2" disabled>
+          <option value="false">Privat</option>
+          <option value="true">Öffentlich</option>
+        </select>
+        <div class="btn-group-lg">
+          <button id="saveCollectionBtn" type="button" disabled><i class="fas fa-save"></i></button>
+          <button id="editCollectionBtn" type="button"><i class="fas fa-edit"></i></button>
+          <button id="deleteCollectionBtn" type="button" data-toggle="modal"
+            data-target="#confirmDeleteCollectionModal"><i class="fas fa-trash"></i></button>
+        </div>
+        <p>
+          <a href="/mycollections.html" class="btn btn-warning my-2">Zurück zu meinen Sammlungen</a>
         </p>
       </div>
+    </section>
 
-      <p>&copy; Büffle 2019</p>
-    </footer>
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <div class="row" id="collection-content">
+
+          <div class="col-md-4" id="nth-column-1">
+            <div class="card mb-4 shadow-sm" id="create_card">
+
+              <div class="card-body">
+                <p class="card-text">Neue Karte erstellen</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                  data-target="#createCardModal">Erstellen</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="createCardModal" tabindex="-1" role="dialog"
+                  aria-labelledby="createCardModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="createCardModalLabel">Neue Karte erstellen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/cards" method="post" id="create_card_form">
+                          <div class="form-group">
+                            <label for="formCreateCardQuestion">Frage</label>
+                            <input type="text" class="form-control" id="formCreateCardQuestion"
+                              placeholder="Example input">
+                          </div>
+                          <div class="form-group">
+                            <label for="formCreateCardAnswer">Antwort</label>
+                            <input type="text" class="form-control" id="formCreateCardAnswer"
+                              placeholder="Another input">
+                          </div>
+
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                        <button type="button" form="create_card_form" class="btn btn-primary"
+                          id="create_new_card_submit">Speichern</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Modal -->
+
+                <!-- Delete card modal -->
+                <div class="modal fade" id="confirmDeleteCardModal" tabindex="-1" role="dialog"
+                  aria-labelledby="confirmDeleteCardModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Löschen?</h5>
+                      </div>
+                      <div class="modal-body">
+                        <p>Soll die Karte wirklich gelöscht werden?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                        <button type="button" id="confirmDeleteCard" class="btn btn-danger btn-ok">Löschen</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End delete card modal -->
+
+                <!-- Delete collection modal -->
+                <div class="modal fade" id="confirmDeleteCollectionModal" tabindex="-1" role="dialog"
+                  aria-labelledby="confirmDeleteCollectionModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Löschen?</h5>
+                      </div>
+                      <div class="modal-body">
+                        <p>Soll die Sammlung wirklich gelöscht werden?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                        <button type="button" id="confirmDeleteCollection"
+                          class="btn btn-danger btn-ok">Löschen</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End delete collection modal -->
+
+                <!-- Edit card modal -->
+
+                <!-- End edit card modal -->
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4" id="nth-column-2"></div>
+          <div class="col-md-4" id="nth-column-3"></div>
+
+        </div>
+      </div>
+    </div>
+    <div id="js_modal_holder"></div>
+  </main>
+
+  <footer class="sticky-bottom">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+    </div>
+
+    <p>&copy; Büffle 2019</p>
+  </footer>
 
 
-    <script id="card-template" type="text/x-handlebars-template">
-      <div class="card mb-4 shadow-sm">
+  <script id="card-template" type="text/x-handlebars-template">
+    <div class="card mb-4 shadow-sm">
         <div class="card-body">
           <h5>Frage</h5>
           <p class="card-text font-italic">{{question}}</p>
@@ -190,14 +200,18 @@
     </script>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="/js/vendor/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js" integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
-    <script src="/js/helpers.js"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="/js/vendor/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js"
+    integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
+  <script src="/js/helpers.js"></script>
 
-    <!-- Custom JavaScript -->
-    <script src="/js/collections.js"></script>
-  </body>
+  <!-- Custom JavaScript -->
+  <script src="/js/collections.js"></script>
+</body>
+
 </html>

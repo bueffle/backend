@@ -1,127 +1,135 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <!-- Icon set -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/vendor/bootstrap.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/main.css">
+  <!-- Icon set -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/main.css">
 
-    <title>Meine Sammlungen</title>
-  </head>
-  <body  class="collections">
-    <header id="header_nav">
-      <!-- Loaded via helpers.js -->
-      <!-- Just add an element with the id header_nav and the header is added automatically -->
-    </header>
+  <style>
+    body {
+      margin: 0;
+    }
+  </style>
 
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Home</a></li>
-        <li class="breadcrumb-item"><a href="/collections.html">Öffentliche Sammlungen</a></li>
-        <li class="breadcrumb-item"><a href="/mycollections.html">Meine Sammlungen</a></li>
-      </ol>
-    </nav>
+  <title>Meine Sammlungen</title>
+</head>
 
-    <main role="main">
+<body class="collections">
+  <header id="header_nav">
+    <!-- Loaded via helpers.js -->
+    <!-- Just add an element with the id header_nav and the header is added automatically -->
+  </header>
 
-      <div class="album py-5 bg-light">
-        <div class="container" >
-            <h1>Meine Sammlungen</h1>
-            <div class="row" id="collections-content">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item"><a href="/collections.html">Öffentliche Sammlungen</a></li>
+      <li class="breadcrumb-item"><a href="/mycollections.html">Meine Sammlungen</a></li>
+    </ol>
+  </nav>
 
-                <div class="col-md-4" id="nth-column-1">
-                  <!-- Default add element -->
-                    <div class="card mb-4 shadow-sm" id="create_collection_card">
-            
-                        <div class="card-body">
-                          <p class="card-text">Neue Sammlung erstellen</p>
-                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCollectionModal">Erstellen</button>
-                          
-                          <!-- Modal -->
-                          <div class="modal fade" id="createCollectionModal" tabindex="-1" role="dialog" aria-labelledby="createCollectionModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="createCollectionModalLabel">Neue Sammlung erstellen</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                                </div>
-                                <div class="modal-body">
-                                  <form action="/collections" method="post" id="create_collection_form">
-                                      <div class="form-group">
-                                        <label for="formCreateCollectionName">Titel</label>
-                                        <input type="text" class="form-control" id="formCreateCollectionName"
-                                               placeholder="Example input">
-                                      </div>
-                                      <div class="form-group">
-                                        <label for="formCreateCollectionDescription">Beschreibung</label>
-                                        <input type="text" class="form-control" id="formCreateCollectionDescription"
-                                               placeholder="Another input">
-                                      </div>
-                                      
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
-                                  <button type="button" form="create_collection_form" class="btn btn-primary" id="create_new_collection_submit">Speichern</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <!-- End Modal -->
+  <main role="main">
 
-                        </div>
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <h1>Meine Sammlungen</h1>
+        <div class="row" id="collections-content">
+
+          <div class="col-md-4" id="nth-column-1">
+            <!-- Default add element -->
+            <div class="card mb-4 shadow-sm" id="create_collection_card">
+
+              <div class="card-body">
+                <p class="card-text">Neue Sammlung erstellen</p>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                  data-target="#createCollectionModal">Erstellen</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="createCollectionModal" tabindex="-1" role="dialog"
+                  aria-labelledby="createCollectionModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="createCollectionModalLabel">Neue Sammlung erstellen</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
                       </div>
-                       <!-- End Default add element -->
-                </div>
-                <div class="col-md-4" id="nth-column-2"></div>
-                <div class="col-md-4" id="nth-column-3"></div>
+                      <div class="modal-body">
+                        <form action="/collections" method="post" id="create_collection_form">
+                          <div class="form-group">
+                            <label for="formCreateCollectionName">Titel</label>
+                            <input type="text" class="form-control" id="formCreateCollectionName"
+                              placeholder="Example input">
+                          </div>
+                          <div class="form-group">
+                            <label for="formCreateCollectionDescription">Beschreibung</label>
+                            <input type="text" class="form-control" id="formCreateCollectionDescription"
+                              placeholder="Another input">
+                          </div>
 
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+                        <button type="button" form="create_collection_form" class="btn btn-primary"
+                          id="create_new_collection_submit">Speichern</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Modal -->
+
+              </div>
             </div>
+            <!-- End Default add element -->
+          </div>
+          <div class="col-md-4" id="nth-column-2"></div>
+          <div class="col-md-4" id="nth-column-3"></div>
+
         </div>
       </div>
-    
-    </main>
+    </div>
 
-    <footer class="sticky-bottom">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Back to top</a>
-        </p>
-      </div>
+  </main>
 
-      <p>&copy; Büffle 2019</p>
-    </footer>
+  <footer class="sticky-bottom">
+    <div class="container">
+      <p class="float-right">
+        <a href="#">Back to top</a>
+      </p>
+    </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-            src="/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="/js/vendor/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js" integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
-    <script src="/js/helpers.js"></script>
-    
+    <p>&copy; Büffle 2019</p>
+  </footer>
 
-    
-    <script id="collection-template" type="text/x-handlebars-template">
-          <div class="card mb-4 shadow-sm">
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="/js/vendor/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="/js/vendor/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js"
+    integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
+  <script src="/js/helpers.js"></script>
+
+
+
+  <script id="collection-template" type="text/x-handlebars-template">
+    <div class="card mb-4 shadow-sm">
             <div class="card-image-placeholder"></div>
             <div class="card-body">
               <p class="card-text">{{name}}</p>
@@ -141,7 +149,8 @@
 
 
 
-    <!-- Custom JavaScript -->
-    <script src="/js/collections.js"></script>
-  </body>
-  </html>
+  <!-- Custom JavaScript -->
+  <script src="/js/collections.js"></script>
+</body>
+
+</html>

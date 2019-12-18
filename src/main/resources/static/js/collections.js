@@ -1,4 +1,17 @@
-$(function() {
+/**
+ * Collection(s) Javascript file
+ *
+ * A collection of shared functions in context of collections and cards in collections
+ *
+ * @link   https://github.com/bueffle/backend/blob/master/src/main/resources/static/js/collections.js
+ * @author AuthorName.
+ */
+
+
+ /**
+  * Instantly executing function to determine which load function should be executed 
+  */
+$(function () {
     if ($("body.collections").length > 0) {
         getAllCollections();
     }
@@ -7,14 +20,21 @@ $(function() {
     }
 });
 
+
+/**
+ * Retrieves all collections depending on the context of the call. 
+ * If a search string is set (e.g. page.html?search=text) the request will switch to search mode
+ * If a the context is on mycollections.html the request will return only the users collections
+ * 
+ */
 function getAllCollections() {
-    if(window.location.pathname == "/mycollections.html") {
+    if (window.location.pathname == "/mycollections.html") {
         request_url = "/collections/own";
     } else {
         var search = parseSearch("search");
-        if(search && "search" in search) {
-            request_url = "/collections?name="+search["search"];
-            $('#collection_search').val(search["search"]);
+        if (search && "search" in search) {
+            request_url = "/collections?name=" + search["search"];
+            //$('#collection_search').val(search["search"]); template is not loaded yet
         } else {
 
             request_url = "/collections";
@@ -24,25 +44,29 @@ function getAllCollections() {
         url: request_url,
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             renderCollections(data.content);
         }
     });
 }
 
+/**
+ * Creates a collection by extracting the required params directly from the input elements
+ * After the request is completed the collections are reloaded 
+ */
 function createCollection() {
     $.ajax({
         url: "/collections",
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
-        success:function(data){
+        success: function (data) {
             console.log(data);
         },
-        error:function(data){
+        error: function (data) {
             console.log(data);
         },
-        complete: function(data) {
+        complete: function (data) {
             $('#createCollectionModal').modal('hide');
             clearCollections();
             getAllCollections();
@@ -54,38 +78,55 @@ function createCollection() {
     });
 }
 
+/**
+ * Determines the colum that the collection should be appended to 
+ * 
+ * @param {Object} collections 
+ */
 function renderCollections(collections) {
     var row = 1;
     for (var i in collections) {
-        appendToBody(row,collections[i])
-        if(row >= 3) {
-            row=1;
+        appendToBody(row, collections[i])
+        if (row >= 3) {
+            row = 1;
         } else {
             row++;
         }
     }
 }
 
+/**
+ * Creates a learning session and writes the information into a cookie, overwriting any existing cookie
+ * This information is used in learn.html context to set the learn session.
+ * 
+ * @param {Int} collection_id 
+ */
 function learnCollection(collection_id) {
     var settings = {
-        url: "/collections/"+collection_id+"/learn",
+        url: "/collections/" + collection_id + "/learn",
         method: "POST",
         contentType: 'application/json',
-        data: JSON.stringify({learningRunPlus: true}),
-        success: function(resp){
-            createCookie("learnrun", JSON.stringify({collection_id:collection_id,learnrun:resp.id}), 1)
-            window.location.href = window.location.origin+"/learn.html";
+        data: JSON.stringify({
+            learningRunPlus: true
+        }),
+        success: function (resp) {
+            createCookie("learnrun", JSON.stringify({
+                collection_id: collection_id,
+                learnrun: resp.id
+            }), 1)
+            window.location.href = window.location.origin + "/learn.html";
         }
-      }
-      
-      $.ajax(settings).done(function (response) {
+    }
+
+    $.ajax(settings).done(function (response) {
         console.log(response);
-      });
+    });
 }
 
 /**
  * Deletes collection
  * todo: ask user before, also delete references on cards?
+ * 
  * @param collection_id
  */
 function deleteCollection(collection_id) {
@@ -93,7 +134,7 @@ function deleteCollection(collection_id) {
         url: "/collections/" + collection_id,
         type: 'DELETE',
         dataType: 'json',
-        complete: function(data) {
+        complete: function (data) {
             console.log("DELETE /collections/" + collection_id);
             //redirect back to collections is not possible here
         }
@@ -101,27 +142,42 @@ function deleteCollection(collection_id) {
     window.location.href = "mycollections.html";
 }
 
+
+/**
+ * Retrieves the template, parses the information and appends the html to the given index colum 
+ * 
+ * @param {Int} index 
+ * @param {Object} collection 
+ */
 function appendToBody(index, collection) {
     var template = Handlebars.compile($('#collection-template').html());
     var html = template(collection);
     var addColletionSnipp = $("#create_collection_card").detach();
-    $('#nth-column-'+index).append(html);
-    (index == 3)?index=1:index++; 
-    $('#nth-column-'+index).append(addColletionSnipp);
+    $('#nth-column-' + index).append(html);
+    (index == 3) ? index = 1: index++;
+    $('#nth-column-' + index).append(addColletionSnipp);
 }
 
+
+/**
+ * Removes all collection elements from the DOM
+ */
 function clearCollections() {
     var addColletionSnipp = $("#create_collection_card").detach();
     $('#nth-column-1').empty();
     $('#nth-column-2').empty();
     $('#nth-column-3').empty();
-  
+
     $('#nth-column-1').append(addColletionSnipp);
     $('#formCreateCollectionName').val("");
     $('#formCreateCollectionDescription').val("");
 }
 
-$('#create_new_collection_submit').click(function(event) {
+
+/**
+ * On-click listener to create a new collection
+ */
+$('#create_new_collection_submit').click(function (event) {
     createCollection()
 });
 
@@ -139,7 +195,7 @@ function getAllCards() {
         url: url,
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             console.log("data of getAllCards(): " + data);
             renderCards(data);
         }
@@ -152,15 +208,15 @@ function createCard() {
         type: 'POST',
         contentType: 'application/json',
         dataType: 'json',
-        complete: function(data) {
+        complete: function (data) {
 
             $.ajax({
                 url: "/cards/" + data.responseJSON.id + "/collections/" + getParameterFromUrlByName('collectionId'),
                 type: 'POST',
                 contentType: 'application/json',
                 dataType: 'json',
-                complete: function(data) {
-                    
+                complete: function (data) {
+
                     $('#createCardModal').modal('hide');
                     clearCards();
                     getAllCards();
@@ -177,9 +233,9 @@ function createCard() {
 function renderCards(cards) {
     var row = 1;
     for (var i in cards) {
-        appendToBodyCards(row,cards[i])
-        if(row >= 3) {
-            row=1;
+        appendToBodyCards(row, cards[i])
+        if (row >= 3) {
+            row = 1;
         } else {
             row++;
         }
@@ -192,7 +248,7 @@ function deleteCard(card_id) {
         url: "/cards/" + card_id,
         type: 'DELETE',
         dataType: 'json',
-        success: function(data) {
+        success: function (data) {
             console.log("data of deleteCard(): " + data);
             //renderCards(data);
         }
@@ -212,16 +268,16 @@ function editCard(card_id) {
         url: url,
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
-            var card_data=null;
-            for (var i=0;i<data.length;i++) {
-                if(data[i]["id"] == card_id) {
+        success: function (data) {
+            var card_data = null;
+            for (var i = 0; i < data.length; i++) {
+                if (data[i]["id"] == card_id) {
                     card_data = data[i];
                     break;
                 }
             }
             if (card_data) {
-                getTemplateAjax("/templates/edit-card.handlebars", "js_modal_holder", card_data, function(){
+                getTemplateAjax("/templates/edit-card.handlebars", "js_modal_holder", card_data, function () {
                     $('#editCardModal').modal();
                 });
             } else {
@@ -232,8 +288,8 @@ function editCard(card_id) {
     $.ajax(settings);
 
 
- 
-    
+
+
 }
 
 
@@ -251,11 +307,11 @@ function saveCard(card_id) {
     }
 
     $.ajax({
-        url: "/cards/"+card_id,
+        url: "/cards/" + card_id,
         type: 'PUT',
         contentType: 'application/json',
         dataType: 'json',
-        complete: function(data) {
+        complete: function (data) {
             $('#editCardModal').modal('hide');
             location.reload();
         },
@@ -263,16 +319,16 @@ function saveCard(card_id) {
     });
 
     console.info(card_data);
-    
+
 }
 
 function appendToBodyCards(index, card) {
     var template = Handlebars.compile($('#card-template').html());
     var html = template(card);
     var addCardSnipp = $("#create_card").detach();
-    $('#nth-column-'+index).append(html);
-    (index == 3)?index=1:index++;
-    $('#nth-column-'+index).append(addCardSnipp);
+    $('#nth-column-' + index).append(html);
+    (index == 3) ? index = 1: index++;
+    $('#nth-column-' + index).append(addCardSnipp);
 }
 
 function clearCards() {
@@ -286,7 +342,7 @@ function clearCards() {
     $('#formCreateCardAnswer').val("");
 }
 
-$('#create_new_card_submit').click(function(event) {
+$('#create_new_card_submit').click(function (event) {
     createCard();
 });
 
@@ -300,7 +356,7 @@ function saveCollection() {
     setCollectionUneditable();
     updateCollection();
     var breadCrumbCollection = $(".breadcrumb-item").last().find("a")[0];
-    breadCrumbCollection.innerHTML =  $("#collectionName").text();
+    breadCrumbCollection.innerHTML = $("#collectionName").text();
 }
 
 /**
@@ -314,7 +370,7 @@ function loadCollection() {
 
     //modal for confirming the delete of the collection
     $('#confirmDeleteCollectionModal').on('show.bs.modal', function (e) {
-        $('#confirmDeleteCollection').on("click", function() {
+        $('#confirmDeleteCollection').on("click", function () {
             deleteCollection(getParameterFromUrlByName('collectionId'));
         })
     });
@@ -323,7 +379,7 @@ function loadCollection() {
     $('#confirmDeleteCardModal').on('show.bs.modal', function (e) {
         var cardId = e.relatedTarget.dataset['id'];
         console.log("deleteCard: " + cardId);
-        $('#confirmDeleteCard').on("click", function() {
+        $('#confirmDeleteCard').on("click", function () {
             deleteCard(cardId);
         })
     });
@@ -336,7 +392,7 @@ function loadCollection() {
             console.log("description : " + data.description);
             $("#collectionName").html(data.name);
             $("#collectionDescription").html(data.description);
-            $('#collection_public_state option[value="'+data.public+'"]').prop("selected",true)
+            $('#collection_public_state option[value="' + data.public + '"]').prop("selected", true)
 
             //Breadcrumb
             var breadCrumbCollection = $(".breadcrumb-item").last().find("a")[0];
@@ -358,13 +414,18 @@ function updateCollection() {
     var name = $("#collectionName").text();
     console.log("name: " + name);
     var description = $("#collectionDescription").text();
-    var public_state= $("#collection_public_state").children("option:selected").val()
+    var public_state = $("#collection_public_state").children("option:selected").val()
 
     $.ajax({
         url: "/collections/" + collectionId,
         type: 'PUT',
         contentType: 'application/json',
-        data: JSON.stringify({"id": collectionId, "name": name, "description": description, "public": public_state}),
+        data: JSON.stringify({
+            "id": collectionId,
+            "name": name,
+            "description": description,
+            "public": public_state
+        }),
         success: function (data) {
             console.log(data);
             console.log('process success');
@@ -397,7 +458,7 @@ function setCollectionUneditable() {
     console.log("setCollectionUneditable()");
     $("#collectionName").removeAttr('contenteditable style');
     $("#collectionDescription").removeAttr('contenteditable style');
-    $("#collection_public_state").prop('disabled',true);
+    $("#collection_public_state").prop('disabled', true);
     document.getElementById("saveCollectionBtn").disabled = true;
     document.getElementById("editCollectionBtn").disabled = false;
 }
@@ -408,7 +469,7 @@ function setCollectionUneditable() {
  * @returns {string}
  */
 function getParameterFromUrlByName(paramName) {
-    var  urlParams= new URLSearchParams(window.location.search);
+    var urlParams = new URLSearchParams(window.location.search);
     var param = urlParams.get(paramName);
     console.log("getParameterFromUrlByName(" + paramName + "): " + param);
     return param;
