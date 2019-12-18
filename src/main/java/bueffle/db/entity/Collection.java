@@ -78,4 +78,16 @@ public class Collection {
     public long getId() {
         return id;
     }
+
+    public boolean hasOwner() {
+        return owner != null;
+    }
+
+    public boolean hasName() {
+        return name != null;
+    }
+
+    public boolean hasDescription() {
+        return description != null;
+    }
 }

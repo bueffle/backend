@@ -130,8 +130,12 @@ public class CollectionService {
         if (!hasPermissionsToAccessCollection(collection)) {
             throw new NoAccessException("collection");
         }
-        collection.setName(newColl.getName());
-        collection.setDescription(newColl.getDescription());
+        if (newColl.hasName()) {
+            collection.setName(newColl.getName());
+        }
+        if (newColl.hasDescription()) {
+            collection.setDescription(newColl.getDescription());
+        }
         collection.setPublic(newColl.isPublic());
         if (newColl.isPublic()) {
             collection.getCards().forEach(Card::publish);
