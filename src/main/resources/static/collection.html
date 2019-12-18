@@ -32,6 +32,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="/collections.html">Öffentliche Sammlungen</a></li>
         <li class="breadcrumb-item"><a href="/mycollections.html">Meine Sammlungen</a></li>
         <li class="breadcrumb-item"><a href="/collection.html">Sammlung</a></li>
       </ol>
@@ -43,7 +44,10 @@
         <div class="container">
           <h1 id="collectionName" class="jumbotron-heading">Collection</h1>
           <p id="collectionDescription" class="lead text-muted">description of the collection</p>
-          <p id="collection_public_state" class="lead text-muted">privat</p>
+          <select id="collection_public_state" class="form-control mx-auto col col-lg-2" disabled>
+              <option value="false" >Privat</option>
+              <option value="true" >Öffentlich</option>
+            </select>
           <div class="btn-group-lg">
             <button id="saveCollectionBtn" type="button" disabled><i class="fas fa-save"></i></button>
             <button id="editCollectionBtn" type="button"><i class="fas fa-edit"></i></button>
@@ -177,6 +181,9 @@
               <a type="button" class="btn btn-sm btn-outline-secondary" onclick="editCard('{{id}}')">Editieren</a>
               <a type="button" class="btn btn-sm btn-outline-secondary" data-id="{{id}}" data-toggle="modal" data-target="#confirmDeleteCardModal">Löschen</a>
             </div>
+            {{#if public}}
+            <small class="text-muted"><i class="fas fa-bullhorn"></i>&nbsp;Öffentlich</small>
+            {{/if}}
           </div>
         </div>
       </div>
