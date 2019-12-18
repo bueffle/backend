@@ -135,8 +135,12 @@ public class CardService {
         if (!hasPermissionsToAccessCard(card)) {
             throw new NoAccessException("card");
         }
-        card.setQuestion(newCard.getQuestion());
-        card.setAnswer(newCard.getAnswer());
+        if (newCard.hasQuestion()) {
+            card.setQuestion(newCard.getQuestion());
+        }
+        if (newCard.hasAnswer()) {
+            card.setAnswer(newCard.getAnswer());
+        }
         card.setPublic(newCard.isPublic());
         cardRepository.save(card);
     }

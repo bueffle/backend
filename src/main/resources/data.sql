@@ -1,12 +1,19 @@
 --select * from user;
---HansMuster
+--Creates 3 User for testing purposes.
+--Password User 1: HansMuster
 insert into user values (1, TRUE, '$2a$10$y046R1LdT1wsdexyUmQDGulpj8/7fQbeufqTWfD/P3YyEWabIdU1O', 'hans.muster@gmail.com');
---1234
+--Password User 2: 1234
 insert into user values (2, TRUE, '$2a$10$florpQw0Y6L8sEx14xn4Duq3csCVdiljW.n3tbix5BPaCK.eFGo/W', 'vreni.meier@gmail.com');
---Pierre
-insert into user values (3, TRUE, '$2a$10$fi6VKUYAVjGghz5nkDHGK.Zo8HW7cT0Kpcgbxmal95FXApvo/7Gee', 'peter.mueller@gmail.com');
+--Password User 3: aaaa
+insert into user values (3, TRUE, '$2a$10$O9ouBG7WODhETqoZUzGzWe7ViA5kZkfRht/MOGnIZaUXBpQTQ1qCm', 'peter.mueller@gmail.com');
 
+--creating public and private example collections
+--collection 1,2,3 are public and have public questions, except for question 1, which is private
+--collection 4 is private and has private question
+--collection 5 is public and has some private and some public questions
+--collection 6 is private but has public questions
 --select * from collection;
+--id, description, isPublic, name, owner_id
 insert into collection values (1, 'Hauptstädte Europa', TRUE, 'Hauptstädte Europa', 1);
 insert into collection values (2, 'Hauptstädte Südamerika', TRUE, 'Hauptstädte Südamerika', 1);
 insert into collection values (3, 'Hauptstädte Asien', TRUE, 'Hauptstädte Asien', 1);
@@ -16,36 +23,40 @@ insert into collection values (6, 'Basiskommandos Kürzel', FALSE, 'Assembler', 
 INSERT INTO collection values (7, 'Basiswortschatz Spanisch', TRUE, 'Spanisch', 3);
 INSERT INTO collection VALUES (8, 'SQL-Befehle', TRUE, 'SQL', 3);
 
+--creating the roles for spring security
 --select * from role;
+--id, name
 insert into role values (1, 'ROLE_USER');
 
 --select * from role_users;
 --leer
 
 --select * from user_roles;
+--relations for the user and roles. Every user gets the user role.
 insert into user_roles values (1,1);
 insert into user_roles values (2,1);
 insert into user_roles values (3,1);
 
+--
 --select * from card;
-insert into card values (1, 'Bern', FALSE, 'Schweiz', 1);
-insert into card values (2, 'Paris', FALSE, 'Frankreich', 1);
-insert into card values (3, 'Madrid', FALSE, 'Spanien', 1);
-insert into card values (4, 'Tirana', FALSE, 'Albanien', 1);
-insert into card values (5, 'Kopenhagen', FALSE, 'Dänemark', 1);
-insert into card values (6, 'Andorra la Vella', FALSE, 'Andorra', 1);
-insert into card values (7, 'Sofia', FALSE, 'Bulgarien', 1);
-insert into card values (8, 'Berlin', FALSE, 'Deutschland', 1);
-insert into card values (9, 'Dublin', FALSE, 'Irland', 1);
-insert into card values (10, 'Oslo', FALSE, 'Norwegen', 1);
-insert into card values (11, 'Moskau', FALSE, 'Russland', 1);
-insert into card values (12, 'Minsk', FALSE, 'Weissrussland', 1);
-insert into card values (13, 'Ankara', FALSE, 'Türkei', 1);
+insert into card values (1, 'Bern', FALSE , 'Schweiz', 1);
+insert into card values (2, 'Paris', TRUE, 'Frankreich', 1);
+insert into card values (3, 'Madrid', TRUE, 'Spanien', 1);
+insert into card values (4, 'Tirana', TRUE, 'Albanien', 1);
+insert into card values (5, 'Kopenhagen', TRUE, 'Dänemark', 1);
+insert into card values (6, 'Andorra la Vella', TRUE, 'Andorra', 1);
+insert into card values (7, 'Sofia', TRUE, 'Bulgarien', 1);
+insert into card values (8, 'Berlin', TRUE, 'Deutschland', 1);
+insert into card values (9, 'Dublin', TRUE, 'Irland', 1);
+insert into card values (10, 'Oslo', TRUE, 'Norwegen', 1);
+insert into card values (11, 'Moskau', TRUE, 'Russland', 1);
+insert into card values (12, 'Minsk', TRUE, 'Weissrussland', 1);
+insert into card values (13, 'Ankara', TRUE, 'Türkei', 1);
 
-insert into card values (14, 'Buenos Aires', FALSE, 'Argentinien', 1);
-insert into card values (15, 'Rio de Janeiro', FALSE, 'Brasilien', 1);
-insert into card values (16, 'Lima', FALSE, 'Peru', 1);
-insert into card values (17, 'Montevideo', FALSE, 'Uruguay', 1);
+insert into card values (14, 'Buenos Aires', TRUE, 'Argentinien', 1);
+insert into card values (15, 'Rio de Janeiro', TRUE, 'Brasilien', 1);
+insert into card values (16, 'Lima', TRUE, 'Peru', 1);
+insert into card values (17, 'Montevideo', TRUE, 'Uruguay', 1);
 
 insert into card values (18, 'Bejing', TRUE, 'China', 1);
 insert into card values (19, 'Astana', TRUE, 'Kasachstan', 1);
@@ -63,9 +74,9 @@ insert into card values (24, 'Thermische Aufwinde oder Hangaufwinde, Zufuhr von 
 insert into card values (25, 'Cirrocumulus, Altocumulus, Cumulonimbus ',
                          FALSE, 'Was sind Mutterwolken der Gattung Cirrus?', 1);
 
-insert into card values (26, 'avare', TRUE, 'geizig', 2);
-insert into card values (27, 'essayer', TRUE, 'versuchen', 2);
-insert into card values (28, 'la lune', TRUE, 'der Mond', 2);
+insert into card values (26, 'avare', FALSE, 'geizig', 2);
+insert into card values (27, 'essayer', FALSE, 'versuchen', 2);
+insert into card values (28, 'la lune', FALSE, 'der Mond', 2);
 insert into card values (29, 'voyaer', TRUE, 'reisen', 2);
 insert into card values (30, 'la tournure', TRUE, 'die Redewendung', 2);
 insert into card values (31, 'bon marché', TRUE, 'billig', 2);

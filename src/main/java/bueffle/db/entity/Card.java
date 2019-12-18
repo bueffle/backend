@@ -13,7 +13,7 @@ public class Card {
 
     private String question;
     private String answer;
-    private boolean isPublic = false;
+    private boolean isPublic;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Collection> collections = new HashSet<>();
@@ -85,5 +85,17 @@ public class Card {
 
     public long getId() {
         return id;
+    }
+
+    public boolean hasOwner() {
+        return owner != null;
+    }
+
+    public boolean hasAnswer() {
+        return answer != null;
+    }
+
+    public boolean hasQuestion() {
+        return question != null;
     }
 }
