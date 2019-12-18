@@ -1,8 +1,8 @@
 package bueffle.service;
 
-import bueffle.db.entity.Card;
-import bueffle.db.entity.Collection;
-import bueffle.db.entity.User;
+import bueffle.entity.Card;
+import bueffle.entity.Collection;
+import bueffle.entity.User;
 import bueffle.exception.CardNotFoundException;
 import bueffle.exception.CollectionNotFoundException;
 import bueffle.exception.NoAccessException;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,7 +51,7 @@ public class CardService {
      * @return List of all cards.
      */
     public Page<Card> getAllCards() {
-        List<Card> cards = (cardRepository.findByisPublicTrue());
+        List<Card> cards = cardRepository.findByisPublicTrue();
         cards.forEach(Card::emptyRestrictedFields);
         return new PageImpl<>(cards);
     }
@@ -109,7 +108,6 @@ public class CardService {
         cards.forEach(Card::emptyRestrictedFields);
         return new PageImpl<>(cards);
     }
-
 
     /**
      * Creates new card. The new card is added to the default collection of the user then.

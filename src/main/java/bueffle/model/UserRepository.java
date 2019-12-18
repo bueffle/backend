@@ -1,6 +1,6 @@
 package bueffle.model;
 
-import bueffle.db.entity.User;
+import bueffle.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

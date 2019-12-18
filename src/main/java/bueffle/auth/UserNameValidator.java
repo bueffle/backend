@@ -1,6 +1,6 @@
 package bueffle.auth;
 
-import bueffle.db.entity.User;
+import bueffle.entity.User;
 import bueffle.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

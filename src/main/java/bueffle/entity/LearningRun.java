@@ -1,7 +1,8 @@
-package bueffle.db.entity;
+package bueffle.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -22,7 +23,7 @@ public class LearningRun {
     private Collection collection;
 
     @OneToMany(mappedBy = "learningRun")
-    private Set<CardInLearningRun> cardInLearningRuns;
+    private Set<CardInLearningRun> cardInLearningRuns = new HashSet<>();
 
     private Long lastAnsweredCardInLearningRunId;
 
@@ -70,6 +71,10 @@ public class LearningRun {
 
     public Set<CardInLearningRun> getCardInLearningRuns() {
         return cardInLearningRuns;
+    }
+
+    public void addCardInLearningRun(CardInLearningRun cardInLearningRun) {
+        cardInLearningRuns.add(cardInLearningRun);
     }
 
     public Long getLastAnsweredCardInLearningRunId() {

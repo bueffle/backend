@@ -1,8 +1,8 @@
 package bueffle.controller;
 
-import bueffle.db.entity.Card;
-import bueffle.db.entity.CardInLearningRun;
-import bueffle.db.entity.LearningRun;
+import bueffle.entity.Card;
+import bueffle.entity.CardInLearningRun;
+import bueffle.entity.LearningRun;
 import bueffle.service.LearningService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

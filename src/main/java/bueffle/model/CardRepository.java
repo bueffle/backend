@@ -1,7 +1,7 @@
 package bueffle.model;
 
-import bueffle.db.entity.Card;
-import bueffle.db.entity.User;
+import bueffle.entity.Card;
+import bueffle.entity.User;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
