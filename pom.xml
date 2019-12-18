@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.2.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>bueffle.io</groupId>
 	<artifactId>backend</artifactId>
@@ -17,6 +17,12 @@
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+	<scm>
+		<connection>scm:git:https://github.com/bueffle/backend.git</connection>
+		<developerConnection>scm:git:https://github.com/bueffle/backend.git</developerConnection>
+		<url>https://github.com/bueffle/backend.git</url>
+		<tag>0.0.1</tag>
+	</scm>
 
 	<dependencies>
 		<dependency>
@@ -43,15 +49,30 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.10</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-    </dependencies>
-
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
+					<configuration>
+						<preparationGoals>clean verify</preparationGoals>
+						<tagNameFormat>@{project.version}</tagNameFormat>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
