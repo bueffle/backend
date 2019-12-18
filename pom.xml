@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>bueffle.io</groupId>
 	<artifactId>bueffle-webapp</artifactId>
-	<version>0.3.0-SNAPSHOT</version>
+	<version>0.3.0</version>
 	<name>bueffle-webapp</name>
 	<description>A webbased multiuser learning card service</description>
 
@@ -20,7 +20,7 @@
 		<connection>scm:git:https://github.com/bueffle/backend.git</connection>
 		<developerConnection>scm:git:https://github.com/bueffle/backend.git</developerConnection>
 		<url>https://github.com/bueffle/backend.git</url>
-		<tag>0.0.2</tag>
+		<tag>0.3.0</tag>
 	</scm>
 
 	<dependencies>
