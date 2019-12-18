@@ -27,7 +27,23 @@ function getNextCard(leanrun_id) {
                 getTemplateAjax("templates/card.handlebars","learn_card_container",data.responseJSON)
             } else {
                 eraseCookie("learnrun");
-                $('#leaningEndModal').modal();
+                $.ajax({url: "/learn/"+leanrun_id,
+                type: 'GET',
+                dataType: 'json',
+                complete: function(data) {
+                    var richtig = data.responseJSON.cardInLearningRuns.length;
+                    var falsch = 0;
+                    for(var i in data.responseJSON.cardInLearningRuns ) {
+                        falsch += data.responseJSON.cardInLearningRuns[i]["shownCounter"] - 1;
+                    }
+                    var template  = Handlebars.compile($('#lean-finished-modal-template').html());
+                    var html=template({richtig:richtig,falsch:falsch});
+                    $('#finished_modal').html(html);
+
+                    $('#leaningEndModal').modal();
+                }
+            });
+                
             }
         }
     });

@@ -44,26 +44,7 @@
 
       </div>
 
-      <div class="modal fade" id="leaningEndModal" tabindex="-1" role="dialog" aria-labelledby="leaningEndModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="leaningEndModalLabel">Lernlauf abgeschlossen</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <p>Sie haben alle Fragen in diesem Lernlauf beantwortet. </p>
-                <p><b>Herzlichen Glückwunsch!</b></p>
-                <canvas id="myChart" width="400" height="400"></canvas>
-              </div>
-              <div class="modal-footer">
-                <a href="/collections.html" class="btn btn-success">Zurück zu den Sammlungen</a>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div id="finished_modal"></div>
 
   <!-- Footer -->
   <div class="footer-copyright py-3 text-center">
@@ -82,6 +63,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.4.2/handlebars.js" integrity="sha256-hSzapznWRy/aOZkctlN03an9DxCLlN8ZCQS0lxntiHg=" crossorigin="anonymous"></script>
     <script src="js/vendor/Chart.bundle.min.js"></script>
     <script src="js/helpers.js"></script>
+
+    <script id="lean-finished-modal-template" type="text/x-handlebars-template">
+      <div class="modal fade" id="leaningEndModal" tabindex="-1" role="dialog" aria-labelledby="leaningEndModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="leaningEndModalLabel">Lernlauf abgeschlossen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Sie haben alle Fragen in diesem Lernlauf beantwortet. </p>
+                <p><b>Herzlichen Glückwunsch!</b></p>
+                <canvas id="resultsChart" width="400" height="400"></canvas>
+                <script >
+                  var ctx=$('#resultsChart')
+                var data = {
+                      datasets: [{
+                          data: [{{richtig}},{{falsch}}],
+                          backgroundColor: ['#28a745','#dc3545']
+                      }],
+
+                      // These labels appear in the legend and in the tooltips when hovering different arcs
+                      labels: [
+                          'Richtig',
+                          'Falsch'
+                      ]
+                  };
+                  var myPieChart = new Chart(ctx, {
+                      type: 'pie',
+                      data: data
+                  });
+                </script>
+              </div>
+              <div class="modal-footer">
+                <a href="/collections.html" class="btn btn-success">Zurück zu den Sammlungen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </script>
     
     <!-- Custom JavaScript -->
     <script src="js/learn.js"></script>
