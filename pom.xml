@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -10,7 +9,7 @@
 	</parent>
 	<groupId>bueffle.io</groupId>
 	<artifactId>bueffle-webapp</artifactId>
-	<version>0.4.1-SNAPSHOT</version>
+	<version>0.4.1</version>
 	<name>bueffle-webapp</name>
 	<description>A webbased multiuser learning card service</description>
 
@@ -21,7 +20,7 @@
 		<connection>scm:git:https://github.com/bueffle/backend.git</connection>
 		<developerConnection>scm:git:https://github.com/bueffle/backend.git</developerConnection>
 		<url>https://github.com/bueffle/backend.git</url>
-		<tag>0.0.2</tag>
+		<tag>0.4.1</tag>
 	</scm>
 
 	<dependencies>
